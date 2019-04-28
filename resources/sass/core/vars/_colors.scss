@@ -1,0 +1,34 @@
+$green:#469408;
+$yellow:#e69a2a;
+$red:#ea6c41;
+$blue:#177ec1;
+$pink:#dc4666;
+$orange:#ff8b15;
+$gold:#c4996d;
+$silver:#83878d;
+$black:#212121;
+$grey:#878787;
+$white:#fff;
+$twitter_blue:#00aced;
+$light_grey:rgba(33,33,33,0.1);
+$light_white:rgba(255,255,255,0.1);
+$xtra_lighter_grey:rgba(33,33,33,0.05);
+$xtra_lighter_white:rgba(255,255,255,0.05);
+
+$colors: () !default;
+$colors: map_merge(
+        (
+            "green":      $green,
+            "yellow":     $yellow,
+            "red":        $red,
+            "blue":       $blue,
+            "pink":       $pink,
+            "orange":     $orange,
+            "gold":       $gold,
+            "silver":     $silver,
+            "black":      $black,
+            "gray":       $grey,
+            "white":      $white
+        ),
+        $colors
+);

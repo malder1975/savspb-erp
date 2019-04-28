@@ -1,0 +1,26 @@
+@import "vars/colors";
+
+//Навбар
+$navbar-min-height:           66px !default;
+$navbar-bg-color:             linear-gradient(to top, #ecd0e9, #812a78) !default;
+$navbar-border: (
+    bottom: (
+        size:           1px,
+        style:          solid,
+        color:          $light_grey
+    )
+) !default;
+$navbar-color:                linear-gradient(to bottom, #ecd0e9 0%, #812a78 100%) !default;
+$navbar-hover-color:          $pink !default;
+
+// Навбар бренд
+$navbar-brand-width:          14.0625rem !default;
+$navbar-transition: (
+    transition-duration:                0.4s,
+    transition-timing-function:         ease
+) !default;
+$brand-text-font:             'Poppins', sans-serif !default;
+$brand-text-size:             1.3125rem !default;
+$brand-font-color:            $black;
+$navbar-brand-minimized-width: 3.125rem !default;
+

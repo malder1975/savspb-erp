@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use Laravel\Passport\Passport;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +19,8 @@ Route::prefix('v1')->group(function () {
         Route::post('login', 'AuthController@login');
         Route::get('refresh', 'AuthController@refresh');
         Route::get('user', 'AuthController@getAuthenticatedUser');
+        Route::post('reset-password', 'AuthController@sendPasswordResetLink');
+        Route::post('reset/password', 'AuthController@callResetPassword');
 
         Route::middleware('auth:api')->group(function () {
             Route::get('person', ['uses' => 'AuthController@getDetails']);

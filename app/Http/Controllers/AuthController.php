@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+Illuminate\Foundation\Auth\ResetsPasswords;
 
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -115,5 +118,44 @@ class AuthController extends Controller
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
 
+    public function sendPasswordResetLink(Request $request)
+    {
+        return $this->sendResetLinkEmail($request);
+    }
 
+    protected function sendResetLinkResponse(Request $request, $response)
+    {
+        return response()->json([
+            'message' => 'Отправлено письмо восстановления пароля',
+            'data' => $response
+        ]);
+    }
+
+    protected function sendResetLinkFiledResponse(Request $request, $response)
+    {
+        return response()->json(['message' => 'Невозможно отправить письмо на указанный адрес']);
+    }
+
+    public function callResetPassword(Request $request)
+    {
+        return $this->reset($request);
+    }
+
+    protected function resetPassword($user, $password)
+    {
+        $user->password = Hash::make($password);
+        $user->save();
+
+        event(new PasswordReset($user));
+    }
+
+    protected function sentResetResponse(Request $request, $response)
+    {
+        return response()->json(['message' => 'Пароль успешно изменен.']);
+    }
+
+    protected function sentResetFailedResponse(Request $request, $response)
+    {
+        return response()->json(['message' => 'Ошибка! Неверный ключ доступа пользователя.']);
+    }
 }
