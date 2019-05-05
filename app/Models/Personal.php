@@ -56,6 +56,7 @@ class Personal extends Authenticatable implements JWTSubject
 
     public function isAdmin()
     {
-        return $this->levels->LEVELS_ID == 100;
+        //return $this->levels->LEVELS_ID == 100;
+        return (boolean)$this->levels->where('NAME', 'Supervisor')->count();
     }
 }
