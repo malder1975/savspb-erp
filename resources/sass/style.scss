@@ -1,4 +1,5 @@
 @import "~bootstrap-vue/dist/bootstrap-vue.css";
+@import "core/core.scss";
 .login-container {
     padding-top: 6%;
     padding-bottom: 2%;
@@ -24,6 +25,9 @@
     margin-top: 2%;
     margin-bottom: 2%;
     color: #fff;
+}
+.login-errors {
+    background-color: #fff;
 }
 .login-form {
     background-color: #fff;

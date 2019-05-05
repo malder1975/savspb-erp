@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Levels;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -18,7 +18,7 @@ class Personal extends Authenticatable implements JWTSubject
 
 
     protected $fillable = [
-        'LOGIN', 'PASS', 'EMAIL',
+        'LOGIN', 'PASS', 'email', 'LEVELS_ID'
     ];
 
     protected $hidden = [
@@ -37,5 +37,25 @@ class Personal extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->PASS;
+    }
+
+    public function getJWTAuthPassword()
+    {
+        return $this->PASS;
+    }
+
+    public function levels()
+    {
+        return $this->belongsTo(Levels::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->levels->LEVELS_ID == 100;
     }
 }

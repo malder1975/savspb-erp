@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.8 on 2019-04-02 13:03:23.
+ * Generated for Laravel 5.8.15 on 2019-05-05 10:39:36.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -666,6 +666,30 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Foundation\Application $instance */
                         return $instance->getCachedRoutesPath();
+        }
+        
+        /**
+         * Determine if the application events are cached.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function eventsAreCached()
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->eventsAreCached();
+        }
+        
+        /**
+         * Get the path to the events cache file.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getCachedEventsPath()
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->getCachedEventsPath();
         }
         
         /**
@@ -1590,6 +1614,10 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
+     * @method static \Illuminate\Contracts\Auth\Authenticatable loginUsingId(mixed $id, bool $remember = false)
+     * @method static bool viaRemember()
+     * @method static \Symfony\Component\HttpFoundation\Response|null onceBasic(string $field = 'email',array $extraConditions = [])
+     * @method static null|bool logoutOtherDevices(string $password, string $attribute = 'password')
      * @see \Illuminate\Auth\AuthManager
      * @see \Illuminate\Contracts\Auth\Factory
      * @see \Illuminate\Contracts\Auth\Guard
@@ -1777,46 +1805,21 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function user()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->user();
         }
         
         /**
-         * Get the ID for the currently authenticated user.
+         * Get the currently authenticated user or throws an exception.
          *
-         * @return int|null 
+         * @throws \Tymon\JWTAuth\Exceptions\UserNotDefinedException
+         * @return \App\User 
          * @static 
          */ 
-        public static function id()
+        public static function userOrFail()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->id();
-        }
-        
-        /**
-         * Log a user into the application without sessions or cookies.
-         *
-         * @param array $credentials
-         * @return bool 
-         * @static 
-         */ 
-        public static function once($credentials = array())
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->once($credentials);
-        }
-        
-        /**
-         * Log the given user ID into the application without sessions or cookies.
-         *
-         * @param mixed $id
-         * @return \App\User|false 
-         * @static 
-         */ 
-        public static function onceUsingId($id)
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->onceUsingId($id);
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->userOrFail();
         }
         
         /**
@@ -1828,230 +1831,215 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function validate($credentials = array())
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->validate($credentials);
         }
         
         /**
-         * Attempt to authenticate using HTTP Basic Auth.
-         *
-         * @param string $field
-         * @param array $extraConditions
-         * @return \Symfony\Component\HttpFoundation\Response|null 
-         * @static 
-         */ 
-        public static function basic($field = 'email', $extraConditions = array())
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->basic($field, $extraConditions);
-        }
-        
-        /**
-         * Perform a stateless HTTP Basic login attempt.
-         *
-         * @param string $field
-         * @param array $extraConditions
-         * @return \Symfony\Component\HttpFoundation\Response|null 
-         * @static 
-         */ 
-        public static function onceBasic($field = 'email', $extraConditions = array())
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->onceBasic($field, $extraConditions);
-        }
-        
-        /**
-         * Attempt to authenticate a user using the given credentials.
+         * Attempt to authenticate the user using the given credentials and return the token.
          *
          * @param array $credentials
-         * @param bool $remember
-         * @return bool 
+         * @param bool $login
+         * @return bool|string 
          * @static 
          */ 
-        public static function attempt($credentials = array(), $remember = false)
+        public static function attempt($credentials = array(), $login = true)
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->attempt($credentials, $remember);
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->attempt($credentials, $login);
         }
         
         /**
-         * Log the given user ID into the application.
+         * Create a token for a user.
+         *
+         * @param \Tymon\JWTAuth\Contracts\JWTSubject $user
+         * @return string 
+         * @static 
+         */ 
+        public static function login($user)
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->login($user);
+        }
+        
+        /**
+         * Logout the user, thus invalidating the token.
+         *
+         * @param bool $forceForever
+         * @return void 
+         * @static 
+         */ 
+        public static function logout($forceForever = false)
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        $instance->logout($forceForever);
+        }
+        
+        /**
+         * Refresh the token.
+         *
+         * @param bool $forceForever
+         * @param bool $resetClaims
+         * @return string 
+         * @static 
+         */ 
+        public static function refresh($forceForever = false, $resetClaims = false)
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->refresh($forceForever, $resetClaims);
+        }
+        
+        /**
+         * Invalidate the token.
+         *
+         * @param bool $forceForever
+         * @return \Tymon\JWTAuth\JWT 
+         * @static 
+         */ 
+        public static function invalidate($forceForever = false)
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->invalidate($forceForever);
+        }
+        
+        /**
+         * Create a new token by User id.
          *
          * @param mixed $id
-         * @param bool $remember
-         * @return \App\User|false 
+         * @return string|null 
          * @static 
          */ 
-        public static function loginUsingId($id, $remember = false)
+        public static function tokenById($id)
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->loginUsingId($id, $remember);
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->tokenById($id);
         }
         
         /**
-         * Log a user into the application.
+         * Log a user into the application using their credentials.
          *
-         * @param \Illuminate\Contracts\Auth\Authenticatable $user
-         * @param bool $remember
-         * @return void 
-         * @static 
-         */ 
-        public static function login($user, $remember = false)
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        $instance->login($user, $remember);
-        }
-        
-        /**
-         * Log the user out of the application.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function logout()
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        $instance->logout();
-        }
-        
-        /**
-         * Invalidate other sessions for the current user.
-         * 
-         * The application must be using the AuthenticateSession middleware.
-         *
-         * @param string $password
-         * @param string $attribute
-         * @return bool|null 
-         * @static 
-         */ 
-        public static function logoutOtherDevices($password, $attribute = 'password')
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->logoutOtherDevices($password, $attribute);
-        }
-        
-        /**
-         * Register an authentication attempt event listener.
-         *
-         * @param mixed $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function attempting($callback)
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        $instance->attempting($callback);
-        }
-        
-        /**
-         * Get the last user we attempted to authenticate.
-         *
-         * @return \App\User 
-         * @static 
-         */ 
-        public static function getLastAttempted()
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->getLastAttempted();
-        }
-        
-        /**
-         * Get a unique identifier for the auth session value.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getName()
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->getName();
-        }
-        
-        /**
-         * Get the name of the cookie used to store the "recaller".
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getRecallerName()
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->getRecallerName();
-        }
-        
-        /**
-         * Determine if the user was authenticated via "remember me" cookie.
-         *
+         * @param array $credentials
          * @return bool 
          * @static 
          */ 
-        public static function viaRemember()
+        public static function once($credentials = array())
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->viaRemember();
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->once($credentials);
         }
         
         /**
-         * Get the cookie creator instance used by the guard.
+         * Log the given User into the application.
          *
-         * @return \Illuminate\Contracts\Cookie\QueueingFactory 
-         * @throws \RuntimeException
+         * @param mixed $id
+         * @return bool 
          * @static 
          */ 
-        public static function getCookieJar()
+        public static function onceUsingId($id)
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->getCookieJar();
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->onceUsingId($id);
         }
         
         /**
-         * Set the cookie creator instance used by the guard.
+         * Alias for onceUsingId.
          *
-         * @param \Illuminate\Contracts\Cookie\QueueingFactory $cookie
-         * @return void 
+         * @param mixed $id
+         * @return bool 
          * @static 
          */ 
-        public static function setCookieJar($cookie)
+        public static function byId($id)
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        $instance->setCookieJar($cookie);
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->byId($id);
         }
         
         /**
-         * Get the event dispatcher instance.
+         * Add any custom claims.
          *
-         * @return \Illuminate\Contracts\Events\Dispatcher 
+         * @param array $claims
+         * @return \Tymon\JWTAuth\JWTGuard 
          * @static 
          */ 
-        public static function getDispatcher()
+        public static function claims($claims)
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->getDispatcher();
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->claims($claims);
         }
         
         /**
-         * Set the event dispatcher instance.
+         * Get the raw Payload instance.
          *
-         * @param \Illuminate\Contracts\Events\Dispatcher $events
-         * @return void 
+         * @return \Tymon\JWTAuth\Payload 
          * @static 
          */ 
-        public static function setDispatcher($events)
+        public static function getPayload()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        $instance->setDispatcher($events);
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->getPayload();
         }
         
         /**
-         * Get the session store used by the guard.
+         * Alias for getPayload().
          *
-         * @return \Illuminate\Contracts\Session\Session 
+         * @return \Tymon\JWTAuth\Payload 
          * @static 
          */ 
-        public static function getSession()
+        public static function payload()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->getSession();
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->payload();
+        }
+        
+        /**
+         * Set the token.
+         *
+         * @param \Tymon\JWTAuth\Token|string $token
+         * @return \Tymon\JWTAuth\JWTGuard 
+         * @static 
+         */ 
+        public static function setToken($token)
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->setToken($token);
+        }
+        
+        /**
+         * Set the token ttl.
+         *
+         * @param int $ttl
+         * @return \Tymon\JWTAuth\JWTGuard 
+         * @static 
+         */ 
+        public static function setTTL($ttl)
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->setTTL($ttl);
+        }
+        
+        /**
+         * Get the user provider used by the guard.
+         *
+         * @return \Illuminate\Contracts\Auth\UserProvider 
+         * @static 
+         */ 
+        public static function getProvider()
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->getProvider();
+        }
+        
+        /**
+         * Set the user provider used by the guard.
+         *
+         * @param \Illuminate\Contracts\Auth\UserProvider $provider
+         * @return \Tymon\JWTAuth\JWTGuard 
+         * @static 
+         */ 
+        public static function setProvider($provider)
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->setProvider($provider);
         }
         
         /**
@@ -2062,46 +2050,45 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function getUser()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->getUser();
-        }
-        
-        /**
-         * Set the current user.
-         *
-         * @param \Illuminate\Contracts\Auth\Authenticatable $user
-         * @return \Illuminate\Auth\SessionGuard 
-         * @static 
-         */ 
-        public static function setUser($user)
-        {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->setUser($user);
         }
         
         /**
          * Get the current request instance.
          *
-         * @return \Symfony\Component\HttpFoundation\Request 
+         * @return \Illuminate\Http\Request 
          * @static 
          */ 
         public static function getRequest()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->getRequest();
         }
         
         /**
          * Set the current request instance.
          *
-         * @param \Symfony\Component\HttpFoundation\Request $request
-         * @return \Illuminate\Auth\SessionGuard 
+         * @param \Illuminate\Http\Request $request
+         * @return \Tymon\JWTAuth\JWTGuard 
          * @static 
          */ 
         public static function setRequest($request)
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->setRequest($request);
+        }
+        
+        /**
+         * Get the last user we attempted to authenticate.
+         *
+         * @return \App\User 
+         * @static 
+         */ 
+        public static function getLastAttempted()
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->getLastAttempted();
         }
         
         /**
@@ -2113,7 +2100,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function authenticate()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->authenticate();
         }
         
@@ -2125,7 +2112,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function hasUser()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->hasUser();
         }
         
@@ -2137,7 +2124,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function check()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->check();
         }
         
@@ -2149,33 +2136,33 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function guest()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
                         return $instance->guest();
         }
         
         /**
-         * Get the user provider used by the guard.
+         * Get the ID for the currently authenticated user.
          *
-         * @return \Illuminate\Contracts\Auth\UserProvider 
+         * @return int|null 
          * @static 
          */ 
-        public static function getProvider()
+        public static function id()
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        return $instance->getProvider();
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->id();
         }
         
         /**
-         * Set the user provider used by the guard.
+         * Set the current user.
          *
-         * @param \Illuminate\Contracts\Auth\UserProvider $provider
-         * @return void 
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @return \Tymon\JWTAuth\JWTGuard 
          * @static 
          */ 
-        public static function setProvider($provider)
+        public static function setUser($user)
         {
-                        /** @var \Illuminate\Auth\SessionGuard $instance */
-                        $instance->setProvider($provider);
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->setUser($user);
         }
         
         /**
@@ -2188,7 +2175,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function macro($name, $macro)
         {
-                        \Illuminate\Auth\SessionGuard::macro($name, $macro);
+                        \Tymon\JWTAuth\JWTGuard::macro($name, $macro);
         }
         
         /**
@@ -2202,7 +2189,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Auth\SessionGuard::mixin($mixin, $replace);
+                        \Tymon\JWTAuth\JWTGuard::mixin($mixin, $replace);
         }
         
         /**
@@ -2214,7 +2201,22 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function hasMacro($name)
         {
-                        return \Illuminate\Auth\SessionGuard::hasMacro($name);
+                        return \Tymon\JWTAuth\JWTGuard::hasMacro($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+                        /** @var \Tymon\JWTAuth\JWTGuard $instance */
+                        return $instance->macroCall($method, $parameters);
         }
          
     }
@@ -3826,23 +3828,6 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static \Illuminate\Database\Query\Builder table(string $table)
-     * @method static \Illuminate\Database\Query\Expression raw($value)
-     * @method static mixed selectOne(string $query, array $bindings = [])
-     * @method static array select(string $query, array $bindings = [])
-     * @method static bool insert(string $query, array $bindings = [])
-     * @method static int update(string $query, array $bindings = [])
-     * @method static int delete(string $query, array $bindings = [])
-     * @method static bool statement(string $query, array $bindings = [])
-     * @method static int affectingStatement(string $query, array $bindings = [])
-     * @method static bool unprepared(string $query)
-     * @method static array prepareBindings(array $bindings)
-     * @method static mixed transaction(\Closure $callback, int $attempts = 1)
-     * @method static void beginTransaction()
-     * @method static void commit()
-     * @method static void rollBack()
-     * @method static int transactionLevel()
-     * @method static array pretend(\Closure $callback)
      * @see \Illuminate\Database\DatabaseManager
      * @see \Illuminate\Database\Connection
      */ 
@@ -3986,6 +3971,860 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Database\DatabaseManager $instance */
                         $instance->setReconnector($reconnector);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getSchemaBuilder()
+        {
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getSchemaBuilder();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function query()
+        {
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->query();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function executeFunction($function, $values = null)
+        {
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->executeFunction($function, $values);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function executeProcedure($procedure, $values = null)
+        {
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->executeProcedure($procedure, $values);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function beginTransaction()
+        {
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->beginTransaction();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function commit()
+        {
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->commit();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function rollBack($toLevel = null)
+        {
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->rollBack($toLevel);
+        }
+        
+        /**
+         * Set the query grammar to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function useDefaultQueryGrammar()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->useDefaultQueryGrammar();
+        }
+        
+        /**
+         * Set the schema grammar to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function useDefaultSchemaGrammar()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->useDefaultSchemaGrammar();
+        }
+        
+        /**
+         * Set the query post processor to the default implementation.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function useDefaultPostProcessor()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->useDefaultPostProcessor();
+        }
+        
+        /**
+         * Begin a fluent query against a database table.
+         *
+         * @param string $table
+         * @return \Illuminate\Database\Query\Builder 
+         * @static 
+         */ 
+        public static function table($table)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->table($table);
+        }
+        
+        /**
+         * Run a select statement and return a single result.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param bool $useReadPdo
+         * @return mixed 
+         * @static 
+         */ 
+        public static function selectOne($query, $bindings = array(), $useReadPdo = true)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->selectOne($query, $bindings, $useReadPdo);
+        }
+        
+        /**
+         * Run a select statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return array 
+         * @static 
+         */ 
+        public static function selectFromWriteConnection($query, $bindings = array())
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->selectFromWriteConnection($query, $bindings);
+        }
+        
+        /**
+         * Run a select statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param bool $useReadPdo
+         * @return array 
+         * @static 
+         */ 
+        public static function select($query, $bindings = array(), $useReadPdo = true)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->select($query, $bindings, $useReadPdo);
+        }
+        
+        /**
+         * Run a select statement against the database and returns a generator.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param bool $useReadPdo
+         * @return \Generator 
+         * @static 
+         */ 
+        public static function cursor($query, $bindings = array(), $useReadPdo = true)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->cursor($query, $bindings, $useReadPdo);
+        }
+        
+        /**
+         * Run an insert statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return bool 
+         * @static 
+         */ 
+        public static function insert($query, $bindings = array())
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->insert($query, $bindings);
+        }
+        
+        /**
+         * Run an update statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */ 
+        public static function update($query, $bindings = array())
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->update($query, $bindings);
+        }
+        
+        /**
+         * Run a delete statement against the database.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */ 
+        public static function delete($query, $bindings = array())
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->delete($query, $bindings);
+        }
+        
+        /**
+         * Execute an SQL statement and return the boolean result.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return bool 
+         * @static 
+         */ 
+        public static function statement($query, $bindings = array())
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->statement($query, $bindings);
+        }
+        
+        /**
+         * Run an SQL statement and get the number of rows affected.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @return int 
+         * @static 
+         */ 
+        public static function affectingStatement($query, $bindings = array())
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->affectingStatement($query, $bindings);
+        }
+        
+        /**
+         * Run a raw, unprepared query against the PDO connection.
+         *
+         * @param string $query
+         * @return bool 
+         * @static 
+         */ 
+        public static function unprepared($query)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->unprepared($query);
+        }
+        
+        /**
+         * Execute the given callback in "dry run" mode.
+         *
+         * @param \Closure $callback
+         * @return array 
+         * @static 
+         */ 
+        public static function pretend($callback)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->pretend($callback);
+        }
+        
+        /**
+         * Bind values to their parameters in the given statement.
+         *
+         * @param \PDOStatement $statement
+         * @param array $bindings
+         * @return void 
+         * @static 
+         */ 
+        public static function bindValues($statement, $bindings)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->bindValues($statement, $bindings);
+        }
+        
+        /**
+         * Prepare the query bindings for execution.
+         *
+         * @param array $bindings
+         * @return array 
+         * @static 
+         */ 
+        public static function prepareBindings($bindings)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->prepareBindings($bindings);
+        }
+        
+        /**
+         * Log a query in the connection's query log.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param float|null $time
+         * @return void 
+         * @static 
+         */ 
+        public static function logQuery($query, $bindings, $time = null)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->logQuery($query, $bindings, $time);
+        }
+        
+        /**
+         * Register a database query listener with the connection.
+         *
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function listen($callback)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->listen($callback);
+        }
+        
+        /**
+         * Get a new raw query expression.
+         *
+         * @param mixed $value
+         * @return \Illuminate\Database\Query\Expression 
+         * @static 
+         */ 
+        public static function raw($value)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->raw($value);
+        }
+        
+        /**
+         * Indicate if any records have been modified.
+         *
+         * @param bool $value
+         * @return void 
+         * @static 
+         */ 
+        public static function recordsHaveBeenModified($value = true)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->recordsHaveBeenModified($value);
+        }
+        
+        /**
+         * Is Doctrine available?
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isDoctrineAvailable()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->isDoctrineAvailable();
+        }
+        
+        /**
+         * Get a Doctrine Schema Column instance.
+         *
+         * @param string $table
+         * @param string $column
+         * @return \Doctrine\DBAL\Schema\Column 
+         * @static 
+         */ 
+        public static function getDoctrineColumn($table, $column)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getDoctrineColumn($table, $column);
+        }
+        
+        /**
+         * Get the Doctrine DBAL schema manager for the connection.
+         *
+         * @return \Doctrine\DBAL\Schema\AbstractSchemaManager 
+         * @static 
+         */ 
+        public static function getDoctrineSchemaManager()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getDoctrineSchemaManager();
+        }
+        
+        /**
+         * Get the Doctrine DBAL database connection instance.
+         *
+         * @return \Doctrine\DBAL\Connection 
+         * @static 
+         */ 
+        public static function getDoctrineConnection()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getDoctrineConnection();
+        }
+        
+        /**
+         * Get the current PDO connection.
+         *
+         * @return \PDO 
+         * @static 
+         */ 
+        public static function getPdo()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getPdo();
+        }
+        
+        /**
+         * Get the current PDO connection used for reading.
+         *
+         * @return \PDO 
+         * @static 
+         */ 
+        public static function getReadPdo()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getReadPdo();
+        }
+        
+        /**
+         * Set the PDO connection.
+         *
+         * @param \PDO|\Closure|null $pdo
+         * @return \Firebird\Connection 
+         * @static 
+         */ 
+        public static function setPdo($pdo)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->setPdo($pdo);
+        }
+        
+        /**
+         * Set the PDO connection used for reading.
+         *
+         * @param \PDO|\Closure|null $pdo
+         * @return \Firebird\Connection 
+         * @static 
+         */ 
+        public static function setReadPdo($pdo)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->setReadPdo($pdo);
+        }
+        
+        /**
+         * Get the database connection name.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function getName()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getName();
+        }
+        
+        /**
+         * Get an option from the configuration options.
+         *
+         * @param string|null $option
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getConfig($option = null)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getConfig($option);
+        }
+        
+        /**
+         * Get the PDO driver name.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDriverName()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getDriverName();
+        }
+        
+        /**
+         * Get the query grammar used by the connection.
+         *
+         * @return \Illuminate\Database\Query\Grammars\Grammar 
+         * @static 
+         */ 
+        public static function getQueryGrammar()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getQueryGrammar();
+        }
+        
+        /**
+         * Set the query grammar used by the connection.
+         *
+         * @param \Illuminate\Database\Query\Grammars\Grammar $grammar
+         * @return \Firebird\Connection 
+         * @static 
+         */ 
+        public static function setQueryGrammar($grammar)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->setQueryGrammar($grammar);
+        }
+        
+        /**
+         * Get the schema grammar used by the connection.
+         *
+         * @return \Illuminate\Database\Schema\Grammars\Grammar 
+         * @static 
+         */ 
+        public static function getSchemaGrammar()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getSchemaGrammar();
+        }
+        
+        /**
+         * Set the schema grammar used by the connection.
+         *
+         * @param \Illuminate\Database\Schema\Grammars\Grammar $grammar
+         * @return \Firebird\Connection 
+         * @static 
+         */ 
+        public static function setSchemaGrammar($grammar)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->setSchemaGrammar($grammar);
+        }
+        
+        /**
+         * Get the query post processor used by the connection.
+         *
+         * @return \Illuminate\Database\Query\Processors\Processor 
+         * @static 
+         */ 
+        public static function getPostProcessor()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getPostProcessor();
+        }
+        
+        /**
+         * Set the query post processor used by the connection.
+         *
+         * @param \Illuminate\Database\Query\Processors\Processor $processor
+         * @return \Firebird\Connection 
+         * @static 
+         */ 
+        public static function setPostProcessor($processor)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->setPostProcessor($processor);
+        }
+        
+        /**
+         * Get the event dispatcher used by the connection.
+         *
+         * @return \Illuminate\Contracts\Events\Dispatcher 
+         * @static 
+         */ 
+        public static function getEventDispatcher()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getEventDispatcher();
+        }
+        
+        /**
+         * Set the event dispatcher instance on the connection.
+         *
+         * @param \Illuminate\Contracts\Events\Dispatcher $events
+         * @return \Firebird\Connection 
+         * @static 
+         */ 
+        public static function setEventDispatcher($events)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->setEventDispatcher($events);
+        }
+        
+        /**
+         * Unset the event dispatcher for this connection.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function unsetEventDispatcher()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->unsetEventDispatcher();
+        }
+        
+        /**
+         * Determine if the connection is in a "dry run".
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function pretending()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->pretending();
+        }
+        
+        /**
+         * Get the connection query log.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getQueryLog()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getQueryLog();
+        }
+        
+        /**
+         * Clear the query log.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushQueryLog()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->flushQueryLog();
+        }
+        
+        /**
+         * Enable the query log on the connection.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function enableQueryLog()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->enableQueryLog();
+        }
+        
+        /**
+         * Disable the query log on the connection.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function disableQueryLog()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        $instance->disableQueryLog();
+        }
+        
+        /**
+         * Determine whether we're logging queries.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function logging()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->logging();
+        }
+        
+        /**
+         * Get the name of the connected database.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDatabaseName()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getDatabaseName();
+        }
+        
+        /**
+         * Set the name of the connected database.
+         *
+         * @param string $database
+         * @return \Firebird\Connection 
+         * @static 
+         */ 
+        public static function setDatabaseName($database)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->setDatabaseName($database);
+        }
+        
+        /**
+         * Get the table prefix for the connection.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getTablePrefix()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->getTablePrefix();
+        }
+        
+        /**
+         * Set the table prefix in use by the connection.
+         *
+         * @param string $prefix
+         * @return \Firebird\Connection 
+         * @static 
+         */ 
+        public static function setTablePrefix($prefix)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->setTablePrefix($prefix);
+        }
+        
+        /**
+         * Set the table prefix and return the grammar.
+         *
+         * @param \Illuminate\Database\Grammar $grammar
+         * @return \Illuminate\Database\Grammar 
+         * @static 
+         */ 
+        public static function withTablePrefix($grammar)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->withTablePrefix($grammar);
+        }
+        
+        /**
+         * Register a connection resolver.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function resolverFor($driver, $callback)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        \Firebird\Connection::resolverFor($driver, $callback);
+        }
+        
+        /**
+         * Get the connection resolver for the given driver.
+         *
+         * @param string $driver
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getResolver($driver)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        return \Firebird\Connection::getResolver($driver);
+        }
+        
+        /**
+         * Execute a Closure within a transaction.
+         *
+         * @param \Closure $callback
+         * @param int $attempts
+         * @return mixed 
+         * @throws \Exception|\Throwable
+         * @static 
+         */ 
+        public static function transaction($callback, $attempts = 1)
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->transaction($callback, $attempts);
+        }
+        
+        /**
+         * Get the number of active transactions.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function transactionLevel()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+                        /** @var \Firebird\Connection $instance */
+                        return $instance->transactionLevel();
         }
          
     }
@@ -6502,6 +7341,45 @@ namespace Illuminate\Support\Facades {
                         /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
                         return $instance->hasSent($notifiable, $notification);
         }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Illuminate\Support\Testing\Fakes\NotificationFake::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Illuminate\Support\Testing\Fakes\NotificationFake::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Illuminate\Support\Testing\Fakes\NotificationFake::hasMacro($name);
+        }
          
     }
 
@@ -6889,7 +7767,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Push a new job onto the queue after a delay.
          *
-         * @param \DateTime|int $delay
+         * @param \DateTimeInterface|\DateInterval|int $delay
          * @param string $job
          * @param mixed $data
          * @param string $queue
@@ -6921,7 +7799,7 @@ namespace Illuminate\Support\Facades {
          * Push a new job onto the queue after a delay.
          *
          * @param string $queue
-         * @param \DateTime|int $delay
+         * @param \DateTimeInterface|\DateInterval|int $delay
          * @param string $job
          * @param mixed $data
          * @return mixed 
@@ -6996,6 +7874,20 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Support\Testing\Fakes\QueueFake $instance */
                         return $instance->setConnectionName($name);
+        }
+        
+        /**
+         * Get the retry delay for an object-based queue handler.
+         *
+         * @param mixed $job
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getJobRetryDelay($job)
+        {
+            //Method inherited from \Illuminate\Queue\Queue            
+                        /** @var \Illuminate\Queue\SyncQueue $instance */
+                        return $instance->getJobRetryDelay($job);
         }
         
         /**
@@ -7510,7 +8402,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the client IP address.
          *
-         * @return string 
+         * @return string|null 
          * @static 
          */ 
         public static function ip()
@@ -8553,7 +9445,7 @@ namespace Illuminate\Support\Facades {
          *  * $default
          *
          * @param string|null $default The default format
-         * @return string The request format
+         * @return string|null The request format
          * @static 
          */ 
         public static function getRequestFormat($default = 'html')
@@ -10559,6 +11451,342 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static void registerCustomDBALType(string $class, string $name, string $type)
+     * @see \Illuminate\Database\Schema\Builder
+     */ 
+    class Schema {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function hasSequence($sequence)
+        {
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->hasSequence($sequence);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function createSequence($sequence, $callback = null)
+        {
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->createSequence($sequence, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function dropSequence($sequence)
+        {
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->dropSequence($sequence);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function sequence($sequence, $callback)
+        {
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->sequence($sequence, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function dropSequenceIfExists($sequence)
+        {
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->dropSequenceIfExists($sequence);
+        }
+        
+        /**
+         * Set the default string length for migrations.
+         *
+         * @param int $length
+         * @return void 
+         * @static 
+         */ 
+        public static function defaultStringLength($length)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        \Firebird\Schema\Builder::defaultStringLength($length);
+        }
+        
+        /**
+         * Determine if the given table exists.
+         *
+         * @param string $table
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasTable($table)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->hasTable($table);
+        }
+        
+        /**
+         * Determine if the given table has a given column.
+         *
+         * @param string $table
+         * @param string $column
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasColumn($table, $column)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->hasColumn($table, $column);
+        }
+        
+        /**
+         * Determine if the given table has given columns.
+         *
+         * @param string $table
+         * @param array $columns
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasColumns($table, $columns)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->hasColumns($table, $columns);
+        }
+        
+        /**
+         * Get the data type for the given column name.
+         *
+         * @param string $table
+         * @param string $column
+         * @return string 
+         * @static 
+         */ 
+        public static function getColumnType($table, $column)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->getColumnType($table, $column);
+        }
+        
+        /**
+         * Get the column listing for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */ 
+        public static function getColumnListing($table)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->getColumnListing($table);
+        }
+        
+        /**
+         * Modify a table on the schema.
+         *
+         * @param string $table
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function table($table, $callback)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->table($table, $callback);
+        }
+        
+        /**
+         * Create a new table on the schema.
+         *
+         * @param string $table
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function create($table, $callback)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->create($table, $callback);
+        }
+        
+        /**
+         * Drop a table from the schema.
+         *
+         * @param string $table
+         * @return void 
+         * @static 
+         */ 
+        public static function drop($table)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->drop($table);
+        }
+        
+        /**
+         * Drop a table from the schema if it exists.
+         *
+         * @param string $table
+         * @return void 
+         * @static 
+         */ 
+        public static function dropIfExists($table)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->dropIfExists($table);
+        }
+        
+        /**
+         * Drop all tables from the database.
+         *
+         * @return void 
+         * @throws \LogicException
+         * @static 
+         */ 
+        public static function dropAllTables()
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->dropAllTables();
+        }
+        
+        /**
+         * Drop all views from the database.
+         *
+         * @return void 
+         * @throws \LogicException
+         * @static 
+         */ 
+        public static function dropAllViews()
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->dropAllViews();
+        }
+        
+        /**
+         * Rename a table on the schema.
+         *
+         * @param string $from
+         * @param string $to
+         * @return void 
+         * @static 
+         */ 
+        public static function rename($from, $to)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->rename($from, $to);
+        }
+        
+        /**
+         * Enable foreign key constraints.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function enableForeignKeyConstraints()
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->enableForeignKeyConstraints();
+        }
+        
+        /**
+         * Disable foreign key constraints.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function disableForeignKeyConstraints()
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->disableForeignKeyConstraints();
+        }
+        
+        /**
+         * Register a custom Doctrine mapping type.
+         *
+         * @param string $class
+         * @param string $name
+         * @param string $type
+         * @return void 
+         * @throws \Doctrine\DBAL\DBALException
+         * @static 
+         */ 
+        public static function registerCustomDoctrineType($class, $name, $type)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->registerCustomDoctrineType($class, $name, $type);
+        }
+        
+        /**
+         * Get the database connection instance.
+         *
+         * @return \Illuminate\Database\Connection 
+         * @static 
+         */ 
+        public static function getConnection()
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->getConnection();
+        }
+        
+        /**
+         * Set the database connection instance.
+         *
+         * @param \Illuminate\Database\Connection $connection
+         * @return \Firebird\Schema\Builder 
+         * @static 
+         */ 
+        public static function setConnection($connection)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        return $instance->setConnection($connection);
+        }
+        
+        /**
+         * Set the Schema Blueprint resolver callback.
+         *
+         * @param \Closure $resolver
+         * @return void 
+         * @static 
+         */ 
+        public static function blueprintResolver($resolver)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->blueprintResolver($resolver);
         }
          
     }
@@ -17039,6 +18267,30 @@ namespace  {
             }
          
             /**
+             * Dump the current SQL and bindings.
+             *
+             * @return void 
+             * @static 
+             */ 
+            public static function dump()
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                $instance->dump();
+            }
+         
+            /**
+             * Die and dump the current SQL and bindings.
+             *
+             * @return void 
+             * @static 
+             */ 
+            public static function dd()
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                $instance->dd();
+            }
+         
+            /**
              * Register a custom macro.
              *
              * @param string $name
@@ -17121,6 +18373,8 @@ namespace  {
 
     class Route extends \Illuminate\Support\Facades\Route {}
 
+    class Schema extends \Illuminate\Support\Facades\Schema {}
+
     class Session extends \Illuminate\Support\Facades\Session {}
 
     class Storage extends \Illuminate\Support\Facades\Storage {}
@@ -17143,3 +18397,27 @@ namespace  {
 
 
 
+namespace Illuminate\Support {
+    /**
+     * Methods commonly used in migrations
+     *
+     * @method Fluent after(string $column) Add the after modifier
+     * @method Fluent charset(string $charset) Add the character set modifier
+     * @method Fluent collation(string $collation) Add the collation modifier
+     * @method Fluent comment(string $comment) Add comment
+     * @method Fluent default($value) Add the default modifier
+     * @method Fluent first() Select first row
+     * @method Fluent index(string $name = null) Add the in dex clause
+     * @method Fluent on(string $table) `on` of a foreign key
+     * @method Fluent onDelete(string $action) `on delete` of a foreign key
+     * @method Fluent onUpdate(string $action) `on update` of a foreign key
+     * @method Fluent primary() Add the primary key modifier
+     * @method Fluent references(string $column) `references` of a foreign key
+     * @method Fluent nullable(bool $value = true) Add the nullable modifier
+     * @method Fluent unique(string $name = null) Add unique index clause
+     * @method Fluent unsigned() Add the unsigned modifier
+     * @method Fluent useCurrent() Add the default timestamp value
+     * @method Fluent change() Add the change modifier
+     */
+    class Fluent {}
+}

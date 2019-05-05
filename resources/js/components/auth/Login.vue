@@ -38,9 +38,11 @@
                     </div>
 
                 </div>
-                <div class="alert alert-danger" v-if="has_error && !success">
+                <div class="row login-errors">
+                <div class="container alert alert-danger " v-if="has_error && !success">
                     <p v-if="error = 'login_error'">Ошибки проверки данных.</p>
                     <p v-else>Ошибка, невозможно соединиться с этими учетными данными.</p>
+                </div>
                 </div>
                 <div class="row login-form">
                     <div class="container">
@@ -66,7 +68,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 text-right login-forgot">
                         <div class="form-group">
-                        <router-link to="forgotpassword">Забыли пароль?</router-link>
+                        <router-link to="reset-password">Забыли пароль?</router-link>
                         </div>
                     </div>
                     </div>
@@ -116,13 +118,14 @@
             return {
                 email: null,
                 password: null,
+                //rememberMe: true,
                 success: false,
                 has_error: false,
                 error: ''
             }
         },
         mounted() {
-            rememberMe: false
+           // rememberMe: false
         },
         methods: {
           /*  fieldClassName: function(field) {
@@ -140,7 +143,8 @@
                 this.$auth.login({
                     data: {
                         email: app.email,
-                        password: app.password
+                        password: app.password,
+                        //rememberMe: app.rememberMe
                     },
                     success: function() {
                         // handle redirection
@@ -152,7 +156,7 @@
                         app.has_error = true;
                         app.error = res.response.data.error
                     },
-                    //rememberMe: true,
+                    rememberMe: true,
                     fetchUser: true
                 })
             }

@@ -18,12 +18,12 @@ Route::prefix('v1')->group(function () {
         Route::post('register', 'AuthController@signup');
         Route::post('login', 'AuthController@login');
         Route::get('refresh', 'AuthController@refresh');
-        Route::get('user', 'AuthController@getAuthenticatedUser');
         Route::post('reset-password', 'AuthController@sendPasswordResetLink');
-        Route::post('reset/password', 'AuthController@callResetPassword');
+        //Route::post('reset/password', 'AuthController@callResetPassword');
 
         Route::middleware('auth:api')->group(function () {
-            Route::get('person', ['uses' => 'AuthController@getDetails']);
+            Route::get('user', 'AuthController@getAuthenticatedUser');
+            //Route::get('person', ['uses' => 'AuthController@getDetails']);
             Route::post('logout', 'AuthController@logout');
         });
     });

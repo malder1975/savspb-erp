@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Models\Personal;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-Illuminate\Foundation\Auth\ResetsPasswords;
+//Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+//Illuminate\ ResetsPasswords;
 
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -37,18 +38,18 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $v = Validator::make($request->json()->all(), [
-            'name' => 'required|string|min:3|max:255',
+            'LOGIN' => 'required|string|min:3|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:3|confirmed'
+            'PASS' => 'required|min:3|confirmed'
         ]);
         if ($v->fails())
         {
             return response()->json($v->errors()->toJson(), 400);
         }
-        $user = User::create([
-            'name' => $request->json()->get('name'),
+        $user = Personal::create([
+            'LOGIN' => $request->json()->get('LOGIN'),
             'email' => $request->json()->get('email'),
-            'password' => Hash::make($request->json()->get('password')),
+            'PASS' => Hash::make($request->json()->get('PASS')),
         ]);
 
         $token = JWTAuth::fromUser($user);
@@ -118,7 +119,7 @@ class AuthController extends Controller
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
 
-    public function sendPasswordResetLink(Request $request)
+   /* public function sendPasswordResetLink(Request $request)
     {
         return $this->sendResetLinkEmail($request);
     }
@@ -157,5 +158,5 @@ class AuthController extends Controller
     protected function sentResetFailedResponse(Request $request, $response)
     {
         return response()->json(['message' => 'Ошибка! Неверный ключ доступа пользователя.']);
-    }
+    }*/
 }

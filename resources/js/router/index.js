@@ -1,9 +1,11 @@
 import VueRouter from 'vue-router'
 
 import Login from '../components/auth/Login'
-import Index from "../components/Index";
+//import Index from "../components/Index";
+import DefaultContainer from '../components/containers/DefaultContainer'
 import Home from '../components/Pages/Home'
 import ForgotPassword from "../components/auth/ForgotPassword";
+import ResetPasswordForm from '../components/auth/ResetPasswordForm'
 
 
 const router = new VueRouter({
@@ -30,18 +32,18 @@ const router = new VueRouter({
            auth: false
          }
      },
-     {
+    /* {
        path: '/reset-password/:token',
          name: 'Сменить пароль',
          component: ResetPasswordForm,
          meta: {
            auth: false
          }
-     },
+     },*/
      {
          path: '/',
          name: 'index',
-         component: Index,
+         component: DefaultContainer,
          meta: {
              auth: true
          },
