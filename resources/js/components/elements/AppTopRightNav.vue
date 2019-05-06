@@ -9,7 +9,7 @@
             </template>
             <slot name="dropdown" class="app-dropdown" data-dropdown-in="slideInRight" data-dropdown-out="fliipOutX">
                 <div class="nice-scroll-bar">
-                    <b-dropdown-item>РџРѕРіРѕРґР°</b-dropdown-item>
+                    <b-dropdown-item>Погода</b-dropdown-item>
                 </div>
             </slot>
         </b-nav-item-dropdown>
@@ -19,12 +19,15 @@
                 <span class="user-status"></span>
             </template>
         </b-nav-item-dropdown>
+        <HeaderDropdown></HeaderDropdown>
     </nav>
 </template>
 
 <script>
+    import HeaderDropdown from './header/HeaderDropdown'
     export default {
         name: "AppTopRightNav",
+        components: HeaderDropdown,
         props: {
             noCaret: {
                 type: Boolean,

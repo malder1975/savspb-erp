@@ -3,7 +3,7 @@
        <!--<div class="container">
             <div class="row">
                 <div class="col-lg-4 col-10 col-sm-8 mx-auto login-form">
-                    <h2 class="text-center logo-h2">Р”РѕРј РјРµР±РµР»Рё РќР°СЂРІСЃРєРёР№</h2>
+                    <h2 class="text-center logo-h2">Дом мебели Нарвский</h2>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
@@ -13,11 +13,11 @@
                                         <input type="email" name="email" id="email" class="form-control" required model="model.email" />
 
                                         <field-messages name="email" show="$touched || $submitted">
-                                            <div slot="required">E-mail РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅ</div>
-                                            <div slot="email">РћС€РёР±РєР° РІ Р°РґСЂРµСЃРµ</div>
+                                            <div slot="required">E-mail должен быть заполнен</div>
+                                            <div slot="email">Ошибка в адресе</div>
                                         </field-messages>
                                     </validate>
-                                    <button type="submit" class="btn btn-primary">Р’С…РѕРґ</button>
+                                    <button type="submit" class="btn btn-primary">Вход</button>
                                 </vue-form>
                                 <pre>{{ formstate }}</pre>
                             </div>
@@ -31,17 +31,17 @@
                 <div class="row login-header">
                     <div class="col-sm-12">
                         <h2 class="text-center header-login">
-                            <img src="images/logo1.png" class="login-logo" alt="Р”РњРќ-РќР°СЂРІСЃРєРёР№">
+                            <img src="images/logo1.png" class="login-logo" alt="ДМН-Нарвский">
                             <br>
-                            Р”РѕРј РјРµР±РµР»Рё РќР°СЂРІСЃРєРёР№
+                            Дом мебели Нарвский
                         </h2>
                     </div>
 
                 </div>
                 <div class="row login-errors">
                 <div class="container alert alert-danger " v-if="has_error && !success">
-                    <p v-if="error = 'login_error'">РћС€РёР±РєРё РїСЂРѕРІРµСЂРєРё РґР°РЅРЅС‹С….</p>
-                    <p v-else>РћС€РёР±РєР°, РЅРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕРµРґРёРЅРёС‚СЊСЃСЏ СЃ СЌС‚РёРјРё СѓС‡РµС‚РЅС‹РјРё РґР°РЅРЅС‹РјРё.</p>
+                    <p v-if="error = 'login_error'">Ошибки проверки данных.</p>
+                    <p v-else>Ошибка, невозможно соединиться с этими учетными данными.</p>
                 </div>
                 </div>
                 <div class="row login-form">
@@ -55,24 +55,24 @@
                     </div>
                     <div class="col-sm-12 mt-3">
                     <div class="form-group">
-                        <label for="password">РџР°СЂРѕР»СЊ</label>
-                        <input type="password" id="password" class="form-control" v-model="password" required placeholder="Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" class="form-control" v-model="password" required placeholder="Введите пароль">
                     </div>
                     </div>
                     <div class="row login-remember">
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                         <input type="checkbox" id="rememberme" class="form-check-input" v-model="rememberMe"/>
-                        <label for="rememberme" class="form-check-label">Р—Р°РїРѕРјРЅРёС‚СЊ</label>
+                        <label for="rememberme" class="form-check-label">Запомнить</label>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 text-right login-forgot">
                         <div class="form-group">
-                        <router-link to="reset-password">Р—Р°Р±С‹Р»Рё РїР°СЂРѕР»СЊ?</router-link>
+                        <router-link to="reset-password">Забыли пароль?</router-link>
                         </div>
                     </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block login-submit">Р’С…РѕРґ</button>
+                    <button type="submit" class="btn btn-primary btn-block login-submit">Вход</button>
                 </form>
                     </div>
                 </div>
@@ -80,8 +80,8 @@
 
                     <!--<div class="card-body">
                         <div class="alert alert-danger" v-if="has_error && !success">
-                            <p v-if="error = 'login_error'">РћС€РёР±РєРё РїСЂРѕРІРµСЂРєРё РґР°РЅРЅС‹С….</p>
-                            <p v-else>РћС€РёР±РєР°, РЅРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕРµРґРёРЅРёС‚СЊСЃСЏ СЃ СЌС‚РёРјРё СѓС‡РµС‚РЅС‹РјРё РґР°РЅРЅС‹РјРё.</p>
+                            <p v-if="error = 'login_error'">Ошибки проверки данных.</p>
+                            <p v-else>Ошибка, невозможно соединиться с этими учетными данными.</p>
                         </div>
                         <form autocomplete="off" @submit.prevent="login" method="post">
                             <div class="form-group">
@@ -89,10 +89,10 @@
                                 <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">РџР°СЂРѕР»СЊ</label>
-                                <input type="password" id="password" class="form-control" v-model="password" required placeholder="РџР°СЂРѕР»СЊ">
+                                <label for="password">Пароль</label>
+                                <input type="password" id="password" class="form-control" v-model="password" required placeholder="Пароль">
                             </div>
-                            <button type="submit" class="btn btn-primary">Р’С…РѕРґ</button>
+                            <button type="submit" class="btn btn-primary">Вход</button>
                         </form>
                     </div>-->
                 </div>

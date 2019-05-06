@@ -8,10 +8,11 @@ const config = {
     router: router,
     tokenDefaultName: 'Authorization',
     tokenStore: ['localStorage'],
+    rolesVar: 'LEVELS_ID',
 
     // API endpoints used in Vue Auth.
     registerData: {
-        url: 'auth/registe',
+        url: 'auth/register',
         method: 'POST',
         redirect: '/login'
     },
