@@ -1,0 +1,45 @@
+.app-navbar {
+    position: relative;
+    flex-direction: row;
+    height: $navbar-min-height;
+    padding: 0;
+    margin: 0;
+    background-image: $navbar-bg-color;
+
+    .navbar-brand {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: $navbar-brand-width;
+        height: $navbar-min-height;
+        padding: 0;
+        margin-right: 0;
+        transition-duration: 0.4s;
+        transition-timing-function: ease;
+    }
+
+    .brand-img {
+        margin-right: 10px;
+        top: 2px;
+    }
+
+    .brand-text {
+        font-family: $brand-text-font;
+        font-size: $brand-text-size;
+        color: $brand-font-color;
+        text-transform: capitalize;
+    }
+
+    .nav-item {
+        font-size: 21px;
+        color: #ecd0e9;
+
+        & i {
+            color: #ecd0e9;
+
+            &:hover {
+                color: #812a78;
+            }
+        }
+    }
+}

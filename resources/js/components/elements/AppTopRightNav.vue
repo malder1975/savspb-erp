@@ -13,6 +13,12 @@
                 </div>
             </slot>
         </b-nav-item-dropdown>
+        <b-nav-item-dropdown class="user-drp dropdown" :no-caret="noCaret">
+            <template slot="button-content">
+                <b-img width="43" height="43" rounded="circle" src="#" class="user-auth-img" />
+                <span class="user-status"></span>
+            </template>
+        </b-nav-item-dropdown>
     </nav>
 </template>
 

@@ -17,13 +17,13 @@ Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('register', 'AuthController@signup');
         Route::post('login', 'AuthController@login');
-
         Route::post('reset-password', 'AuthController@sendPasswordResetLink');
         //Route::post('reset/password', 'AuthController@callResetPassword');
 
 
         Route::group(['middleware' => 'jwt.auth'], function () {
             Route::get('user', 'AuthController@getAuthenticatedUser');
+            Route::resource('personal', 'Personal\PersonalController', ['except' => ['create', 'edit']]);
             Route::post('logout', 'AuthController@logout');
         });
 
