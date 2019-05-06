@@ -17,15 +17,25 @@ Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('register', 'AuthController@signup');
         Route::post('login', 'AuthController@login');
-        Route::get('refresh', 'AuthController@refresh');
+
         Route::post('reset-password', 'AuthController@sendPasswordResetLink');
         //Route::post('reset/password', 'AuthController@callResetPassword');
 
-        Route::middleware('auth:api')->group(function () {
+
+        Route::group(['middleware' => 'jwt.auth'], function () {
             Route::get('user', 'AuthController@getAuthenticatedUser');
-            //Route::get('person', ['uses' => 'AuthController@getDetails']);
             Route::post('logout', 'AuthController@logout');
         });
+
+        Route::group(['middleware' => 'jwt.refresh'], function () {
+            Route::get('refresh', 'AuthController@refresh');
+        });
+       /* Route::middleware('auth:api')->group(function () {
+            Route::get('user', 'AuthController@getAuthenticatedUser');
+            Route::get('refresh', 'AuthController@refresh');
+            //Route::get('person', ['uses' => 'AuthController@getDetails']);
+            Route::post('logout', 'AuthController@logout');
+        }); */
     });
 
     Route::middleware('auth:api')->get('/user', function(Request $request) {

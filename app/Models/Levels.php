@@ -15,6 +15,10 @@ class Levels extends Model
 
     public function personal()
     {
+<<<<<<< HEAD
         return $this->hasMany(Personal::class);
+=======
+        return $this->belongsToMany(Personal::class);
+>>>>>>> origin/master
     }
 }
