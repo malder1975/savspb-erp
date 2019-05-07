@@ -7,7 +7,7 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'РЎРёСЃС‚РµРјР° РєРѕРјРїР°РЅРёРё РЎРђР’') }}</title>
+        <title>{{ config('app.name', 'Система компании САВ') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i,900,900i&amp;subset=cyrillic" rel="stylesheet">
