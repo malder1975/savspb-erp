@@ -42,3 +42,18 @@ const config = {
 };
 
 export default config
+  /*  user: {
+        authenticated: false,
+        profile: null
+    },
+    check() {
+        if (localStorage.getItem('token') !== null) {
+            Vue.http.get(
+                'user',
+            ).then(response => {
+                this.user.authenticated = true,
+                    this.user.profile = response.data.data
+            })
+        }
+    }*/
+

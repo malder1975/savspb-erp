@@ -77,7 +77,7 @@ class AuthController extends Controller
         try
         {
             if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['Пользователь не найден'], 404);
+                return response()->json(['РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ РЅР°Р№РґРµРЅ'], 404);
             }
         } catch (TokenExpiredException $e) {
             return response()->json(['token_expired'], $e->getCode());
@@ -98,12 +98,12 @@ class AuthController extends Controller
             JWTAuth::invalidate(JWTAuth::getToken());
             return response()->json([
                 'status' => 'Success',
-                'message' => 'Вышел из системы'
+                'message' => 'Р’С‹С€РµР» РёР· СЃРёСЃС‚РµРјС‹'
             ]);
         } catch (JWTException $e) {
             return response()->json([
                 'status' => 'Error',
-                'message' => 'Ошибка выхода, попробуйте позже'
+                'message' => 'РћС€РёР±РєР° РІС‹С…РѕРґР°, РїРѕРїСЂРѕР±СѓР№С‚Рµ РїРѕР·Р¶Рµ'
             ], 500);
         }
 
@@ -127,14 +127,14 @@ class AuthController extends Controller
     protected function sendResetLinkResponse(Request $request, $response)
     {
         return response()->json([
-            'message' => 'Отправлено письмо восстановления пароля',
+            'message' => 'РћС‚РїСЂР°РІР»РµРЅРѕ РїРёСЃСЊРјРѕ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїР°СЂРѕР»СЏ',
             'data' => $response
         ]);
     }
 
     protected function sendResetLinkFiledResponse(Request $request, $response)
     {
-        return response()->json(['message' => 'Невозможно отправить письмо на указанный адрес']);
+        return response()->json(['message' => 'РќРµРІРѕР·РјРѕР¶РЅРѕ РѕС‚РїСЂР°РІРёС‚СЊ РїРёСЃСЊРјРѕ РЅР° СѓРєР°Р·Р°РЅРЅС‹Р№ Р°РґСЂРµСЃ']);
     }
 
     public function callResetPassword(Request $request)
@@ -152,11 +152,11 @@ class AuthController extends Controller
 
     protected function sentResetResponse(Request $request, $response)
     {
-        return response()->json(['message' => 'Пароль успешно изменен.']);
+        return response()->json(['message' => 'РџР°СЂРѕР»СЊ СѓСЃРїРµС€РЅРѕ РёР·РјРµРЅРµРЅ.']);
     }
 
     protected function sentResetFailedResponse(Request $request, $response)
     {
-        return response()->json(['message' => 'Ошибка! Неверный ключ доступа пользователя.']);
+        return response()->json(['message' => 'РћС€РёР±РєР°! РќРµРІРµСЂРЅС‹Р№ РєР»СЋС‡ РґРѕСЃС‚СѓРїР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ.']);
     }*/
 }

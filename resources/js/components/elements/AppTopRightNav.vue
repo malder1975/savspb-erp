@@ -7,27 +7,38 @@
             <template slot="button-content">
                 <i class="fas fa-th"></i>
             </template>
-            <slot name="dropdown" class="app-dropdown" data-dropdown-in="slideInRight" data-dropdown-out="fliipOutX">
+            <slot name="dropdown" class="app-dropdown" data-dropdown-in="slideInRight" data-dropdown-out="flipOutX">
                 <div class="nice-scroll-bar">
-                    <b-dropdown-item>Погода</b-dropdown-item>
+                    <b-dropdown-item>РџРѕРіРѕРґР°</b-dropdown-item>
                 </div>
             </slot>
         </b-nav-item-dropdown>
-        <b-nav-item-dropdown class="user-drp dropdown" :no-caret="noCaret">
+        <b-nav-item-dropdown class="user-drp dropdown" :no-caret="noCaret" right>
             <template slot="button-content">
                 <b-img width="43" height="43" rounded="circle" src="#" class="user-auth-img" />
                 <span class="user-status"></span>
             </template>
+            <slot name="dropdown" class="app-dropdown">
+                <div :style="{ right: 'auto', height: '200px' }">
+                    <span class="text-center" v-if="$auth.check()">{{ user.data }}</span>
+                </div>
+                <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()" href="#">
+                    Р’С‹С…РѕРґ
+                </b-dropdown-item>
+            </slot>
         </b-nav-item-dropdown>
         <HeaderDropdown></HeaderDropdown>
     </nav>
 </template>
 
 <script>
+    
     import HeaderDropdown from './header/HeaderDropdown'
     export default {
         name: "AppTopRightNav",
-        components: HeaderDropdown,
+        components: {
+            HeaderDropdown
+        },
         props: {
             noCaret: {
                 type: Boolean,
@@ -36,8 +47,21 @@
             right: {
                 type: Boolean,
                 default: false
+            },
+
+        },
+        data() {
+            return {
+                user: []
             }
+        },
+        computed: {
+           //
+        },
+        mounted() {
+          // axios.get('/api/v1/auth/user').then(response => )
         }
+
     }
 </script>
 

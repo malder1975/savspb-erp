@@ -3771,10 +3771,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AppTopRightNav",
-  components: _header_HeaderDropdown__WEBPACK_IMPORTED_MODULE_0__["default"],
+  components: {
+    HeaderDropdown: _header_HeaderDropdown__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: {
     noCaret: {
       type: Boolean,
@@ -3784,6 +3794,15 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       default: false
     }
+  },
+  data: function data() {
+    return {
+      user: []
+    };
+  },
+  computed: {//
+  },
+  mounted: function mounted() {// axios.get('/api/v1/auth/user').then(response => )
   }
 });
 
@@ -25124,7 +25143,7 @@ var hasPointerEvent = inBrowser && Boolean(window.PointerEvent || window.MSPoint
 exports.hasPointerEvent = hasPointerEvent;
 
 var getNoWarn = function getNoWarn() {
-  return typeof process !== 'undefined' && process && Object({"MIX_APP_URL":"http://savspb-erp.loc","MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}) && Object({"MIX_APP_URL":"http://savspb-erp.loc","MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BOOTSTRAP_VUE_NO_WARN;
+  return typeof process !== 'undefined' && process && Object({"MIX_APP_URL":"http://savspb-erp.loc:81","MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}) && Object({"MIX_APP_URL":"http://savspb-erp.loc:81","MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BOOTSTRAP_VUE_NO_WARN;
 };
 
 exports.getNoWarn = getNoWarn;
@@ -69621,10 +69640,10 @@ var render = function() {
             _vm.has_error && !_vm.success
               ? _c("div", { staticClass: "container alert alert-danger " }, [
                   (_vm.error = "login_error")
-                    ? _c("p", [_vm._v("������ �������� ������.")])
+                    ? _c("p", [_vm._v("Ошибки проверки данных.")])
                     : _c("p", [
                         _vm._v(
-                          "������, ���������� ����������� � ����� �������� �������."
+                          "Ошибка, невозможно соединиться с этими учетными данными."
                         )
                       ])
                 ])
@@ -69683,7 +69702,7 @@ var render = function() {
                   _c("div", { staticClass: "col-sm-12 mt-3" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { attrs: { for: "password" } }, [
-                        _vm._v("������")
+                        _vm._v("Пароль")
                       ]),
                       _vm._v(" "),
                       _c("input", {
@@ -69700,7 +69719,7 @@ var render = function() {
                           type: "password",
                           id: "password",
                           required: "",
-                          placeholder: "������� ������"
+                          placeholder: "Введите пароль"
                         },
                         domProps: { value: _vm.password },
                         on: {
@@ -69764,7 +69783,7 @@ var render = function() {
                             staticClass: "form-check-label",
                             attrs: { for: "rememberme" }
                           },
-                          [_vm._v("���������")]
+                          [_vm._v("Запомнить")]
                         )
                       ])
                     ]),
@@ -69782,7 +69801,7 @@ var render = function() {
                             _c(
                               "router-link",
                               { attrs: { to: "reset-password" } },
-                              [_vm._v("������ ������?")]
+                              [_vm._v("Забыли пароль?")]
                             )
                           ],
                           1
@@ -69797,7 +69816,7 @@ var render = function() {
                       staticClass: "btn btn-primary btn-block login-submit",
                       attrs: { type: "submit" }
                     },
-                    [_vm._v("����")]
+                    [_vm._v("Вход")]
                   )
                 ]
               )
@@ -69818,12 +69837,12 @@ var staticRenderFns = [
         _c("h2", { staticClass: "text-center header-login" }, [
           _c("img", {
             staticClass: "login-logo",
-            attrs: { src: "images/logo1.png", alt: "���-��������" }
+            attrs: { src: "images/logo1.png", alt: "ДМН-Нарвский" }
           }),
           _vm._v(" "),
           _c("br"),
           _vm._v(
-            "\n                        ��� ������ ��������\n                    "
+            "\n                        Дом мебели Нарвский\n                    "
           )
         ])
       ])
@@ -70191,11 +70210,11 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "nice-scroll-bar" },
-                [_c("b-dropdown-item", [_vm._v("������")])],
+                [_c("b-dropdown-item", [_vm._v("Погода")])],
                 1
               )
             ],
-            { dataDropdownIn: "slideInRight", dataDropdownOut: "fliipOutX" }
+            { dataDropdownIn: "slideInRight", dataDropdownOut: "flipOutX" }
           )
         ],
         2
@@ -70205,7 +70224,7 @@ var render = function() {
         "b-nav-item-dropdown",
         {
           staticClass: "user-drp dropdown",
-          attrs: { "no-caret": _vm.noCaret }
+          attrs: { "no-caret": _vm.noCaret, right: "" }
         },
         [
           _c(
@@ -70225,7 +70244,33 @@ var render = function() {
               _c("span", { staticClass: "user-status" })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _vm._t("dropdown", [
+            _c("div", { style: { right: "auto", height: "200px" } }, [
+              _vm.$auth.check()
+                ? _c("span", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(_vm.user.data))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm.$auth.check()
+              ? _c(
+                  "b-dropdown-item",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.$auth.logout()
+                      }
+                    }
+                  },
+                  [_vm._v("\n                Выход\n            ")]
+                )
+              : _vm._e()
+          ])
         ],
         2
       ),
@@ -85130,7 +85175,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_form__WEBPACK_IMPORTED_MODULE
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.router = _router__WEBPACK_IMPORTED_MODULE_11__["default"];
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_6___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
-axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = "".concat("http://savspb-erp.loc", "/api/v1");
+axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = "".concat("http://savspb-erp.loc:81", "/api/v1");
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_5___default.a, _auth__WEBPACK_IMPORTED_MODULE_10__["default"]);
 new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
   el: '#app',
@@ -85200,6 +85245,20 @@ var config = {
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (config);
+/*  user: {
+      authenticated: false,
+      profile: null
+  },
+  check() {
+      if (localStorage.getItem('token') !== null) {
+          Vue.http.get(
+              'user',
+          ).then(response => {
+              this.user.authenticated = true,
+                  this.user.profile = response.data.data
+          })
+      }
+  }*/
 
 /***/ }),
 
@@ -86248,8 +86307,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
