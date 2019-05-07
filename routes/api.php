@@ -23,7 +23,7 @@ Route::prefix('v1')->group(function () {
 
         Route::group(['middleware' => 'jwt.auth'], function () {
             Route::get('user', 'AuthController@getAuthenticatedUser');
-            Route::resource('personal', 'Personal\PersonalController', ['except' => ['create', 'edit']]);
+            //Route::resource('personal', 'Personal\PersonalController', ['except' => ['create', 'edit']]);
             Route::post('logout', 'AuthController@logout');
         });
 
