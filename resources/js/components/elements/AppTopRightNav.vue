@@ -20,7 +20,7 @@
             </template>
             <slot name="dropdown" class="app-dropdown">
                 <div :style="{ right: 'auto', height: '200px' }">
-                    <span class="text-center" v-if="$auth.check()">{{ user.data }}</span>
+                    <span class="text-center" v-if="$auth.check()">{{ $auth.user.name }}</span>
                 </div>
                 <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()" href="#">
                     Выход
@@ -52,13 +52,18 @@
         },
         data() {
             return {
-                user: []
+                user: [
+
+                ]
             }
         },
         computed: {
-           //
+           auth_user() {
+               return $auth.user();
+           }
         },
         mounted() {
+
           // axios.get('/api/v1/auth/user').then(response => )
         }
 

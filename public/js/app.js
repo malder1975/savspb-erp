@@ -3800,7 +3800,10 @@ __webpack_require__.r(__webpack_exports__);
       user: []
     };
   },
-  computed: {//
+  computed: {
+    auth_user: function auth_user() {
+      return $auth.user();
+    }
   },
   mounted: function mounted() {// axios.get('/api/v1/auth/user').then(response => )
   }
@@ -70250,7 +70253,7 @@ var render = function() {
             _c("div", { style: { right: "auto", height: "200px" } }, [
               _vm.$auth.check()
                 ? _c("span", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(_vm.user.data))
+                    _vm._v(_vm._s(_vm.$auth.user.name))
                   ])
                 : _vm._e()
             ]),
