@@ -20,7 +20,7 @@
             </template>
             <slot name="dropdown" class="app-dropdown">
                 <div :style="{ right: 'auto', height: '200px' }">
-                    <span class="text-center" v-if="$auth.check()">{{ user.name }}</span>
+                    <span class="text-center" >{{ user.name }}</span>
                 </div>
                 <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()" href="#">
                     Выход
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    
+    import EventBus from '../EventBus'
     import HeaderDropdown from './header/HeaderDropdown'
     export default {
         name: "AppTopRightNav",
@@ -48,18 +48,21 @@
                 type: Boolean,
                 default: false
             },
-
         },
         data() {
             return {
-                user: []
+                auth: '',
+                user: ''
             }
         },
         computed: {
            //
+
         },
         mounted() {
-          // axios.get('/api/v1/auth/user').then(response => )
+            EventBus.$on('logged-in', status => {
+                this.auth = status
+            })
         }
 
     }

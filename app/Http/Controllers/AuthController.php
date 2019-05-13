@@ -57,19 +57,19 @@ class AuthController extends Controller
         return response()->json(compact('user', 'token'), 201);
     }
 
-    public function login(Request $request)
+    public function login(Request $request, $remember = false)
     {
         $credentials = $request->json()->all();
 
         try
         {
-            if(! $token = JWTAuth::attempt($credentials)) {
+            if(! $token = JWTAuth::attempt($credentials, $remember)) {
                 return response()->json(['error' => 'invalid_credentiald'], 400);
             }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-        return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
+        return response()->json(['status' => 'success'], 200)->header('Authorization', 'Bearer '.$token);
     }
 
     public function getAuthenticatedUser()
@@ -111,7 +111,8 @@ class AuthController extends Controller
 
     public function refresh()
     {
-        if ($token = JWTAuth::refresh()) {
+        $token = JWTAuth::getToken();
+        if ($token = JWTAuth::refresh($token)) {
             return response()->json([
                 'status' => 'Success'
             ], 200)->header('Authorization', $token);

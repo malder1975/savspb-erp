@@ -27,6 +27,7 @@ Route::prefix('v1')->group(function () {
             Route::get('personal/{id}', 'Personal\PersonalController@show')->middleware('isAdminOrSelf');
             //Route::resource('personal', 'Personal\PersonalController', ['except' => ['create', 'edit']]);
             Route::post('logout', 'AuthController@logout');
+            Route::get('person-account', 'Personal\PersonController@index');
         });
 
         Route::group(['middleware' => 'jwt.refresh'], function () {
