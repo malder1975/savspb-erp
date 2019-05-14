@@ -19,6 +19,6 @@
         components: {
             AppHeader,
             AppNav
-        }
+        },
     }
 </script>

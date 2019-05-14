@@ -86,7 +86,9 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['token_absent'], $e->getCode());
         }
-        return response()->json(compact('user'));
+        $user = JWTAuth::user();
+        $username = $user->LOGIN;
+        return response()->json(['user' => $user, 'username' => $username]);
     }
 
     public function logout(Request $request)

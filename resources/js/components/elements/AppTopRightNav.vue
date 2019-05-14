@@ -15,14 +15,14 @@
         </b-nav-item-dropdown>
         <b-nav-item-dropdown class="user-drp dropdown" :no-caret="noCaret" right>
             <template slot="button-content">
-                <b-img width="43" height="43" rounded="circle" src="#" class="user-auth-img" />
+                <b-img width="43" height="43" rounded="circle" :src="user.avatar" class="user-auth-img" />
                 <span class="user-status"></span>
             </template>
             <slot name="dropdown" class="app-dropdown">
                 <div :style="{ right: 'auto', height: '200px' }">
-                    <span class="text-center" v-if="$auth.check()">{{ $auth.user.name }}</span>
+                    <span class="text-center">{{ $auth.user().name }}</span>
                 </div>
-                <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()" href="#">
+                <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()">
                     Выход
                 </b-dropdown-item>
             </slot>
@@ -53,17 +53,15 @@
         data() {
             return {
                 user: [
-
                 ]
             }
         },
         computed: {
-           auth_user() {
-               return $auth.user();
-           }
+           //
+
         },
         mounted() {
-
+            this.fetchUser();
           // axios.get('/api/v1/auth/user').then(response => )
         }
 

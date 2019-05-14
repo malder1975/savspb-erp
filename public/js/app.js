@@ -3800,12 +3800,10 @@ __webpack_require__.r(__webpack_exports__);
       user: []
     };
   },
-  computed: {
-    auth_user: function auth_user() {
-      return $auth.user();
-    }
+  computed: {//
   },
-  mounted: function mounted() {// axios.get('/api/v1/auth/user').then(response => )
+  mounted: function mounted() {
+    this.fetchUser(); // axios.get('/api/v1/auth/user').then(response => )
   }
 });
 
@@ -70240,7 +70238,7 @@ var render = function() {
                   width: "43",
                   height: "43",
                   rounded: "circle",
-                  src: "#"
+                  src: _vm.user.avatar
                 }
               }),
               _vm._v(" "),
@@ -70251,18 +70249,15 @@ var render = function() {
           _vm._v(" "),
           _vm._t("dropdown", [
             _c("div", { style: { right: "auto", height: "200px" } }, [
-              _vm.$auth.check()
-                ? _c("span", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(_vm.$auth.user.name))
-                  ])
-                : _vm._e()
+              _c("span", { staticClass: "text-center" }, [
+                _vm._v(_vm._s(_vm.$auth.user().name))
+              ])
             ]),
             _vm._v(" "),
             _vm.$auth.check()
               ? _c(
                   "b-dropdown-item",
                   {
-                    attrs: { href: "#" },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
@@ -85235,7 +85230,7 @@ var config = {
     redirect: '/login',
     makeRequest: true
   },
-  fetchData: {
+  fetchUser: {
     url: 'user',
     method: 'GET',
     enabled: true
