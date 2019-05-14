@@ -118,7 +118,7 @@
             return {
                 email: null,
                 password: null,
-                //rememberMe: true,
+                rememberMe: false,
                 success: false,
                 has_error: false,
                 error: ''
@@ -144,7 +144,7 @@
                     data: {
                         email: app.email,
                         password: app.password,
-                        //rememberMe: app.rememberMe
+                        rememberMe: app.remember
                     },
                     success: function() {
                         // handle redirection
@@ -154,7 +154,6 @@
                     },
                     error: function() {
                         app.has_error = true;
-                        app.error = res.response.data.error
                     },
                     rememberMe: true,
                     fetchUser: true

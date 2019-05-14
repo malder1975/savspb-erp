@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.15 on 2019-05-07 12:49:49.
+ * Generated for Laravel 5.8.16 on 2019-05-08 01:06:02.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -11458,7 +11458,6 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static void registerCustomDBALType(string $class, string $name, string $type)
      * @see \Illuminate\Database\Schema\Builder
      */ 
     class Schema {
@@ -11688,6 +11687,20 @@ namespace Illuminate\Support\Facades {
             //Method inherited from \Illuminate\Database\Schema\Builder            
                         /** @var \Firebird\Schema\Builder $instance */
                         $instance->dropAllViews();
+        }
+        
+        /**
+         * Drop all types from the database.
+         *
+         * @return void 
+         * @throws \LogicException
+         * @static 
+         */ 
+        public static function dropAllTypes()
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Firebird\Schema\Builder $instance */
+                        $instance->dropAllTypes();
         }
         
         /**
