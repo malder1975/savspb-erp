@@ -20,7 +20,7 @@
             </template>
             <slot name="dropdown" class="app-dropdown">
                 <div :style="{ right: 'auto', height: '200px' }">
-                    <span class="text-center" >{{ user.name }}</span>
+                    <span class="text-center" >{{ app.user  }}</span>
                 </div>
                 <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()" href="#">
                     Выход
@@ -49,20 +49,30 @@
                 default: false
             },
         },
+        props: ['app'],
+
         data() {
             return {
-                auth: '',
-                user: ''
+                user: {
+                    PERSONAL_ID: '',
+                    LOGIN: '',
+                    PERS_NAME: '',
+                    email: ''
+                }
             }
         },
         computed: {
            //
 
         },
+        created() {
+            $auth.fetchData();
+        },
         mounted() {
-            EventBus.$on('logged-in', status => {
-                this.auth = status
-            })
+            this.app.user = response.data.user;
+        },
+        methods: {
+            //
         }
 
     }

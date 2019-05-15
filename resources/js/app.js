@@ -14,6 +14,8 @@ import routes from './router'
 
 import '@fortawesome/fontawesome-free/scss/fontawesome.scss'
 import '../sass/style.scss'
+import 'material-design-icons/iconfont/material-icons.css'
+//import 'materialize-css/dist/css/materialize.min.css'
 
 window.Vue = Vue;
 

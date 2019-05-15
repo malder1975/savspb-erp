@@ -8,6 +8,15 @@
     export default {
         name: "App",
         components: {
+            //
+        },
+        data() {
+            return {
+                user: null
+            }
+        },
+        methods: {
+            //
 
         }
     }
