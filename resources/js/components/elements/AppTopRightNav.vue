@@ -52,19 +52,15 @@
         },
         data() {
             return {
-                user: [
-
-                ]
+                auth: '',
+                user: ''
             }
         },
         computed: {
-           auth_user() {
-               return $auth.user();
-           }
+           //
         },
         mounted() {
-
-          // axios.get('/api/v1/auth/user').then(response => )
+           //
         }
 
     }

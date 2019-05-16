@@ -3497,7 +3497,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       email: null,
       password: null,
-      //rememberMe: true,
+      rememberMe: false,
       success: false,
       has_error: false,
       error: ''
@@ -3521,8 +3521,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$auth.login({
         data: {
           email: app.email,
-          password: app.password //rememberMe: app.rememberMe
-
+          password: app.password,
+          rememberMe: app.remember
         },
         success: function success() {
           // handle redirection
@@ -3534,7 +3534,6 @@ __webpack_require__.r(__webpack_exports__);
         },
         error: function error() {
           app.has_error = true;
-          app.error = res.response.data.error;
         },
         rememberMe: true,
         fetchUser: true
@@ -3797,7 +3796,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      user: []
+      auth: '',
+      user: ''
     };
   },
   computed: {
@@ -3805,7 +3805,12 @@ __webpack_require__.r(__webpack_exports__);
       return $auth.user();
     }
   },
-  mounted: function mounted() {// axios.get('/api/v1/auth/user').then(response => )
+  mounted: function mounted() {
+    var _this = this;
+
+    EventBus.$on('logged-in', function (status) {
+      _this.auth = status;
+    });
   }
 });
 
@@ -85235,7 +85240,7 @@ var config = {
     redirect: '/login',
     makeRequest: true
   },
-  fetchData: {
+  fetchUser: {
     url: 'user',
     method: 'GET',
     enabled: true
