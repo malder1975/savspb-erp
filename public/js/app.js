@@ -3774,10 +3774,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EventBus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EventBus */ "./resources/js/components/EventBus.vue");
 /* harmony import */ var _header_HeaderDropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header/HeaderDropdown */ "./resources/js/components/elements/header/HeaderDropdown.vue");
-var _name$components$prop;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -3813,7 +3809,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_name$components$prop = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: "AppTopRightNav",
   components: {
     HeaderDropdown: _header_HeaderDropdown__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -3827,23 +3823,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: Boolean,
       default: false
     }
-  }
-}, _defineProperty(_name$components$prop, "props", ['app']), _defineProperty(_name$components$prop, "data", function data() {
-  return {
-    user: {
-      PERSONAL_ID: '',
-      LOGIN: '',
-      PERS_NAME: '',
-      email: ''
+  },
+  data: function data() {
+    return {
+      user: {
+        PERSONAL_ID: '',
+        LOGIN: '',
+        PERS_NAME: '',
+        email: '',
+        avatar_url: ''
+      }
+    };
+  },
+  computed: {},
+  created: function created() {
+    this.fetchUser();
+    this.user = this.$auth.user;
+  },
+  mounted: function mounted() {//
+  },
+  methods: {
+    fetchUser: function fetchUser() {
+      var _this = this;
+
+      this.error = this.user = null;
+      axios.get('/user').then(function (response) {
+        _this.user = response.data;
+      }).catch(function (error) {
+        return _this.error = error.response.data.message || error.message;
+      });
     }
-  };
-}), _defineProperty(_name$components$prop, "computed", {//
-}), _defineProperty(_name$components$prop, "created", function created() {
-  $auth.fetchData();
-}), _defineProperty(_name$components$prop, "mounted", function mounted() {
-  this.app.user = response.data.user;
-}), _defineProperty(_name$components$prop, "methods", {//
-}), _name$components$prop);
+  }
+});
 
 /***/ }),
 
@@ -70379,7 +70390,9 @@ var render = function() {
                   width: "43",
                   height: "43",
                   rounded: "circle",
-                  src: "#"
+                  src: _vm.user.avatar_url
+                    ? "/images/avatars/user1.png"
+                    : "/images/avatars/user1.png"
                 }
               }),
               _vm._v(" "),
@@ -70390,9 +70403,11 @@ var render = function() {
           _vm._v(" "),
           _vm._t("dropdown", [
             _c("div", { style: { right: "auto", height: "200px" } }, [
-              _c("span", { staticClass: "text-center" }, [
-                _vm._v(_vm._s(_vm.app.user))
-              ])
+              _vm.$auth.check()
+                ? _c("span", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(_vm.user.PERS_NAME))
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _vm.$auth.check()

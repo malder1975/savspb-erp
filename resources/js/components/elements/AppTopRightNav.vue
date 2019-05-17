@@ -15,12 +15,12 @@
         </b-nav-item-dropdown>
         <b-nav-item-dropdown class="user-drp dropdown" :no-caret="noCaret" right>
             <template slot="button-content">
-                <b-img width="43" height="43" rounded="circle" src="#" class="user-auth-img" />
+                <b-img width="43" height="43" rounded="circle" :src="user.avatar_url ? '/images/avatars/user1.png' : '/images/avatars/user1.png'" class="user-auth-img" />
                 <span class="user-status"></span>
             </template>
             <slot name="dropdown" class="app-dropdown">
                 <div :style="{ right: 'auto', height: '200px' }">
-                    <span class="text-center" >{{ app.user  }}</span>
+                    <span class="text-center" v-if="$auth.check()">{{ user.PERS_NAME  }}</span>
                 </div>
                 <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()" href="#">
                     Выход
@@ -49,7 +49,7 @@
                 default: false
             },
         },
-        props: ['app'],
+
 
         data() {
             return {
@@ -57,22 +57,32 @@
                     PERSONAL_ID: '',
                     LOGIN: '',
                     PERS_NAME: '',
-                    email: ''
+                    email: '',
+                    avatar_url: ''
                 }
             }
         },
         computed: {
-           //
+
+
 
         },
         created() {
-            $auth.fetchData();
+            this.fetchUser()
+            this.user = this.$auth.user
         },
         mounted() {
-            this.app.user = response.data.user;
+            //
         },
         methods: {
-            //
+            fetchUser() {
+                this.error = this.user = null
+                axios.get('/user')
+                    .then(response => {
+                        this.user = response.data
+                    }).catch(error =>
+                    this.error = error.response.data.message || error.message)
+            }
         }
 
     }

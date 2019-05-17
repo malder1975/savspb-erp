@@ -72,7 +72,7 @@ class AuthController extends Controller
         return response()->json(['status' => 'success'], 200)->header('Authorization', 'Bearer '.$token);
     }
 
-    public function getAuthenticatedUser()
+    public function getAuthenticatedUser(Request $request)
     {
         try
         {
@@ -86,7 +86,8 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['token_absent'], $e->getCode());
         }
-        return response()->json(compact('user'));
+        //$user = JWTAuth::toUser($request->tok )
+        return response()->json(['result' => $user]); //compact('user')
     }
 
     public function logout(Request $request)
