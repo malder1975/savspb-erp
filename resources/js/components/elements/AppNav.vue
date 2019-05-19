@@ -5,17 +5,19 @@
             <img src="images/logo1.png" class="brand-img" alt="ДМ Нарвский">
             <span class="brand-text">ДМ Нарвский</span>
         </b-navbar-brand>
-        <SidebarToggler class="bv-d-md-down-none" display="lg"></SidebarToggler>
+        <SidebarToggler class="d-sm-none" display="lg"></SidebarToggler>
         <AppTopRightNav right></AppTopRightNav>
     </nav>
 </template>
 
 <script>
     import AppTopRightNav from './AppTopRightNav'
+    import SidebarToggler from './sidebar/SidebarToggler'
     export default {
         name: "AppNav",
         components: {
-            AppTopRightNav
+            AppTopRightNav,
+            SidebarToggler
         },
         props: {
             fixedtop: {

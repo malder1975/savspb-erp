@@ -42,4 +42,56 @@
             }
         }
     }
+    button {
+        margin: 0 auto;
+    }
+    .nav-link {
+        padding-top: 0;
+        padding-bottom: 0;
+        background: 0;
+        border: 0;
+
+        .badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -16px;
+            margin-left: 0;
+        }
+
+        > .user-auth-img {
+            height: $navbar-min-height - 20px;
+            margin: 0 10px;
+        ;
+        }
+    }
+}
+
+.user-status {
+    background: $green;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid $white;
+    position: absolute;
+    bottom: 7px;
+    right: 25px;
+}
+
+.dropdown-item {
+    font-size: 11px;
+    color: $black;
+
+    & i {
+        color: $black !important;
+    }
+
+    &:hover {
+        background-color: #812a78;
+        color: $white;
+
+        & i {
+            color: #ecd0e9 !important;
+        }
+    }
 }

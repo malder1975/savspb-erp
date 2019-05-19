@@ -28,7 +28,7 @@ const config = {
         redirect: '/login',
         makeRequest: true
     },
-    fetchData: {
+    fetchUser: {
         url: 'user',
         method: 'GET',
         enabled: true

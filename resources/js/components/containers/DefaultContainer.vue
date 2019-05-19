@@ -14,11 +14,13 @@
 <script>
     import AppHeader from '../elements/header/Header'
     import AppNav from '../elements/AppNav'
+    import Sidebar from '../elements/sidebar/Sidebar'
     export default {
         name: "DefaultContainer",
         components: {
             AppHeader,
-            AppNav
-        }
+            AppNav,
+            Sidebar
+        },
     }
 </script>
