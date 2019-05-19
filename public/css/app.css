@@ -712,6 +712,59 @@ input[type="color"].form-control:disabled {
   color: #812a78;
 }
 
+.app-navbar button {
+  margin: 0 auto;
+}
+
+.app-navbar .nav-link {
+  padding-top: 0;
+  padding-bottom: 0;
+  background: 0;
+  border: 0;
+}
+
+.app-navbar .nav-link .badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -16px;
+  margin-left: 0;
+}
+
+.app-navbar .nav-link > .user-auth-img {
+  height: 46px;
+  margin: 0 10px;
+}
+
+.user-status {
+  background: #469408;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  bottom: 7px;
+  right: 25px;
+}
+
+.dropdown-item {
+  font-size: 11px;
+  color: #212121;
+}
+
+.dropdown-item i {
+  color: #212121 !important;
+}
+
+.dropdown-item:hover {
+  background-color: #812a78;
+  color: #fff;
+}
+
+.dropdown-item:hover i {
+  color: #ecd0e9 !important;
+}
+
 .login-container {
   padding-top: 6%;
   padding-bottom: 2%;
@@ -785,6 +838,24 @@ input[type="color"].form-control:disabled {
 
 .forgot-input {
   margin-bottom: 3%;
+}
+
+.user-header {
+  padding: 10px 0;
+  text-align: center;
+  background-color: #eee;
+}
+
+.user-header .img {
+  height: 90px;
+  width: 90px;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.user-header p {
+  margin-top: 10px;
+  font-size: 18px;
 }
 
 /*!

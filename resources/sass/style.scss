@@ -68,3 +68,25 @@ float: right;
 .forgot-input {
     margin-bottom: 3%;
 }
+
+//
+.user-header {
+    padding: 10px 0;
+    text-align: center;
+    background-color: #eee;
+
+    & .img {
+        height: 90px;
+        width: 90px;
+        vertical-align: middle;
+        border-style: none;
+    }
+    & p {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+}
+
+.menu-icon {
+    //color: $black !important;
+}

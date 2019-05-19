@@ -15,29 +15,41 @@
         </b-nav-item-dropdown>
         <b-nav-item-dropdown class="user-drp dropdown" :no-caret="noCaret" right>
             <template slot="button-content">
-                <b-img width="43" height="43" rounded="circle" src="#" class="user-auth-img" />
+                <b-img width="43" height="43" rounded="circle" :src="user.avatar_url ? '/images/avatars/user1.png' : '/images/avatars/user1.png'" alt="Мини аватар" class="user-auth-img" />
                 <span class="user-status"></span>
             </template>
             <slot name="dropdown" class="app-dropdown">
-                <div :style="{ right: 'auto', height: '200px' }">
-                    <span class="text-center" >{{ user.email  }}</span>
+                <div :style="{ right: 'auto', height: '120px' }">
+                    <b-dropdown-header class="user-header">
+                        <b-img rounded="circle" :src="user.avatar_url ? '/images/avatars/user1.png' : '/images/avatars/user1.png'" alt="Аватар пользователя" />
+                        <p class="text-center" v-if="$auth.check()">{{ user.PERS_NAME  }}</p>
+                    </b-dropdown-header>
                 </div>
+                <b-dropdown-item @click.prevent="user.profile()" href="#">
+                   <i class="far fa-user menu-icon"></i> Мой профиль
+                </b-dropdown-item>
+                <b-dropdown-item @click.prevent="user.accsettins()" href="#">
+                    <i class="fas fa-cog"></i> Настройки профиля
+                </b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+               <b-dropdown-item class="dropdown-footer" v-if="$auth.check()" @click.prevent="user.lockscr">
+                  <i class="fas fa-lock"></i> Заблокировать экран
+               </b-dropdown-item>
                 <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()" href="#">
-                    Выход
+                    <i class="fas fa-sign-out-alt"></i>  Выход
                 </b-dropdown-item>
             </slot>
         </b-nav-item-dropdown>
-        <HeaderDropdown></HeaderDropdown>
     </nav>
 </template>
 
 <script>
     import EventBus from '../EventBus'
-    import HeaderDropdown from './header/HeaderDropdown'
+    //import HeaderDropdown from './header/HeaderDropdown'
     export default {
         name: "AppTopRightNav",
         components: {
-            HeaderDropdown
+            //HeaderDropdown
         },
         props: {
             noCaret: {
@@ -49,28 +61,40 @@
                 default: false
             },
         },
-         data() {
+
+
+        data() {
             return {
                 user: {
                     PERSONAL_ID: '',
                     LOGIN: '',
                     PERS_NAME: '',
-                    email: ''
+                    email: '',
+                    avatar_url: ''
                 }
             }
         },
         computed: {
-           //
+
+
 
         },
         created() {
-            $auth.fetchData();
+            this.fetchUser()
+            this.user = this.$auth.user
         },
         mounted() {
-            this.app.user = response.data.user;
+            //
         },
         methods: {
-            //
+            fetchUser() {
+                this.error = this.user = null
+                axios.get('/user')
+                    .then(response => {
+                        this.user = response.data
+                    }).catch(error =>
+                    this.error = error.response.data.message || error.message)
+            }
         }
 
     }
