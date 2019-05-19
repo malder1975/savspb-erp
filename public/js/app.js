@@ -70403,11 +70403,9 @@ var render = function() {
           _vm._v(" "),
           _vm._t("dropdown", [
             _c("div", { style: { right: "auto", height: "200px" } }, [
-              _vm.$auth.check()
-                ? _c("span", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(_vm.user.PERS_NAME))
-                  ])
-                : _vm._e()
+              _c("span", { staticClass: "text-center" }, [
+                _vm._v(_vm._s(_vm.user.PERS_NAME))
+              ])
             ]),
             _vm._v(" "),
             _vm.$auth.check()

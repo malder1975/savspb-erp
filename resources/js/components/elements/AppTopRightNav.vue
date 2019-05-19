@@ -20,7 +20,7 @@
             </template>
             <slot name="dropdown" class="app-dropdown">
                 <div :style="{ right: 'auto', height: '200px' }">
-                    <span class="text-center" v-if="$auth.check()">{{ user.PERS_NAME  }}</span>
+                    <span class="text-center">{{ user.PERS_NAME  }}</span>
                 </div>
                 <b-dropdown-item v-if="$auth.check()" @click.prevent="$auth.logout()" href="#">
                     Выход
