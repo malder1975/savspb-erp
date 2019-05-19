@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Validator;
 
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use Tymon\JWTAuth\Facades\JWTAuth;
+//use Tymon\JWTAuth\Facades\JWTAuth;
+use JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -86,7 +87,9 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['token_absent'], $e->getCode());
         }
-        $user = JWTAuth::user();
+        $user = Personal::all()->findOfFail()
+
+        //$user = JWTAuth::user();
         $username = $user->LOGIN;
         return response()->json(['user' => $user, 'username' => $username]);
     }

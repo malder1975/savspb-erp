@@ -50,13 +50,13 @@
                     <div class="col-sm-12 mt-3">
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email" required>
+                        <input type="email" id="email" class="form-control input-sav" placeholder="user@example.com" v-model="email" required>
                     </div>
                     </div>
                     <div class="col-sm-12 mt-3">
                     <div class="form-group">
                         <label for="password">Пароль</label>
-                        <input type="password" id="password" class="form-control" v-model="password" required placeholder="Введите пароль">
+                        <input type="password" id="password" class="form-control input-sav" v-model="password" required placeholder="Введите пароль">
                     </div>
                     </div>
                     <div class="row login-remember">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block login-submit">Вход</button>
+                    <button type="submit" class="btn btn-primary btn-block login-submit">Вход <i class="material-icons right">send</i></button>
                 </form>
                     </div>
                 </div>
@@ -163,6 +163,4 @@
     }
 </script>
 
-<style scoped>
 
-</style>
