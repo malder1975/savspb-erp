@@ -30,6 +30,20 @@
         text-transform: capitalize;
     }
 
+    .navbar-toggler {
+        position: relative;
+        margin-left: 20px;
+    }
+
+    .navbar-toggle-icon {
+        font-size: 21px;
+        color: #ecd0e9;
+
+        &:hover {
+            color: #812a78;
+        }
+    }
+
     .nav-item {
         font-size: 21px;
         color: #ecd0e9;

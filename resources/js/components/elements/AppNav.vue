@@ -5,7 +5,8 @@
             <img src="images/logo1.png" class="brand-img" alt="ДМ Нарвский">
             <span class="brand-text">ДМ Нарвский</span>
         </b-navbar-brand>
-        <SidebarToggler class="d-sm-none" display="lg"></SidebarToggler>
+        <SidebarToggler class="d-md-down-none" display="md"></SidebarToggler>
+
         <AppTopRightNav right></AppTopRightNav>
     </nav>
 </template>

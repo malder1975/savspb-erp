@@ -699,6 +699,20 @@ input[type="color"].form-control:disabled {
   text-transform: capitalize;
 }
 
+.app-navbar .navbar-toggler {
+  position: relative;
+  margin-left: 20px;
+}
+
+.app-navbar .navbar-toggle-icon {
+  font-size: 21px;
+  color: #ecd0e9;
+}
+
+.app-navbar .navbar-toggle-icon:hover {
+  color: #812a78;
+}
+
 .app-navbar .nav-item {
   font-size: 21px;
   color: #ecd0e9;
@@ -763,6 +777,12 @@ input[type="color"].form-control:disabled {
 
 .dropdown-item:hover i {
   color: #ecd0e9 !important;
+}
+
+@media (max-width: 991.98px) {
+  .d-md-down-none {
+    display: none !important;
+  }
 }
 
 .login-container {
