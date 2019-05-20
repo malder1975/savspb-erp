@@ -1,14 +1,19 @@
 <template>
-    <nav
+    <b-nav
         :class="classList">
         <b-navbar-brand to="/" class="navbar-brand">
             <img src="images/logo1.png" class="brand-img" alt="ДМ Нарвский">
             <span class="brand-text">ДМ Нарвский</span>
         </b-navbar-brand>
         <SidebarToggler class="d-md-down-none" display="md"></SidebarToggler>
+        <b-navbar-nav class="mr-auto">
+            <b-nav-item-dropdown class="px-3 dropdown" text="Справочники" :no-caret="noCaret" >
+
+            </b-nav-item-dropdown>
+        </b-navbar-nav>
 
         <AppTopRightNav right></AppTopRightNav>
-    </nav>
+    </b-nav>
 </template>
 
 <script>
@@ -28,6 +33,10 @@
             fixedbottom: {
                 type: Boolean,
                 default: false
+            },
+            noCaret: {
+                type: Boolean,
+                default: true
             }
         },
         computed: {

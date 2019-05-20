@@ -1,14 +1,16 @@
 <template>
     <div class="app">
         <AppHeader fixed>
-            <AppNav fixedTop></AppNav>
+            <AppNav fixedtop></AppNav>
         </AppHeader>
         <div class="app-body">
             <Sidebar fixed>
                 <SidebarNav :nav-items="nav"></SidebarNav>
+                <SidebarFooter></SidebarFooter>
+                <SidebarMinimizer></SidebarMinimizer>
             </Sidebar>
             <main class="main">
-
+                <router-view></router-view>
             </main>
         </div>
     </div>
@@ -20,19 +22,31 @@
     import Sidebar from '../elements/sidebar/Sidebar'
     import SidebarHeader from '../elements/sidebar/SidebarHeader'
     import SidebarNav from '../elements/sidebar/SidebarNav'
+    import SidebarFooter from "../elements/sidebar/SidebarFooter";
+    import SidebarMinimizer from "../elements/sidebar/SidebarMinimizer";
 
     export default {
         name: "DefaultContainer",
         components: {
+            SidebarMinimizer,
+            SidebarFooter,
             AppHeader,
             AppNav,
             Sidebar,
             SidebarHeader,
-            SidebarNav
+            SidebarNav,
         },
         data() {
             return {
                 nav: nav.items
+            }
+        },
+        computed: {
+            name() {
+                return this.$route.name
+            },
+            list() {
+                return this.$route.matched.filter((route) => route.name || route.meta.label)
             }
         }
     }

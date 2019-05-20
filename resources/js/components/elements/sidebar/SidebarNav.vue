@@ -47,7 +47,7 @@
 
 <script>
     import SidebarHeader from "./SidebarHeader";
-    import VuePerfectScrollbar from "vue-perfect-scrollbar/index";
+    import VuePerfectScrollbar from "vue-perfect-scrollbar";
     import SidebarNavTitle from "./SidebarNavTitle";
     import SidebarNavDivider from "./SidebarNavDivider";
     import SidebarNavLabel from "./SidebarNavLabel";
