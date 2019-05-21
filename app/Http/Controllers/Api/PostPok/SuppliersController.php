@@ -15,7 +15,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        Suppliers::all()->where('POST', '=', '1');
+        return Suppliers::where('POST', '=', 1)->where('FDEL', '=', 0)->get();
        // return response()->json(['result' => $suppliers]);
 
     }

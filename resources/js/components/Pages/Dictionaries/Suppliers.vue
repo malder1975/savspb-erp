@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-table striped hover :items="items"></b-table>
+        <b-table striped hover :suppliers="suppliers"></b-table>
     </div>
 </template>
 
@@ -9,12 +9,20 @@
         name: "SuppliersList",
         data() {
             return {
-                suppliers: []
+                suppliers: [],
+                errors: []
             }
+        },
+        mounted() {
+            let app = this
+            axios.post('/auth/suppliers')
+                .then((response) => {
+                    app.suppliers = response.data
+                    })
+                .catch((error) => {
+                    this.errors = error.response.data.errors || error.message
+                    })
+            alert('Не могу показать поставщиков. Ошибка: '. error)
         }
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,9 +1,8 @@
 import VueRouter from 'vue-router'
 
 import Login from '../components/auth/Login'
-//import Index from "../components/Index";
+import Home from "../components/Pages/Home";
 import DefaultContainer from '../components/containers/DefaultContainer'
-import Home from '../components/Pages/Home'
 import SuppliersList from '../components/Pages/Dictionaries/Suppliers'
 import ForgotPassword from "../components/auth/ForgotPassword";
 import ResetPasswordForm from '../components/auth/ResetPasswordForm'
@@ -51,16 +50,16 @@ const router = new VueRouter({
          children: [
              {
                  path: '/',
-                 redirect: '/home'
+                 redirect: '/dashboard'
              },
              {
-                 path: '/home',
-                 name: 'home',
+                 path: '/dashboard',
+                 name: 'dashboard',
                  component: Home
              },
              {
                  path: '/suppliers',
-                 name: 'Поставщики',
+                 name: 'suppliers',
                  component: SuppliersList
              }
          ]

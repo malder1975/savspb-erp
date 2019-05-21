@@ -9,8 +9,8 @@
         <b-navbar>
         <b-navbar-nav>
             <b-nav-item-dropdown class="dropdown top-main-navbar" text="Справочники" :no-caret="noCaret">
-                <b-dropdown-item to="/suppliers">Поставщики</b-dropdown-item>
-                <b-dropdown-item to="#">Покупатели</b-dropdown-item>
+                <b-dropdown-item :to="{name: 'suppliers'}">Поставщики</b-dropdown-item>
+                <b-dropdown-item :to="{name: 'Покупатели'}">Покупатели</b-dropdown-item>
             </b-nav-item-dropdown>
         </b-navbar-nav>
         </b-navbar>
