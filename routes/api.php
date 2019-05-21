@@ -28,6 +28,8 @@ Route::prefix('v1')->group(function () {
             //Route::resource('personal', 'Personal\PersonalController', ['except' => ['create', 'edit']]);
             Route::post('logout', 'AuthController@logout');
             Route::get('person-account', 'Personal\PersonController@index');
+            Route::get('suppliers', 'Api\PostPok\SuppliersController@index');
+            Route::get('supplier/{id}', 'Api\PostPok\SuppliersController@show');
         });
 
         Route::group(['middleware' => 'jwt.refresh'], function () {

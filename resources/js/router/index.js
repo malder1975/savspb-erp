@@ -4,6 +4,7 @@ import Login from '../components/auth/Login'
 //import Index from "../components/Index";
 import DefaultContainer from '../components/containers/DefaultContainer'
 import Home from '../components/Pages/Home'
+import SuppliersList from '../components/Pages/Dictionaries/Suppliers'
 import ForgotPassword from "../components/auth/ForgotPassword";
 import ResetPasswordForm from '../components/auth/ResetPasswordForm'
 
@@ -56,6 +57,11 @@ const router = new VueRouter({
                  path: '/home',
                  name: 'home',
                  component: Home
+             },
+             {
+                 path: '/suppliers',
+                 name: 'Поставщики',
+                 component: SuppliersList
              }
          ]
      }
