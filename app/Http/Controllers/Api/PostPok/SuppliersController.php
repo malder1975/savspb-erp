@@ -15,8 +15,8 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        return Suppliers::where('POST', '=', 1)->where('FDEL', '=', 0)->get();
-       // return response()->json(['result' => $suppliers]);
+       $suppliers = Suppliers::where(['POST' => 0, 'FDEL' => 0])->get();
+        return response()->json(['result' => $suppliers]);
 
     }
 
@@ -49,8 +49,8 @@ class SuppliersController extends Controller
      */
     public function show($id)
     {
-        Suppliers::findOrFail($id)->toArray();
-        //return response()->json(['result' => $supplier]);
+        $supplier = Suppliers::findOrFail($id);
+        return response()->json(['result' => $supplier]);
     }
 
     /**
