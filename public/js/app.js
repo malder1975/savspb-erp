@@ -3299,12 +3299,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SuppliersList",
   data: function data() {
     return {
-      suppliers: [],
-      errors: []
+      suppliers: {
+        KLIENT_KOD: '',
+        NAME: ''
+      },
+      errors: {}
     };
   },
   mounted: function mounted() {
@@ -3312,9 +3327,9 @@ __webpack_require__.r(__webpack_exports__);
 
     var app = this;
     axios.post('/auth/suppliers').then(function (response) {
-      app.suppliers = response.data;
+      return app.suppliers = response.data;
     }).catch(function (error) {
-      _this.errors = error.response.data.errors || error.message;
+      return _this.errors = error.response.data.errors || error.message;
     });
     alert('Не могу показать поставщиков. Ошибка: '.error);
   }
@@ -70462,15 +70477,48 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("b-table", {
-        attrs: { striped: "", hover: "", suppliers: _vm.suppliers }
-      })
-    ],
-    1
-  )
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row mt-3" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        [
+          _c(
+            "ul",
+            _vm._l(_vm.suppliers, function(object) {
+              return _c("li", [_vm._v(_vm._s(object.NAME))])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.suppliers, function(supplier) {
+            return _c(
+              "b-card",
+              {
+                key: supplier.id,
+                attrs: { "header-tag": "header", "footer-tag": "footer" }
+              },
+              [
+                _c("h6", { attrs: { slot: "header" }, slot: "header" }, [
+                  _vm._v(_vm._s(supplier.NAME))
+                ]),
+                _vm._v(" "),
+                _c("b-card-body", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(supplier.KLIENT_KOD) +
+                      "\n                "
+                  )
+                ])
+              ],
+              1
+            )
+          })
+        ],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

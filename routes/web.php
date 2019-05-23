@@ -15,6 +15,10 @@
 Route::get('/{any?}', function () {
     return view('welcome');
 })->where('any', '^(?!api\/) [\/\w\.-]*');
+
+Route::get('/{name}', function () {
+    return redirect('/');
+})->where('name', '[A-Za-z]+');
 /*Route::get('/', function () {
     return view('welcome');
 });
