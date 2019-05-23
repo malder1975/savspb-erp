@@ -4,7 +4,7 @@
     </IfModule>
 
     RewriteEngine On
-    AddCharset windows-1251 .js
+    # AddCharset windows-1251 .js
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
