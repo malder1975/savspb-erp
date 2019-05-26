@@ -5,7 +5,7 @@
         </AppHeader>
         <div class="app-body">
             <Sidebar fixed>
-                <SidebarNav :nav-items="nav"></SidebarNav>
+                <SidebarNav ></SidebarNav>
                 <SidebarFooter></SidebarFooter>
                 <SidebarMinimizer></SidebarMinimizer>
             </Sidebar>
@@ -38,7 +38,7 @@
         },
         data() {
             return {
-                nav: nav.items
+                //nav: nav.items
             }
         },
         computed: {

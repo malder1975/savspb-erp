@@ -3299,24 +3299,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SuppliersList",
   data: function data() {
     return {
-      suppliers: [],
-      errors: []
+      suppliers: null // KLIENT_KOD: '',
+      // NAME: '',
+      //  errors: []
+
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  mounted: function mounted() {//alert('Не могу показать поставщиков. Ошибка: '. error)
+  },
+  created: function created() {
+    this.getSuppliers(); // console.log(suppliers)
+  },
+  methods: {
+    getSuppliers: function getSuppliers() {
+      var _this = this;
 
-    var app = this;
-    axios.post('/auth/suppliers').then(function (response) {
-      app.suppliers = response.data;
-    }).catch(function (error) {
-      _this.errors = error.response.data.errors || error.message;
-    });
-    alert('Не могу показать поставщиков. Ошибка: '.error);
+      var app = this;
+      axios.get('/auth/suppliers').then(function (response) {
+        return app.suppliers = response.data;
+      }).catch(function (error) {
+        return _this.errors = error.response.data.errors || error.message;
+      });
+    }
   }
 });
 
@@ -3757,8 +3777,7 @@ __webpack_require__.r(__webpack_exports__);
     SidebarNav: _elements_sidebar_SidebarNav__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
-    return {
-      nav: nav.items
+    return {//nav: nav.items
     };
   },
   computed: {
@@ -70462,15 +70481,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("b-table", {
-        attrs: { striped: "", hover: "", suppliers: _vm.suppliers }
-      })
-    ],
-    1
-  )
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row mt-3" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        [
+          _c(
+            "ul",
+            _vm._l(_vm.suppliers, function(result) {
+              return _c("li", [_vm._v(_vm._s(result.KLIENT_KOD))])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.suppliers, function(result) {
+            return _c(
+              "b-card",
+              {
+                key: result.KLIENT_ID,
+                attrs: {
+                  "header-tag": "header",
+                  "footer-tag": "footer",
+                  name: result.NAME,
+                  kode: result.KLIENT_KOD
+                }
+              },
+              [
+                _c("h6", { attrs: { slot: "header" }, slot: "header" }, [
+                  _vm._v(_vm._s(result.NAME))
+                ]),
+                _vm._v(" "),
+                _c("b-card-body", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(result.KLIENT_KOD) +
+                      "\n                "
+                  )
+                ])
+              ],
+              1
+            )
+          })
+        ],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -71171,7 +71228,7 @@ var render = function() {
             "Sidebar",
             { attrs: { fixed: "" } },
             [
-              _c("SidebarNav", { attrs: { "nav-items": _vm.nav } }),
+              _c("SidebarNav"),
               _vm._v(" "),
               _c("SidebarFooter"),
               _vm._v(" "),
@@ -71245,11 +71302,9 @@ var render = function() {
                   attrs: { text: "Справочники", "no-caret": _vm.noCaret }
                 },
                 [
-                  _c(
-                    "b-dropdown-item",
-                    { attrs: { to: { name: "suppliers" } } },
-                    [_vm._v("Поставщики")]
-                  ),
+                  _c("b-dropdown-item", { attrs: { to: "/suppliers" } }, [
+                    _vm._v("Поставщики")
+                  ]),
                   _vm._v(" "),
                   _c(
                     "b-dropdown-item",
