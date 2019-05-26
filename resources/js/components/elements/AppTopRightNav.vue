@@ -25,7 +25,7 @@
                         <p class="text-center" v-if="$auth.check()">{{ user.PERS_NAME  }}</p>
                     </b-dropdown-header>
                 </div>
-                <b-dropdown-item @click.prevent="user.profile()" :to="{name: 'Профиль'}">
+                <b-dropdown-item :to="{name: 'Profile'}">
                    <i class="far fa-user menu-icon"></i> Мой профиль
                 </b-dropdown-item>
                 <b-dropdown-item @click.prevent="user.accsettins()" href="#">
