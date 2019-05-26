@@ -15,7 +15,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-       $suppliers = Suppliers::where(['POST' => 0, 'FDEL' => 0])->orderBy('NAME', 'ASC')->get();
+       $suppliers = Suppliers::where(['POST' => 0, 'FDEL' => 0])->orderBy('NAME', 'ASC')->take(20)->get();
         return response()->json(['result' => $suppliers]);
 
     }

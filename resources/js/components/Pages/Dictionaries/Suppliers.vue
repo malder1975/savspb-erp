@@ -2,53 +2,48 @@
     <div class="container">
         <div class="row mt-3">
             <div class="col-md-12">
-                <ul>
-                    <li v-for="(result) in suppliers">{{ result.KLIENT_KOD }}</li>
+
+                <ul v-if="suppliers && suppliers.length">
+                    <li v-for="(index, supplier) of suppliers" :key="index">{{ supplier.NAME }}</li>
                 </ul>
-                <b-card header-tag="header" footer-tag="footer" v-for="(result) in suppliers" :key="result.KLIENT_ID" :name="result.NAME" :kode="result.KLIENT_KOD">
-                    <h6 slot="header">{{ result.NAME }}</h6>
+                <!--<b-card header-tag="header" footer-tag="footer" v-for="supplier in suppliers" :key="supplier.KLIENT_ID">
+                    <h6 slot="header">{{ supplier.NAME }}</h6>
                     <b-card-body>
-                        {{ result.KLIENT_KOD }}
+                        {{ supplier.KLIENT_KOD }}
                     </b-card-body>
-                </b-card>
+                </b-card>-->
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         name: "SuppliersList",
-        data() {
-            return {
-                 suppliers: null,
 
-
-
-                    // KLIENT_KOD: '',
-                    // NAME: '',
-
-              //  errors: []
-            }
+        data: () => ({
+                suppliers: [],
+                errors: []
+        }),
+        created() {
+            //
         },
         mounted() {
-
-            //alert('Не могу показать поставщиков. Ошибка: '. error)
-        },
-        created() {
             this.getSuppliers()
-           // console.log(suppliers)
         },
         methods: {
-            getSuppliers () {
-                let app = this;
-                axios.get('/auth/suppliers')
-                    .then((response) =>
-                        app.suppliers = response.data
-                    )
-                    .catch((error) =>
+            getSuppliers() {
+                //let app = this;
+                axios.get('/auth/suppliers').then((response) => {
+
+                        this.suppliers = response.data
+                        }
+                    ).catch((error) =>
                         this.errors = error.response.data.errors || error.message
                     );
+               // alert('Не могу показать поставщиков. Ошибка: '.error)
             }
         }
     }

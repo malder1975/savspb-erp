@@ -6,6 +6,8 @@ import DefaultContainer from '../components/containers/DefaultContainer'
 import SuppliersList from '../components/Pages/Dictionaries/Suppliers'
 import ForgotPassword from "../components/auth/ForgotPassword";
 import ResetPasswordForm from '../components/auth/ResetPasswordForm'
+import Persons from "../components/Pages/persons/Persons";
+import PersonProfile from "../components/Pages/persons/PersonProfile";
 
 
 const router = new VueRouter({
@@ -61,6 +63,28 @@ const router = new VueRouter({
                  path: '/suppliers',
                  name: 'suppliers',
                  component: SuppliersList
+             },
+             {
+                 path: '/users',
+                 name: 'users',
+                 redirect: 'Pages/persons',
+                 component: {
+                     render (c) {
+                         return c('router-view')
+                     }
+                 },
+                 childern: [
+                     {
+                         path: 'persons',
+                         name: 'Persons',
+                         component: Persons
+                     },
+                     {
+                         path: 'profile',
+                         name: 'Profile',
+                         component: PersonProfile
+                     }
+                 ]
              }
          ]
      }

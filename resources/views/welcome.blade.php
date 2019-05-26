@@ -22,11 +22,14 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     </head>
     <body>
         <div id="app">
             <App></App>
         </div>
+
+
     <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
 </html>
