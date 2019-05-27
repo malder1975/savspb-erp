@@ -1,0 +1,214 @@
+selector-max-compound-selectors, function-url-quotes, selector-max-combinators
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: $sidebar-padding;
+    color: $sidebar-color;
+    background: $sidebar-bg;
+    @include sidebar-borders($sidebar-border, $sidebar-width);
+
+    .sidebar-close {
+        position: absolute;
+        right: 0;
+        display: none;
+        padding: 0 $spacer;
+        background: 0;
+        border: 0;
+        opacity: .8;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+}
+
+.navbar-profile {
+    border-bottom: 1px solid $grey;
+}
+
+.img-avatar-mini {
+    height: $sidebar-profile-minheight - 10px;
+    padding: $sidebar-profile-padding;
+    border-radius: 50%;
+}
+
+.link-block a {
+
+}
+
+a.link-button {
+    padding: 5px;
+    display: inline-block;
+    border: 1px solid $grey;
+    border-radius: 3px;
+    margin-right: 5px;
+
+    &:after {
+        box-sizing: border-box;
+    }
+
+    &:hover {
+        color: #000;
+    }
+}
+
+
+
+.link-button i {
+    color: $grey;
+    font-size: 10px;
+    line-height: 12px;
+    padding: 3px 3px 3px 3px;
+}
+
+.sidebar-header {
+    flex: 0 0 $sidebar-header-height;
+    padding: $sidebar-header-padding-y $sidebar-header-padding-x;
+    text-align: center;
+    background-color: $sidebar-bg;
+    //background-image: $sidebar-header-bg;
+    font-size: $sidebar-header-font-size;
+    font-weight: $sidebar-header0font-weight;
+    text-transform: uppercase;
+    color: $white;
+    text-shadow: $sidebar-bg;
+}
+
+.sidebar-nav {
+    position: relative;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @include sidebar-borders($sidebar-border, $sidebar-width);
+    margin: 0;
+    border-radius: 0;
+    .nav {
+        @include sidebar-borders($sidebar-border, $sidebar-width);
+        flex-direction: column;
+        min-height: 100%;
+        padding: 0;
+    }
+}
+
+
+
+.nav-title {
+    //padding: $side;
+    font-size: 80%;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.nav-divider {
+    height: 10px;
+}
+
+.nav-item {
+    position: relative;
+    margin: 0;
+    transition: background .3s ease-in-out;
+}
+
+.nav-dropdown-items {
+    max-height: 0;
+    padding: 0;
+    margin: 0;
+    overflow-y: hidden;
+    transition: max-height .3s ease-in-out;
+
+    .nav-item {
+        padding: 0;
+        list-style: none;
+
+
+    }
+
+}
+
+.nav-link {
+    display: block;
+    padding: $sidebar-nav-link-padding-y $sidebar-nav-link-padding-x;
+    color: $sidebar-nav-link-color;
+    text-decoration: none;
+    background: $sidebar-nav-link-bg;
+    @include borders($sidebar-nav-link-borders);
+
+    .nav-icon {
+        display: inline-block;
+        margin: 0 ($sidebar-nav-link-padding-x / 2) 0 0;
+        text-align: center;
+        transition: transform .3s;
+    }
+
+    .badge {
+        float: right;
+        margin-top: 2px;
+    }
+
+    &.active {
+        color: $sidebar-nav-link-active-color;
+        background: $sidebar-nav-link-active-bg;
+        @include borders($sidebar-nav-link-active-borders);
+    }
+
+    &:hover {
+        color: $sidebar-nav-link-hover-color;
+        background-image: $sidebar-nav-link-hover-bg;
+        @include borders($sidebar-nav-link-hover-borders);
+
+        &.nav-dropdown-toggle::before {
+
+        }
+    }
+}
+
+.nav-dropdown-toggle {
+    position: relative;
+
+    &::before {
+        position: absolute;
+        top: 50%;
+        right: $sidebar-nav-link-padding-x;
+        display: block;
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        margin-top: -4px;
+        content: "";
+        background-attachment: $sidebar-nav-dropdown-indicator;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: transform .5s;
+    }
+
+    span {
+
+    }
+
+    .badge {
+        margin-right: 16px;
+    }
+}
+
+.nav-dropdown.open {
+
+
+    > .nav-dropdown-items {
+        max-height: 1500px;
+    }
+
+    .nav-link {
+        color: $sidebar-nav-dropdown-color;
+        border-left: 0;
+
+        .nav-icon {
+            transition: transform .5s;
+            transform: rotate(-90deg);
+        }
+    }
+
+    > .nav-dropdown-toggle::before {
+        transform: rotate(-90deg);
+    }
+}

@@ -1,0 +1,27 @@
+@mixin sidebar-borders($borders, $width) {
+    $sidebar-width: $width;
+
+    @each $border in $borders {
+        $direction: nth($border, 1);
+        @if $direction == "all" {
+            $size: map_get(map_get($borders, $direction), size);
+            $style: map_get(map_get($borders, $direction), style);
+            $color: map_get(map_get($borders, $direction), color);
+            border: $size $style $color;
+            $sidebar-width: $sidebar-width - 2 * $size;
+        } @else if $direction == "right" {
+            $size: map_get(map_get($borders, $direction), size);
+            $style: map_get(map_get($borders, $direction), style);
+            $color: map_get(map_get($borders, $direction), color);
+            border-right: $size $style $color;
+            $sidebar-width: $sidebar-width - $size;
+        } @else if $direction == "left" {
+            $size: map_get(map_get($borders, $direction), size);
+            $style: map_get(map_get($borders, $direction), style);
+            $color: map_get(map_get($borders, $direction), color);
+            border-left: $size $style $color;
+            $sidebar-width: $sidebar-width -  $size;
+        }
+        width: $sidebar-width;
+    }
+}

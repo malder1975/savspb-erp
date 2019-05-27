@@ -22,11 +22,13 @@
 <script>
     import AppTopRightNav from './AppTopRightNav'
     import SidebarToggler from './sidebar/SidebarToggler'
+    import AppNavToggler from './AppNavToggler'
     export default {
         name: "AppNav",
         components: {
             AppTopRightNav,
-            SidebarToggler
+            SidebarToggler,
+            AppNavToggler
         },
         props: {
             fixedtop: {
