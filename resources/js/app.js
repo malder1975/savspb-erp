@@ -20,6 +20,7 @@ import 'material-design-icons/iconfont/material-icons.css'
 window.Vue = Vue;
 
 Vue.component('App', require('./components/App.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 Vue.use(BootstrapVue);
 Vue.use(VueForm);

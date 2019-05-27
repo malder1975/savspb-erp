@@ -32,6 +32,7 @@
         "@websanova/vue-auth": "^2.21.14-beta",
         "bootstrap-vue": "^2.0.0-rc.18",
         "es6-promise": "^4.2.6",
+        "laravel-vue-pagination": "^2.3.0",
         "material-design-icons": "^3.0.1",
         "materialize-css": "^1.0.0-rc.2",
         "popper": "^1.0.1",
