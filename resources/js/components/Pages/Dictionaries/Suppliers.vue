@@ -19,38 +19,12 @@
                 </div>
                     </b-card-body>
                     <div slot="footer">
-                        <pagination :limit="3" :data="suppliers" @pagination-change-page="getResults"></pagination>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page != 1" @click="page--"> << </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber in pages.slice(page-1, page+5)" @click="page = pageNumber"> {{pageNumber}} </button>
+                        <button type="button" @click="page++" v-if="page < pages.length" class="btn btn-sm btn-outline-secondary"> >> </button>
+                        <!--<pagination :limit="5" :data="suppliers" @pagination-change-page="getResults"></pagination>-->
                     </div>
-
                 </b-card>
-
-                <!--<div v-for="supplier in suppliers" :key="supplier.KLIENT_ID">
-                    <template v-for="(index, value) in supplier"  :index="index">
-                        <h5>{{value}}</h5>
-                        <p>{{index.NAME}}</p>
-                    </template>
-                </div>
-               <ul  v-for="supplier in suppliers" :key="supplier.KLIENT_ID">
-                    //
-                   <template v-for="(key, index, value) in supplier"  :index="index">
-                        <li> {{ key }} , {{ index }}, {{ value }}</li>
-                    </template>
-                </ul>
-
-                <ul >
-
-                        <li v-for="supplier in suppliers">
-                            <p>{{ supplier.NAME }}</p>
-                        </li>
-
-                </ul>-->
-
-                <!--<b-card header-tag="header" footer-tag="footer" v-for="supplier in suppliers" :key="supplier.KLIENT_ID">
-                    <h6 slot="header">{{ supplier.NAME }}</h6>
-                    <b-card-body>
-                        {{ supplier.KLIENT_KOD }}
-                    </b-card-body>
-                </b-card>-->
             </div>
         </div>
     </div>
@@ -65,26 +39,48 @@
         data(){
             return {
                 suppliers: {},
-                errors: []
+                errors: [],
+                page: 1,
+                perPage: 5,
+                pages: []
             }
         },
         created() {
-            this.getResults()
+            //this.getResults()
+            this.getSuppliers()
         },
         mounted() {
-            this.getSuppliers()
 
+
+        },
+        watch: {
+            suppliers() {
+                this.setPages()
+            }
         },
         methods: {
             getResults(page) {
                 if (typeof page === 'undefined') {
                     page = 1
                 }
-
                 axios.get('/auth/suppliers?page=' + page)
                     .then((response) => {
                         this.suppliers = response.data
                     })
+            },
+            setPages() {
+              let numOfPages = Math.ceil(this.suppliers.length / this.perPage)
+                console.log(numOfPages)
+                for (let index = 1; index < numOfPages; index++) {
+                    this.pages.push(index)
+                }
+            },
+            paginate(suppliers) {
+              let page = this.page
+              let perPage = this.perPage
+              let from_ = (page * perPage) - perPage
+              let to = (page * perPage)
+                return suppliers.slice(from_, to)
             },
             getSuppliers() {
                 //let app = this;
@@ -95,6 +91,11 @@
                         this.errors = error.response.data.errors || error.message
                     );
                // alert('Не могу показать поставщиков. Ошибка: '.error)
+            }
+        },
+        computed: {
+            displayedSuppliers() {
+                return this.paginate(this.suppliers)
             }
         }
     }
