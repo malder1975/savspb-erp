@@ -38,50 +38,15 @@
 
         data(){
             return {
-                suppliers: {},
+                suppliers: [],
                 errors: [],
                 page: 1,
-                perPage: 5,
+                perPage: 3,
                 pages: []
             }
         },
-        created() {
-            //this.getResults()
-            this.getSuppliers()
-        },
-        mounted() {
 
-
-        },
-        watch: {
-            suppliers() {
-                this.setPages()
-            }
-        },
         methods: {
-            getResults(page) {
-                if (typeof page === 'undefined') {
-                    page = 1
-                }
-                axios.get('/auth/suppliers?page=' + page)
-                    .then((response) => {
-                        this.suppliers = response.data
-                    })
-            },
-            setPages() {
-              let numOfPages = Math.ceil(this.suppliers.length / this.perPage)
-                console.log(numOfPages)
-                for (let index = 1; index < numOfPages; index++) {
-                    this.pages.push(index)
-                }
-            },
-            paginate(suppliers) {
-              let page = this.page
-              let perPage = this.perPage
-              let from_ = (page * perPage) - perPage
-              let to = (page * perPage)
-                return suppliers.slice(from_, to)
-            },
             getSuppliers() {
                 //let app = this;
                 axios.get('/auth/suppliers').then(({ data }) => (
@@ -91,11 +56,37 @@
                         this.errors = error.response.data.errors || error.message
                     );
                // alert('Не могу показать поставщиков. Ошибка: '.error)
+            },
+            setPages() {
+                let numOfPages = Math.ceil(this.suppliers.result.length / this.perPage);
+                console.log(numOfPages);
+                for (let index = 1; index <= numOfPages; index++) {
+                    this.pages.push(index)
+                }
+            },
+            paginate(suppl) {
+                let page = this.page;
+                let perPage = this.perPage;
+                let from_ = (page * perPage) - perPage;
+                let to_ = (page * perPage);
+                return suppl.slice(from_, to_)
+            },
+        },
+        created() {
+            //this.getResults()
+            this.getSuppliers()
+        },
+        mounted() {
+            //
+        },
+        watch: {
+            suppliers() {
+                this.setPages()
             }
         },
         computed: {
             displayedSuppliers() {
-                return this.paginate(this.suppliers)
+                return this.paginate(this.suppliers.result)
             }
         }
     }

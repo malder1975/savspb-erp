@@ -3332,67 +3332,57 @@ __webpack_require__.r(__webpack_exports__);
   name: "SuppliersList",
   data: function data() {
     return {
-      suppliers: {},
+      suppliers: [],
       errors: [],
       page: 1,
-      perPage: 5,
+      perPage: 3,
       pages: []
     };
   },
-  created: function created() {
-    //this.getResults()
-    this.getSuppliers();
-  },
-  mounted: function mounted() {},
-  watch: {
-    suppliers: function suppliers() {
-      this.setPages();
-    }
-  },
   methods: {
-    getResults: function getResults(page) {
-      var _this = this;
-
-      if (typeof page === 'undefined') {
-        page = 1;
-      }
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/auth/suppliers?page=' + page).then(function (response) {
-        _this.suppliers = response.data;
-      });
-    },
-    setPages: function setPages() {
-      var numOfPages = Math.ceil(this.suppliers.length / this.perPage);
-      console.log(numOfPages);
-
-      for (var index = 1; index < numOfPages; index++) {
-        this.pages.push(index);
-      }
-    },
-    paginate: function paginate(suppliers) {
-      var page = this.page;
-      var perPage = this.perPage;
-      var from_ = page * perPage - perPage;
-      var to = page * perPage;
-      return suppliers.slice(from_, to);
-    },
     getSuppliers: function getSuppliers() {
-      var _this2 = this;
+      var _this = this;
 
       //let app = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/auth/suppliers').then(function (_ref) {
         var data = _ref.data;
         return (//console.log(response.data)
-          _this2.suppliers = data
+          _this.suppliers = data
         );
       }).catch(function (error) {
-        return _this2.errors = error.response.data.errors || error.message;
+        return _this.errors = error.response.data.errors || error.message;
       }); // alert('Не могу показать поставщиков. Ошибка: '.error)
+    },
+    setPages: function setPages() {
+      var numOfPages = Math.ceil(this.suppliers.result.length / this.perPage);
+      console.log(numOfPages);
+
+      for (var index = 1; index <= numOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    paginate: function paginate(suppl) {
+      var page = this.page;
+      var perPage = this.perPage;
+      var from_ = page * perPage - perPage;
+      var to_ = page * perPage;
+      return suppl.slice(from_, to_);
+    }
+  },
+  created: function created() {
+    //this.getResults()
+    this.getSuppliers();
+  },
+  mounted: function mounted() {//
+  },
+  watch: {
+    suppliers: function suppliers() {
+      this.setPages();
     }
   },
   computed: {
     displayedSuppliers: function displayedSuppliers() {
-      return this.paginate(this.suppliers);
+      return this.paginate(this.suppliers.result);
     }
   }
 });
@@ -94870,8 +94860,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
