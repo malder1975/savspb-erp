@@ -4,6 +4,7 @@ import Login from '../components/auth/Login'
 import Home from "../components/Pages/Home";
 import DefaultContainer from '../components/containers/DefaultContainer'
 import SuppliersList from '../components/Pages/Dictionaries/Suppliers'
+//import SupplierView from '../components/views/SuppliersView'
 import ForgotPassword from "../components/auth/ForgotPassword";
 import ResetPasswordForm from '../components/auth/ResetPasswordForm'
 import Persons from "../components/Pages/persons/Persons";
