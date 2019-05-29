@@ -3358,6 +3358,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SuppliersList",
@@ -3366,7 +3367,7 @@ __webpack_require__.r(__webpack_exports__);
       suppliers: [],
       errors: [],
       page: 1,
-      perPage: 3,
+      perPage: 2,
       pages: []
     };
   },
@@ -3376,29 +3377,28 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       //let app = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/auth/suppliers').then(function (_ref) {
-        var data = _ref.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/auth/suppliers').then(function (response) {
         return (//console.log(response.data)
-          _this.suppliers = data
+          _this.suppliers = response.data
         );
       }).catch(function (error) {
         return _this.errors = error.response.data.errors || error.message;
       }); // alert('Не могу показать поставщиков. Ошибка: '.error)
     },
     setPages: function setPages() {
-      var numOfPages = Math.ceil(this.suppliers.result.length / this.perPage);
+      var numOfPages = Math.ceil(this.suppliers.length / this.perPage);
       console.log(numOfPages);
 
       for (var index = 1; index <= numOfPages; index++) {
         this.pages.push(index);
       }
     },
-    paginate: function paginate(suppl) {
+    paginate: function paginate(suppliers) {
       var page = this.page;
       var perPage = this.perPage;
-      var from_ = page * perPage - perPage;
-      var to_ = page * perPage;
-      return suppl.slice(from_, to_);
+      var from = page * perPage - perPage;
+      var to = page * perPage;
+      return suppliers.slice(from, to);
     }
   },
   created: function created() {
@@ -3413,7 +3413,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     displayedSuppliers: function displayedSuppliers() {
-      return this.paginate(this.suppliers.result);
+      return this.paginate(this.suppliers);
     }
   }
 });
@@ -75847,226 +75847,133 @@ var render = function() {
                     _vm._v("Поставщики")
                   ]),
                   _vm._v(" "),
-                  _vm._l(_vm.suppliers, function(supplier) {
+                  _vm._l(_vm.displayedSuppliers, function(supplier) {
                     return _c(
                       "div",
                       { key: supplier.KLIENT_ID },
                       [
-                        _vm._l(supplier, function(value) {
-                          return [
+                        _c(
+                          "b-card",
+                          {
+                            staticClass: "mb-4",
+                            attrs: {
+                              "header-tag": "header",
+                              "footer-tag": "footer",
+                              "header-bg-variant": "primary",
+                              "header-text-variant": "white"
+                            }
+                          },
+                          [
                             _c(
-                              "b-card",
+                              "h4",
                               {
-                                attrs: {
-                                  "header-tag": "header",
-                                  "footer-tag": "footer",
-                                  "header-bg-variant": "primary",
-                                  "header-text-variant": "white"
-                                }
+                                staticClass: "text-center",
+                                attrs: { slot: "header" },
+                                slot: "header"
                               },
                               [
-                                _c(
-                                  "h4",
-                                  {
-                                    staticClass: "text-center",
-                                    attrs: { slot: "header" },
-                                    slot: "header"
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(value.KLIENT_KOD) +
-                                        " - " +
-                                        _vm._s(value.NAME)
-                                    )
-                                  ]
-                                ),
+                                _vm._v(
+                                  _vm._s(supplier.KLIENT_KOD) +
+                                    " - " +
+                                    _vm._s(supplier.NAME)
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("b-card-body", [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-md-3" }, [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "https://via.placeholder.com/80",
+                                      alt: "Лого",
+                                      width: "80px",
+                                      height: "80px"
+                                    }
+                                  })
+                                ]),
                                 _vm._v(" "),
-                                _c("b-card-body", [
+                                _c("div", { staticClass: "col-md-9" }, [
                                   _c("div", { staticClass: "row" }, [
-                                    _c("div", { staticClass: "col-md-3" }, [
-                                      _c("img", {
-                                        attrs: {
-                                          src: "https://via.placeholder.com/80",
-                                          alt: "Лого",
-                                          width: "80px",
-                                          height: "80px"
-                                        }
-                                      })
+                                    _c("div", { staticClass: "col-md-4" }, [
+                                      _c("h5", [_vm._v("Адрес поставщика")]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "Город: " + _vm._s(supplier.KL_CITY)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "Адрес: " + _vm._s(supplier.KL_ADR)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "Телефон: " + _vm._s(supplier.KL_TEL)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "Факс: " + _vm._s(supplier.KL_FAX)
+                                        )
+                                      ])
                                     ]),
                                     _vm._v(" "),
-                                    _c("div", { staticClass: "col-md-9" }, [
-                                      _c("div", { staticClass: "row" }, [
-                                        _c("div", { staticClass: "col-md-4" }, [
-                                          _c("h5", [
-                                            _vm._v("Адрес поставщика")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Город: " +
-                                                  _vm._s(value.KL_CITY)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Адрес: " + _vm._s(value.KL_ADR)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Телефон: " +
-                                                  _vm._s(value.KL_TEL)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Факс: " + _vm._s(value.KL_FAX)
-                                              )
-                                            ]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "col-md-4" }, [
-                                          _c("h5", [
-                                            _vm._v("Банковские реквизиты")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "ИНН: " +
-                                                  _vm._s(value.KL_INN) +
-                                                  "/ КПП: " +
-                                                  _vm._s(value.KL_KPP)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "БИК: " + _vm._s(value.KL_BIK)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "К/сч: " + _vm._s(value.KL_KS)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Р/сч: " + _vm._s(value.KL_RS)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Банк: " + _vm._s(value.KL_BANK)
-                                              )
-                                            ]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "col-md-4" })
+                                    _c("div", { staticClass: "col-md-4" }, [
+                                      _c("h5", [
+                                        _vm._v("Банковские реквизиты")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "ИНН: " +
+                                            _vm._s(supplier.KL_INN) +
+                                            "/ КПП: " +
+                                            _vm._s(supplier.KL_KPP)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "БИК: " + _vm._s(supplier.KL_BIK)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "К/сч: " + _vm._s(supplier.KL_KS)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "Р/сч: " + _vm._s(supplier.KL_RS)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "recv_post" }, [
+                                        _vm._v(
+                                          "Банк: " + _vm._s(supplier.KL_BANK)
+                                        )
                                       ])
-                                    ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-4" })
                                   ])
                                 ])
-                              ],
-                              1
-                            )
-                          ]
-                        })
+                              ])
+                            ])
+                          ],
+                          1
+                        )
                       ],
-                      2
+                      1
                     )
-                  }),
-                  _vm._v(" "),
-                  _vm.page != 1
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-sm btn-outline-secondary",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.page--
-                            }
-                          }
-                        },
-                        [_vm._v(" << ")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._l(_vm.pages.slice(_vm.page - 1, _vm.page + 5), function(
-                    pageNumber
-                  ) {
-                    return _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm btn-outline-secondary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.page = pageNumber
-                          }
-                        }
-                      },
-                      [_vm._v(" " + _vm._s(pageNumber) + " ")]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _vm.page < _vm.pages.length
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-sm btn-outline-secondary",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.page++
-                            }
-                          }
-                        },
-                        [_vm._v(" >> ")]
-                      )
-                    : _vm._e()
+                  })
                 ],
                 2
               ),
@@ -93178,15 +93085,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************************!*\
   !*** ./resources/js/components/Pages/Dictionaries/Suppliers.vue ***!
   \******************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Suppliers_vue_vue_type_template_id_319d64a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Suppliers.vue?vue&type=template&id=319d64a2& */ "./resources/js/components/Pages/Dictionaries/Suppliers.vue?vue&type=template&id=319d64a2&");
 /* harmony import */ var _Suppliers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Suppliers.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dictionaries/Suppliers.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Suppliers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Suppliers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -93216,7 +93122,7 @@ component.options.__file = "resources/js/components/Pages/Dictionaries/Suppliers
 /*!*******************************************************************************************!*\
   !*** ./resources/js/components/Pages/Dictionaries/Suppliers.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95066,8 +94972,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
