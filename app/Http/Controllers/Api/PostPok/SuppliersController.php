@@ -15,8 +15,10 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-       $suppliers = Suppliers::where(['POST' => 1, 'FDEL' => 0])->orderBy('NAME', 'ASC')->get();
-          return response()->json($suppliers);
+       $suppliers = Suppliers::where(['KLIENT.POST' => 0, 'KLIENT.FDEL' => 0])->
+       join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->select('KLIENT.*', 'ORG.ORG_NAME')->
+       orderBy('KLIENT.NAME', 'ASC')->get();
+          return response()->json($suppliers, 200);
 
     }
 
@@ -73,7 +75,8 @@ class SuppliersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $edit = Suppliers::find($id)->update($request->all());
+        return response()->json($edit);
     }
 
     /**
@@ -84,6 +87,8 @@ class SuppliersController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $delete = Suppliers::find($id);
+       $delete->FDEL = 1;
+       Suppliers::save();
     }
 }

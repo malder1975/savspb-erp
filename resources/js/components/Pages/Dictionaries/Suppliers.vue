@@ -3,13 +3,17 @@
         <div class="row mt-3">
             <div class="col-md-12">
                 <b-card header-tag="header" footer-tag="footer">
+                    <h4 slot="header">Поставщики</h4>
+                    <div slot="header" class="text-right">
+                        <b-button variant="outline-primary" >Добавить поставщика</b-button>
+                    </div>
                     <b-card-body>
-                    <h6 slot="header">Поставщики</h6>
                 <div v-for="supplier in displayedSuppliers" :key="supplier.KLIENT_ID">
 
                     <b-card header-tag="header" footer-tag="footer" header-bg-variant="primary" header-text-variant="white" class="mb-4">
 
                     <h4 slot="header" class="text-center">{{supplier.KLIENT_KOD}} - {{ supplier.NAME }}</h4>
+                        <h5 slot="header" class="text-center">{{supplier.ORG_NAME}}</h5>
                     <b-card-body>
                         <div class="row">
                             <div class="col-md-3">
@@ -35,18 +39,22 @@
                                     <div class="col-md-4">
                                         <h5>Финансовая информация</h5>
                                         <p class="recv_post">Торговая наценка: {{ supplier.PREMIUM}}</p>
+                                        <p class="recv_post">Компенсация: {{supplier.KOMPENS}}</p>
+                                        <p class="recv_post">Трансп. расходы: {{supplier.TRANSP}}</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
                     </b-card-body>
-
+                        <div slot="footer" class="text-right">
+                            <div class="ml-auto">
+                                <b-button variant="outline-success" data-toggle="modal" data-target="#editSupplier">Редактировать</b-button>
+                                <b-button variant="outline-danger">Удалить</b-button>
+                            </div>
+                        </div>
                 </b-card>
-
                 </div>
-
                     </b-card-body>
                     <div slot="footer">
 <!--                        <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page = 1" disabled>Первая</button>-->
@@ -60,15 +68,27 @@
                 </b-card>
             </div>
         </div>
+
+        <!-- Модальные окна: Добавить, Редактировать -->
+        <div class="modal fade" id="editSupplier" tabindex="-1" role="dialog" aria-labelledby="editSupplierLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+
+            </div>
+        </div>
     </div>
+
 </template>
 
 <script>
     import axios from 'axios'
-
     export default {
         name: "SuppliersList",
-
+        props: {
+          showModal: {
+              type: Boolean,
+              default: false
+          }
+        },
         data(){
             return {
                 suppliers: [],

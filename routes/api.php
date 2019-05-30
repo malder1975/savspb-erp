@@ -30,6 +30,8 @@ Route::prefix('v1')->group(function () {
             Route::get('person-account', 'Personal\PersonController@index');
             Route::get('suppliers', 'Api\PostPok\SuppliersController@index');
             Route::get('supplier/{id}', 'Api\PostPok\SuppliersController@show');
+            Route::post('supplier/{id}', 'Api\PostPok\SuppliersController@update');
+            Route::post('supplier/{id}', 'Api\PostPok\SuppliersController@destroy');
         });
 
         Route::group(['middleware' => 'jwt.refresh'], function () {
