@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\PostPok;
+namespace App\Http\Controllers;
 
+use App\Models\Customers;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Suppliers;
 
-class SuppliersController extends Controller
+class CustomersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +14,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-       $suppliers = Suppliers::where(['KLIENT.POST' => 1, 'KLIENT.FDEL' => 0])->
-       join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->select('KLIENT.*', 'ORG.ORG_NAME')->
-       orderBy('KLIENT.NAME', 'ASC')->get();
-          return response()->json($suppliers, 200);
-
+        //
     }
 
     /**
@@ -46,22 +41,21 @@ class SuppliersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Customers $customers)
     {
-        $supplier = Suppliers::findOrFail($id);
-        return response()->json(['result' => $supplier]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Customers $customers)
     {
         //
     }
@@ -70,25 +64,22 @@ class SuppliersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Customers $customers)
     {
-        $edit = Suppliers::find($id)->update($request->all());
-        return response()->json($edit);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Customers $customers)
     {
-       $delete = Suppliers::find($id);
-       $delete->FDEL = 1;
-       Suppliers::save();
+        //
     }
 }
