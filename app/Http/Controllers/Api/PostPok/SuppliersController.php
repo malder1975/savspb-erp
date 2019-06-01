@@ -52,7 +52,7 @@ class SuppliersController extends Controller
     public function show($id)
     {
         $supplier = Suppliers::findOrFail($id);
-        return response()->json(['result' => $supplier]);
+        return response()->json($supplier, 200);
     }
 
     /**

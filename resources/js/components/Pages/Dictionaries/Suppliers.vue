@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-md-12">
+    <b-container>
+        <b-row class="mt-3">
+            <b-col md="12">
                 <b-card no-body>
                     <b-tabs card>
                         <b-tab title="Поставщики" active>
@@ -70,79 +70,60 @@
                                     <b-form-input  placeholder="Поиск" id="serch1"></b-form-input>
                                 </b-input-group>
                             </b-button-toolbar>
+                            <div v-for="customer in displayedCustomers" :key="customer.KLIENT_ID">
+
+                                <b-card header-tag="header" footer-tag="footer" header-bg-variant="primary" header-text-variant="white" class="mb-4">
+
+                                    <h4 slot="header" class="text-center">{{customer.KLIENT_KOD}} - {{ customer.NAME }}</h4>
+                                    <h5 slot="header" class="text-center">{{customer.ORG_NAME}}</h5>
+                                    <b-card-body>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <img src="https://via.placeholder.com/80" alt="Лого" width="80px" height="80px"/>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h5>Адрес поставщика</h5>
+                                                        <p class="recv_post">Город: {{ customer.KL_CITY }}</p>
+                                                        <p class="recv_post">Адрес: {{ customer.KL_ADR }}</p>
+                                                        <p class="recv_post">Телефон: {{ customer.KL_TEL }}</p>
+                                                        <p class="recv_post">Факс: {{ customer.KL_FAX }}</p>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5>Банковские реквизиты</h5>
+                                                        <p class="recv_post">ИНН: {{ customer.KL_INN }}/ КПП: {{ customer.KL_KPP }}</p>
+                                                        <p class="recv_post">БИК: {{ customer.KL_BIK }}</p>
+                                                        <p class="recv_post">К/сч: {{ customer.KL_KS }}</p>
+                                                        <p class="recv_post">Р/сч: {{ customer.KL_RS }}</p>
+                                                        <p class="recv_post">Банк: {{ customer.KL_BANK }}</p>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5>Финансовая информация</h5>
+                                                        <p class="recv_post">Торговая наценка: {{ customer.PREMIUM}}</p>
+                                                        <p class="recv_post">Компенсация: {{customer.KOMPENS}}</p>
+                                                        <p class="recv_post">Трансп. расходы: {{customer.TRANSP}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </b-card-body>
+                                    <div slot="footer" class="text-right">
+                                        <div class="ml-auto">
+                                            <b-button variant="outline-success" data-toggle="modal" data-target="#editCustomer" size="sm">Редактировать</b-button>
+                                            <b-button variant="outline-danger" size="sm">Удалить</b-button>
+                                        </div>
+                                    </div>
+                                </b-card>
+                            </div>
                             <b-button-toolbar class="mb-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page != 1" @click="page--"> << </button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber in pages.slice(page-1, page+5)" @click="page = pageNumber"> {{pageNumber}} </button>
-                                <button type="button" @click="page++" v-if="page < pages.length" class="btn btn-sm btn-outline-secondary"> >> </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" v-if="pageCust != 1" @click="pageCust--"> << </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber in pagesCust.slice(pageCust-1, pageCust+5)" @click="pageCust = pageNumber"> {{pageNumber}} </button>
+                                <button type="button" @click="pageCust++" v-if="pageCust < pagesCust.length" class="btn btn-sm btn-outline-secondary"> >> </button>
                             </b-button-toolbar>
                         </b-tab>
                     </b-tabs>
                 </b-card>
-                <!--<b-card header-tag="header" footer-tag="footer">
-                    <h4 slot="header">Поставщики</h4>
-                    <div slot="header" class="text-right">
-                        <b-button variant="outline-primary" >Добавить поставщика</b-button>
-                    </div>
-                    <b-card-body>
-                <div v-for="supplier in displayedSuppliers" :key="supplier.KLIENT_ID">
-
-                    <b-card header-tag="header" footer-tag="footer" header-bg-variant="primary" header-text-variant="white" class="mb-4">
-
-                    <h4 slot="header" class="text-center">{{supplier.KLIENT_KOD}} - {{ supplier.NAME }}</h4>
-                        <h5 slot="header" class="text-center">{{supplier.ORG_NAME}}</h5>
-                    <b-card-body>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="https://via.placeholder.com/80" alt="Лого" width="80px" height="80px"/>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <h5>Адрес поставщика</h5>
-                                        <p class="recv_post">Город: {{ supplier.KL_CITY }}</p>
-                                        <p class="recv_post">Адрес: {{ supplier.KL_ADR }}</p>
-                                        <p class="recv_post">Телефон: {{ supplier.KL_TEL }}</p>
-                                        <p class="recv_post">Факс: {{ supplier.KL_FAX }}</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                       <h5>Банковские реквизиты</h5>
-                                        <p class="recv_post">ИНН: {{ supplier.KL_INN }}/ КПП: {{ supplier.KL_KPP }}</p>
-                                        <p class="recv_post">БИК: {{ supplier.KL_BIK }}</p>
-                                        <p class="recv_post">К/сч: {{ supplier.KL_KS }}</p>
-                                        <p class="recv_post">Р/сч: {{ supplier.KL_RS }}</p>
-                                        <p class="recv_post">Банк: {{ supplier.KL_BANK }}</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5>Финансовая информация</h5>
-                                        <p class="recv_post">Торговая наценка: {{ supplier.PREMIUM}}</p>
-                                        <p class="recv_post">Компенсация: {{supplier.KOMPENS}}</p>
-                                        <p class="recv_post">Трансп. расходы: {{supplier.TRANSP}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </b-card-body>
-                        <div slot="footer" class="text-right">
-                            <div class="ml-auto">
-                                <b-button variant="outline-success" data-toggle="modal" data-target="#editSupplier">Редактировать</b-button>
-                                <b-button variant="outline-danger">Удалить</b-button>
-                            </div>
-                        </div>
-                </b-card>
-                </div>
-                    </b-card-body>
-                    <div slot="footer">
-&lt;!&ndash;                        <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page = 1" disabled>Первая</button>&ndash;&gt;
-&lt;!&ndash;                        <button type="button" class="btn btn-sm btn-outline-secondary" v-else="page != 1" enabled @click="page = 1">Первая</button>&ndash;&gt;
-                        <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page != 1" @click="page&#45;&#45;"> << </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber in pages.slice(page-1, page+5)" @click="page = pageNumber"> {{pageNumber}} </button>
-                        <button type="button" @click="page++" v-if="page < pages.length" class="btn btn-sm btn-outline-secondary"> >> </button>
-&lt;!&ndash;                        <button type="button" @click="pages.length" v-if="page = pages.length" disabled class="btn btn-sm btn-outline-secondary">Последняя</button>&ndash;&gt;
-                        &lt;!&ndash;<pagination :limit="5" :data="suppliers" @pagination-change-page="getResults"></pagination>&ndash;&gt;
-                    </div>
-                </b-card>
-            </div>-->
 
 
         <!-- Модальные окна: Добавить, Редактировать -->
@@ -151,10 +132,10 @@
 
             </div>
         </div>
-            </div>
+            </b-col>
 
-        </div>
-    </div>
+        </b-row>
+    </b-container>
 
 </template>
 
@@ -171,17 +152,19 @@
         data(){
             return {
                 suppliers: [],
+                customers: [],
                 errors: [],
+                errorsCust: [],
                 page: 1,
+                pageCust: 1,
                 perPage: 2,
+                perPageCust: 2,
                 pages: [],
+                pagesCust: []
             }
         },
 
         methods: {
-            getSuppliersData() {
-
-            },
             getSuppliers() {
                 //let app = this;
                 axios.get('/auth/suppliers').then((response) => (
@@ -192,12 +175,24 @@
                     );
                // alert('Не могу показать поставщиков. Ошибка: '.error)
             },
+            getCustomers() {
+              axios.get('/auth/customers').then((response) => {
+                  this.customers = response.data
+              }).catch((error) =>
+              this.errors = error.response.data.errors || error.message);
+            },
             setPages() {
                 let numOfPages = Math.ceil(this.suppliers.length / this.perPage);
                 console.log(numOfPages);
                 for (let index = 1; index <= numOfPages; index++) {
                     this.pages.push(index)
                 }
+            },
+            setPagesCust() {
+              let numOfPages = Math.ceil(this.customers.length / this.perPageCust);
+              for (let index = 1; index <= numOfPages; index++) {
+                  this.pagesCust.push(index)
+              }
             },
             paginate(suppliers) {
                 let page = this.page;
@@ -206,9 +201,17 @@
                 let to = (page * perPage);
                 return suppliers.slice(from, to)
             },
+            paginateCust(customers) {
+                let pageCust = this.pageCust;
+                let perPageCust = this.perPageCust;
+                let from = (pageCust * perPageCust) - perPageCust;
+                let to = (pageCust * perPageCust);
+                return customers.slice(from, to)
+            }
         },
         created() {
             this.getSuppliers()
+            this.getCustomers()
         },
         mounted() {
             //
@@ -216,11 +219,17 @@
         watch: {
             suppliers() {
                 this.setPages()
+            },
+            customers() {
+                this.setPagesCust()
             }
         },
         computed: {
             displayedSuppliers() {
                 return this.paginate(this.suppliers)
+            },
+            displayedCustomers() {
+                return this.paginateCust(this.customers)
             }
         }
     }

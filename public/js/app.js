@@ -3436,25 +3436,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SuppliersList",
@@ -3467,14 +3448,18 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       suppliers: [],
+      customers: [],
       errors: [],
+      errorsCust: [],
       page: 1,
+      pageCust: 1,
       perPage: 2,
-      pages: []
+      perPageCust: 2,
+      pages: [],
+      pagesCust: []
     };
   },
   methods: {
-    getSuppliersData: function getSuppliersData() {},
     getSuppliers: function getSuppliers() {
       var _this = this;
 
@@ -3487,6 +3472,15 @@ __webpack_require__.r(__webpack_exports__);
         return _this.errors = error.response.data.errors || error.message;
       }); // alert('Не могу показать поставщиков. Ошибка: '.error)
     },
+    getCustomers: function getCustomers() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/auth/customers').then(function (response) {
+        _this2.customers = response.data;
+      }).catch(function (error) {
+        return _this2.errors = error.response.data.errors || error.message;
+      });
+    },
     setPages: function setPages() {
       var numOfPages = Math.ceil(this.suppliers.length / this.perPage);
       console.log(numOfPages);
@@ -3495,27 +3489,48 @@ __webpack_require__.r(__webpack_exports__);
         this.pages.push(index);
       }
     },
+    setPagesCust: function setPagesCust() {
+      var numOfPages = Math.ceil(this.customers.length / this.perPageCust);
+
+      for (var index = 1; index <= numOfPages; index++) {
+        this.pagesCust.push(index);
+      }
+    },
     paginate: function paginate(suppliers) {
       var page = this.page;
       var perPage = this.perPage;
       var from = page * perPage - perPage;
       var to = page * perPage;
       return suppliers.slice(from, to);
+    },
+    paginateCust: function paginateCust(customers) {
+      var pageCust = this.pageCust;
+      var perPageCust = this.perPageCust;
+      var from = pageCust * perPageCust - perPageCust;
+      var to = pageCust * perPageCust;
+      return customers.slice(from, to);
     }
   },
   created: function created() {
     this.getSuppliers();
+    this.getCustomers();
   },
   mounted: function mounted() {//
   },
   watch: {
     suppliers: function suppliers() {
       this.setPages();
+    },
+    customers: function customers() {
+      this.setPagesCust();
     }
   },
   computed: {
     displayedSuppliers: function displayedSuppliers() {
       return this.paginate(this.suppliers);
+    },
+    displayedCustomers: function displayedCustomers() {
+      return this.paginateCust(this.customers);
     }
   }
 });
@@ -75932,463 +75947,781 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row mt-3" }, [
+  return _c(
+    "b-container",
+    [
       _c(
-        "div",
-        { staticClass: "col-md-12" },
+        "b-row",
+        { staticClass: "mt-3" },
         [
           _c(
-            "b-card",
-            { attrs: { "no-body": "" } },
+            "b-col",
+            { attrs: { md: "12" } },
             [
               _c(
-                "b-tabs",
-                { attrs: { card: "" } },
+                "b-card",
+                { attrs: { "no-body": "" } },
                 [
                   _c(
-                    "b-tab",
-                    { attrs: { title: "Поставщики", active: "" } },
+                    "b-tabs",
+                    { attrs: { card: "" } },
                     [
                       _c(
-                        "b-button-toolbar",
-                        { staticClass: "mb-2" },
+                        "b-tab",
+                        { attrs: { title: "Поставщики", active: "" } },
                         [
                           _c(
-                            "b-button",
-                            {
-                              attrs: { variant: "outline-primary", size: "sm" }
-                            },
-                            [_vm._v("Добавить поставщика")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-input-group",
-                            { staticClass: "ml-1", attrs: { size: "sm" } },
+                            "b-button-toolbar",
+                            { staticClass: "mb-2" },
                             [
-                              _c("b-form-input", {
-                                attrs: { placeholder: "Поиск", id: "serch" }
-                              })
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: {
+                                    variant: "outline-primary",
+                                    size: "sm"
+                                  }
+                                },
+                                [_vm._v("Добавить поставщика")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-input-group",
+                                { staticClass: "ml-1", attrs: { size: "sm" } },
+                                [
+                                  _c("b-form-input", {
+                                    attrs: { placeholder: "Поиск", id: "serch" }
+                                  })
+                                ],
+                                1
+                              )
                             ],
                             1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.displayedSuppliers, function(supplier) {
-                        return _c(
-                          "div",
-                          { key: supplier.KLIENT_ID },
-                          [
-                            _c(
-                              "b-card",
-                              {
-                                staticClass: "mb-4",
-                                attrs: {
-                                  "header-tag": "header",
-                                  "footer-tag": "footer",
-                                  "header-bg-variant": "primary",
-                                  "header-text-variant": "white"
-                                }
-                              },
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.displayedSuppliers, function(supplier) {
+                            return _c(
+                              "div",
+                              { key: supplier.KLIENT_ID },
                               [
                                 _c(
-                                  "h4",
+                                  "b-card",
                                   {
-                                    staticClass: "text-center",
-                                    attrs: { slot: "header" },
-                                    slot: "header"
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(supplier.KLIENT_KOD) +
-                                        " - " +
-                                        _vm._s(supplier.NAME)
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "h5",
-                                  {
-                                    staticClass: "text-center",
-                                    attrs: { slot: "header" },
-                                    slot: "header"
-                                  },
-                                  [_vm._v(_vm._s(supplier.ORG_NAME))]
-                                ),
-                                _vm._v(" "),
-                                _c("b-card-body", [
-                                  _c("div", { staticClass: "row" }, [
-                                    _c("div", { staticClass: "col-md-3" }, [
-                                      _c("img", {
-                                        attrs: {
-                                          src: "https://via.placeholder.com/80",
-                                          alt: "Лого",
-                                          width: "80px",
-                                          height: "80px"
-                                        }
-                                      })
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "col-md-9" }, [
-                                      _c("div", { staticClass: "row" }, [
-                                        _c("div", { staticClass: "col-md-4" }, [
-                                          _c("h5", [
-                                            _vm._v("Адрес поставщика")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Город: " +
-                                                  _vm._s(supplier.KL_CITY)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Адрес: " +
-                                                  _vm._s(supplier.KL_ADR)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Телефон: " +
-                                                  _vm._s(supplier.KL_TEL)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Факс: " +
-                                                  _vm._s(supplier.KL_FAX)
-                                              )
-                                            ]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "col-md-4" }, [
-                                          _c("h5", [
-                                            _vm._v("Банковские реквизиты")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "ИНН: " +
-                                                  _vm._s(supplier.KL_INN) +
-                                                  "/ КПП: " +
-                                                  _vm._s(supplier.KL_KPP)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "БИК: " +
-                                                  _vm._s(supplier.KL_BIK)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "К/сч: " +
-                                                  _vm._s(supplier.KL_KS)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Р/сч: " +
-                                                  _vm._s(supplier.KL_RS)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Банк: " +
-                                                  _vm._s(supplier.KL_BANK)
-                                              )
-                                            ]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "col-md-4" }, [
-                                          _c("h5", [
-                                            _vm._v("Финансовая информация")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Торговая наценка: " +
-                                                  _vm._s(supplier.PREMIUM)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Компенсация: " +
-                                                  _vm._s(supplier.KOMPENS)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            { staticClass: "recv_post" },
-                                            [
-                                              _vm._v(
-                                                "Трансп. расходы: " +
-                                                  _vm._s(supplier.TRANSP)
-                                              )
-                                            ]
-                                          )
-                                        ])
-                                      ])
-                                    ])
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "text-right",
-                                    attrs: { slot: "footer" },
-                                    slot: "footer"
+                                    staticClass: "mb-4",
+                                    attrs: {
+                                      "header-tag": "header",
+                                      "footer-tag": "footer",
+                                      "header-bg-variant": "primary",
+                                      "header-text-variant": "white"
+                                    }
                                   },
                                   [
                                     _c(
+                                      "h4",
+                                      {
+                                        staticClass: "text-center",
+                                        attrs: { slot: "header" },
+                                        slot: "header"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(supplier.KLIENT_KOD) +
+                                            " - " +
+                                            _vm._s(supplier.NAME)
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "h5",
+                                      {
+                                        staticClass: "text-center",
+                                        attrs: { slot: "header" },
+                                        slot: "header"
+                                      },
+                                      [_vm._v(_vm._s(supplier.ORG_NAME))]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("b-card-body", [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c("div", { staticClass: "col-md-3" }, [
+                                          _c("img", {
+                                            attrs: {
+                                              src:
+                                                "https://via.placeholder.com/80",
+                                              alt: "Лого",
+                                              width: "80px",
+                                              height: "80px"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-9" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-4" },
+                                              [
+                                                _c("h5", [
+                                                  _vm._v("Адрес поставщика")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Город: " +
+                                                        _vm._s(supplier.KL_CITY)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Адрес: " +
+                                                        _vm._s(supplier.KL_ADR)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Телефон: " +
+                                                        _vm._s(supplier.KL_TEL)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Факс: " +
+                                                        _vm._s(supplier.KL_FAX)
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-4" },
+                                              [
+                                                _c("h5", [
+                                                  _vm._v("Банковские реквизиты")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "ИНН: " +
+                                                        _vm._s(
+                                                          supplier.KL_INN
+                                                        ) +
+                                                        "/ КПП: " +
+                                                        _vm._s(supplier.KL_KPP)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "БИК: " +
+                                                        _vm._s(supplier.KL_BIK)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "К/сч: " +
+                                                        _vm._s(supplier.KL_KS)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Р/сч: " +
+                                                        _vm._s(supplier.KL_RS)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Банк: " +
+                                                        _vm._s(supplier.KL_BANK)
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-4" },
+                                              [
+                                                _c("h5", [
+                                                  _vm._v(
+                                                    "Финансовая информация"
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Торговая наценка: " +
+                                                        _vm._s(supplier.PREMIUM)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Компенсация: " +
+                                                        _vm._s(supplier.KOMPENS)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Трансп. расходы: " +
+                                                        _vm._s(supplier.TRANSP)
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
                                       "div",
-                                      { staticClass: "ml-auto" },
+                                      {
+                                        staticClass: "text-right",
+                                        attrs: { slot: "footer" },
+                                        slot: "footer"
+                                      },
                                       [
                                         _c(
-                                          "b-button",
-                                          {
-                                            attrs: {
-                                              variant: "outline-success",
-                                              "data-toggle": "modal",
-                                              "data-target": "#editSupplier",
-                                              size: "sm"
-                                            }
-                                          },
-                                          [_vm._v("Редактировать")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-button",
-                                          {
-                                            attrs: {
-                                              variant: "outline-danger",
-                                              size: "sm"
-                                            }
-                                          },
-                                          [_vm._v("Удалить")]
+                                          "div",
+                                          { staticClass: "ml-auto" },
+                                          [
+                                            _c(
+                                              "b-button",
+                                              {
+                                                attrs: {
+                                                  variant: "outline-success",
+                                                  "data-toggle": "modal",
+                                                  "data-target":
+                                                    "#editSupplier",
+                                                  size: "sm"
+                                                }
+                                              },
+                                              [_vm._v("Редактировать")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "b-button",
+                                              {
+                                                attrs: {
+                                                  variant: "outline-danger",
+                                                  size: "sm"
+                                                }
+                                              },
+                                              [_vm._v("Удалить")]
+                                            )
+                                          ],
+                                          1
                                         )
-                                      ],
-                                      1
+                                      ]
                                     )
-                                  ]
+                                  ],
+                                  1
                                 )
                               ],
                               1
                             )
-                          ],
-                          1
-                        )
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "b-button-toolbar",
-                        { staticClass: "mb-2" },
-                        [
-                          _vm.page != 1
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-sm btn-outline-secondary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.page--
-                                    }
-                                  }
-                                },
-                                [_vm._v(" << ")]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm._l(
-                            _vm.pages.slice(_vm.page - 1, _vm.page + 5),
-                            function(pageNumber) {
-                              return _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-sm btn-outline-secondary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.page = pageNumber
-                                    }
-                                  }
-                                },
-                                [_vm._v(" " + _vm._s(pageNumber) + " ")]
-                              )
-                            }
-                          ),
-                          _vm._v(" "),
-                          _vm.page < _vm.pages.length
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-sm btn-outline-secondary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.page++
-                                    }
-                                  }
-                                },
-                                [_vm._v(" >> ")]
-                              )
-                            : _vm._e()
-                        ],
-                        2
-                      )
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-tab",
-                    { attrs: { title: "Покупатели" } },
-                    [
-                      _c(
-                        "b-button-toolbar",
-                        { staticClass: "mb-2" },
-                        [
-                          _c(
-                            "b-button",
-                            {
-                              attrs: { variant: "outline-primary", size: "sm" }
-                            },
-                            [_vm._v("Добавить покупателя")]
-                          ),
+                          }),
                           _vm._v(" "),
                           _c(
-                            "b-input-group",
-                            { staticClass: "ml-1", attrs: { size: "sm" } },
+                            "b-button-toolbar",
+                            { staticClass: "mb-2" },
                             [
-                              _c("b-form-input", {
-                                attrs: { placeholder: "Поиск", id: "serch1" }
-                              })
+                              _vm.page != 1
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-sm btn-outline-secondary",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.page--
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(" << ")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm._l(
+                                _vm.pages.slice(_vm.page - 1, _vm.page + 5),
+                                function(pageNumber) {
+                                  return _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-sm btn-outline-secondary",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.page = pageNumber
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(" " + _vm._s(pageNumber) + " ")]
+                                  )
+                                }
+                              ),
+                              _vm._v(" "),
+                              _vm.page < _vm.pages.length
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-sm btn-outline-secondary",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.page++
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(" >> ")]
+                                  )
+                                : _vm._e()
                             ],
-                            1
+                            2
                           )
                         ],
-                        1
+                        2
                       ),
                       _vm._v(" "),
                       _c(
-                        "b-button-toolbar",
-                        { staticClass: "mb-2" },
+                        "b-tab",
+                        { attrs: { title: "Покупатели" } },
                         [
-                          _vm.page != 1
-                            ? _c(
-                                "button",
+                          _c(
+                            "b-button-toolbar",
+                            { staticClass: "mb-2" },
+                            [
+                              _c(
+                                "b-button",
                                 {
-                                  staticClass:
-                                    "btn btn-sm btn-outline-secondary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.page--
-                                    }
+                                  attrs: {
+                                    variant: "outline-primary",
+                                    size: "sm"
                                   }
                                 },
-                                [_vm._v(" << ")]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm._l(
-                            _vm.pages.slice(_vm.page - 1, _vm.page + 5),
-                            function(pageNumber) {
-                              return _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-sm btn-outline-secondary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.page = pageNumber
+                                [_vm._v("Добавить покупателя")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-input-group",
+                                { staticClass: "ml-1", attrs: { size: "sm" } },
+                                [
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      placeholder: "Поиск",
+                                      id: "serch1"
                                     }
-                                  }
-                                },
-                                [_vm._v(" " + _vm._s(pageNumber) + " ")]
+                                  })
+                                ],
+                                1
                               )
-                            }
+                            ],
+                            1
                           ),
                           _vm._v(" "),
-                          _vm.page < _vm.pages.length
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-sm btn-outline-secondary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.page++
+                          _vm._l(_vm.displayedCustomers, function(customer) {
+                            return _c(
+                              "div",
+                              { key: customer.KLIENT_ID },
+                              [
+                                _c(
+                                  "b-card",
+                                  {
+                                    staticClass: "mb-4",
+                                    attrs: {
+                                      "header-tag": "header",
+                                      "footer-tag": "footer",
+                                      "header-bg-variant": "primary",
+                                      "header-text-variant": "white"
                                     }
-                                  }
-                                },
-                                [_vm._v(" >> ")]
-                              )
-                            : _vm._e()
+                                  },
+                                  [
+                                    _c(
+                                      "h4",
+                                      {
+                                        staticClass: "text-center",
+                                        attrs: { slot: "header" },
+                                        slot: "header"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(customer.KLIENT_KOD) +
+                                            " - " +
+                                            _vm._s(customer.NAME)
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "h5",
+                                      {
+                                        staticClass: "text-center",
+                                        attrs: { slot: "header" },
+                                        slot: "header"
+                                      },
+                                      [_vm._v(_vm._s(customer.ORG_NAME))]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("b-card-body", [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c("div", { staticClass: "col-md-3" }, [
+                                          _c("img", {
+                                            attrs: {
+                                              src:
+                                                "https://via.placeholder.com/80",
+                                              alt: "Лого",
+                                              width: "80px",
+                                              height: "80px"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-9" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-4" },
+                                              [
+                                                _c("h5", [
+                                                  _vm._v("Адрес поставщика")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Город: " +
+                                                        _vm._s(customer.KL_CITY)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Адрес: " +
+                                                        _vm._s(customer.KL_ADR)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Телефон: " +
+                                                        _vm._s(customer.KL_TEL)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Факс: " +
+                                                        _vm._s(customer.KL_FAX)
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-4" },
+                                              [
+                                                _c("h5", [
+                                                  _vm._v("Банковские реквизиты")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "ИНН: " +
+                                                        _vm._s(
+                                                          customer.KL_INN
+                                                        ) +
+                                                        "/ КПП: " +
+                                                        _vm._s(customer.KL_KPP)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "БИК: " +
+                                                        _vm._s(customer.KL_BIK)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "К/сч: " +
+                                                        _vm._s(customer.KL_KS)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Р/сч: " +
+                                                        _vm._s(customer.KL_RS)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Банк: " +
+                                                        _vm._s(customer.KL_BANK)
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-md-4" },
+                                              [
+                                                _c("h5", [
+                                                  _vm._v(
+                                                    "Финансовая информация"
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Торговая наценка: " +
+                                                        _vm._s(customer.PREMIUM)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Компенсация: " +
+                                                        _vm._s(customer.KOMPENS)
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Трансп. расходы: " +
+                                                        _vm._s(customer.TRANSP)
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "text-right",
+                                        attrs: { slot: "footer" },
+                                        slot: "footer"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-auto" },
+                                          [
+                                            _c(
+                                              "b-button",
+                                              {
+                                                attrs: {
+                                                  variant: "outline-success",
+                                                  "data-toggle": "modal",
+                                                  "data-target":
+                                                    "#editCustomer",
+                                                  size: "sm"
+                                                }
+                                              },
+                                              [_vm._v("Редактировать")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "b-button",
+                                              {
+                                                attrs: {
+                                                  variant: "outline-danger",
+                                                  size: "sm"
+                                                }
+                                              },
+                                              [_vm._v("Удалить")]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "b-button-toolbar",
+                            { staticClass: "mb-2" },
+                            [
+                              _vm.pageCust != 1
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-sm btn-outline-secondary",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.pageCust--
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(" << ")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm._l(
+                                _vm.pagesCust.slice(
+                                  _vm.pageCust - 1,
+                                  _vm.pageCust + 5
+                                ),
+                                function(pageNumber) {
+                                  return _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-sm btn-outline-secondary",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.pageCust = pageNumber
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(" " + _vm._s(pageNumber) + " ")]
+                                  )
+                                }
+                              ),
+                              _vm._v(" "),
+                              _vm.pageCust < _vm.pagesCust.length
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-sm btn-outline-secondary",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.pageCust++
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(" >> ")]
+                                  )
+                                : _vm._e()
+                            ],
+                            2
+                          )
                         ],
                         2
                       )
@@ -76397,44 +76730,38 @@ var render = function() {
                   )
                 ],
                 1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "modal fade",
+                  attrs: {
+                    id: "editSupplier",
+                    tabindex: "-1",
+                    role: "dialog",
+                    "aria-labelledby": "editSupplierLabel",
+                    "aria-hidden": "true"
+                  }
+                },
+                [
+                  _c("div", {
+                    staticClass: "modal-dialog modal-dialog-centered",
+                    attrs: { role: "document" }
+                  })
+                ]
               )
             ],
             1
-          ),
-          _vm._v(" "),
-          _vm._m(0)
+          )
         ],
         1
       )
-    ])
-  ])
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "editSupplier",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "editSupplierLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c("div", {
-          staticClass: "modal-dialog modal-dialog-centered",
-          attrs: { role: "document" }
-        })
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -77289,13 +77616,13 @@ var render = function() {
                 },
                 [
                   _c("b-dropdown-item", { attrs: { to: "/suppliers" } }, [
-                    _vm._v("Поставщики")
+                    _vm._v("Поставщики/покупатели")
                   ]),
                   _vm._v(" "),
                   _c(
                     "b-dropdown-item",
-                    { attrs: { to: { name: "Покупатели" } } },
-                    [_vm._v("Покупатели")]
+                    { attrs: { to: { name: _vm.Organization } } },
+                    [_vm._v("Торговые организации")]
                   )
                 ],
                 1

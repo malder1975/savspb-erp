@@ -19,4 +19,9 @@ class Organisations extends Model
     {
         return $this->hasManyThrough('App\Models\Suppliers', 'ORG_ID', 'KLIENT_ID');
     }
+
+    public function customers()
+    {
+        return $this->hasManyThrough('App\Models\Customers', 'ORG_ID', 'KLIENT_ID');
+    }
 }

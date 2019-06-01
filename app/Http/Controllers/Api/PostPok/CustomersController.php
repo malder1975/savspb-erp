@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\PostPok;
 
 use App\Models\Customers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CustomersController extends Controller
 {
@@ -14,7 +15,10 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customers::where(['KLIENT.POK' => 1, 'KLIENT.FDEL' => 0])->
+        join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->select('KLIENT.*', 'ORG.ORG_NAME')->
+        orderBy('KLIENT.NAME', 'ASC')->get();
+        return response()->json($customers, 200);
     }
 
     /**
