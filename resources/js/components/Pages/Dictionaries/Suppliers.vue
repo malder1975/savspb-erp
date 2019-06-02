@@ -51,7 +51,7 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
-                                            <b-button variant="outline-success" v-b-modal.EditSupplier size="sm">Редактировать</b-button>
+                                            <b-button variant="outline-success" v-b-modal.EditSupplier size="sm" ref="btnEdit" @click="showModal = !showModal">Редактировать</b-button>
                                             <b-button variant="outline-danger" size="sm">Удалить</b-button>
                                         </div>
                                     </div>

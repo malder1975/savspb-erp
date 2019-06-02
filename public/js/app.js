@@ -3302,6 +3302,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
   props: {
@@ -3312,7 +3318,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {};
+  },
+  methods: {
+    toggleModal: function toggleModal() {
+      showModal = false;
+    }
   }
+  /* watch: {
+       showModal(newVal) {
+           if (newVal) {
+               this.$refs.editModal.show()
+           } else {
+               this.$refs.editModal.hide()
+           }
+       }
+   }*/
+
 });
 
 /***/ }),
@@ -75991,7 +76012,8 @@ var render = function() {
       attrs: {
         id: "EditSupplier",
         scrollable: "",
-        title: "Scrollable Content"
+        centered: "",
+        title: "Редактирование поставщика"
       },
       model: {
         value: _vm.showModal,
@@ -76001,14 +76023,46 @@ var render = function() {
         expression: "showModal"
       }
     },
-    _vm._l(20, function(i) {
-      return _c("p", { key: i, staticClass: "my-4" }, [
-        _vm._v(
-          "\n        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis\n        in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.\n    "
-        )
-      ])
-    }),
-    0
+    [
+      _vm._l(5, function(i) {
+        return _c("p", { key: i, staticClass: "my-4" }, [
+          _vm._v(
+            "\n        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis\n        in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.\n    "
+          )
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "w-100",
+          attrs: { slot: "modal-footer" },
+          slot: "modal-footer"
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "float-right" },
+            [
+              _c("b-button", { attrs: { variant: "success", size: "sm" } }, [
+                _vm._v("Сохранить")
+              ]),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                {
+                  attrs: { variant: "info", size: "sm" },
+                  on: { click: _vm.toggleModal }
+                },
+                [_vm._v("Отмена")]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -76341,9 +76395,16 @@ var render = function() {
                                                     }
                                                   }
                                                 ],
+                                                ref: "btnEdit",
+                                                refInFor: true,
                                                 attrs: {
                                                   variant: "outline-success",
                                                   size: "sm"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.showModal = !_vm.showModal
+                                                  }
                                                 }
                                               },
                                               [_vm._v("Редактировать")]
@@ -95856,8 +95917,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
