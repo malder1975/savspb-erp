@@ -51,7 +51,7 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
-                                            <b-button variant="outline-success" data-toggle="modal" data-target="#editSupplier" size="sm">Редактировать</b-button>
+                                            <b-button variant="outline-success" v-b-modal.EditSupplier size="sm">Редактировать</b-button>
                                             <b-button variant="outline-danger" size="sm">Удалить</b-button>
                                         </div>
                                     </div>
@@ -132,6 +132,8 @@
 
             </div>
         </div>
+
+     <EditSupplier :showModal="this.showModal ? true : false"></EditSupplier>
             </b-col>
 
         </b-row>
@@ -141,13 +143,14 @@
 
 <script>
     import axios from 'axios'
+    import EditSupplier from './EditSupplier'
     export default {
         name: "SuppliersList",
         props: {
-          showModal: {
-              type: Boolean,
-              default: false
-          }
+          //
+        },
+        components: {
+          EditSupplier
         },
         data(){
             return {
@@ -160,7 +163,8 @@
                 perPage: 2,
                 perPageCust: 2,
                 pages: [],
-                pagesCust: []
+                pagesCust: [],
+                showModal: false
             }
         },
 
@@ -207,7 +211,8 @@
                 let from = (pageCust * perPageCust) - perPageCust;
                 let to = (pageCust * perPageCust);
                 return customers.slice(from, to)
-            }
+            },
+
         },
         created() {
             this.getSuppliers()
