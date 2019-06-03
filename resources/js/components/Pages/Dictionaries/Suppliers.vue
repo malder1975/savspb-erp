@@ -10,6 +10,7 @@
                                 <b-input-group size="sm" class="ml-1">
                                     <b-form-input  placeholder="Поиск" id="serch"></b-form-input>
                                 </b-input-group>
+                                <span> Всего поставщиков - {{ suppliersCount }}</span>
                             </b-button-toolbar>
                             <div v-for="supplier in displayedSuppliers" :key="supplier.KLIENT_ID">
 
@@ -51,7 +52,7 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
-                                            <b-button variant="outline-success" v-b-modal.EditSupplier size="sm" ref="btnEdit" @click="showModal = !showModal">Редактировать</b-button>
+                                            <b-button variant="outline-success" v-b-modal.EditSupplier size="sm" ref="btnEdit" @click="editSuppl(supplier.KLIENT_ID)">Редактировать</b-button>
                                             <b-button variant="outline-danger" size="sm">Удалить</b-button>
                                         </div>
                                     </div>
@@ -127,13 +128,13 @@
 
 
         <!-- Модальные окна: Добавить, Редактировать -->
-        <div class="modal fade" id="editSupplier" tabindex="-1" role="dialog" aria-labelledby="editSupplierLabel" aria-hidden="true">
+       <!-- <div class="modal fade" id="editSupplier" tabindex="-1" role="dialog" aria-labelledby="editSupplierLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
 
             </div>
-        </div>
+        </div>-->
 
-     <EditSupplier :showModal="this.showModal ? true : false"></EditSupplier>
+     <EditSupplier :edit-supplier="EditSuppl(key)"></EditSupplier>
             </b-col>
 
         </b-row>
@@ -164,7 +165,8 @@
                 perPageCust: 2,
                 pages: [],
                 pagesCust: [],
-                showModal: false
+                showModal: false,
+                suppliersCount: null
             }
         },
 
@@ -179,6 +181,7 @@
                     );
                // alert('Не могу показать поставщиков. Ошибка: '.error)
             },
+
             getCustomers() {
               axios.get('/auth/customers').then((response) => {
                   this.customers = response.data
@@ -212,14 +215,19 @@
                 let to = (pageCust * perPageCust);
                 return customers.slice(from, to)
             },
-
+            EditSuppl(key) {
+                console.log(this.$children[key])
+                //this.showModal ? true : false
+            }
         },
         created() {
             this.getSuppliers()
             this.getCustomers()
+
+
         },
         mounted() {
-            //
+            this.suppliersCount = this.countSuppliers()
         },
         watch: {
             suppliers() {
@@ -235,7 +243,10 @@
             },
             displayedCustomers() {
                 return this.paginateCust(this.customers)
-            }
+            },
+            countSuppliers() {
+                return this.suppliers.length;
+            },
         }
     }
 </script>

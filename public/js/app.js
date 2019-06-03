@@ -3305,23 +3305,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
-  props: {
-    showModal: {
-      type: Boolean,
-      default: false
-    }
+  props: {//
   },
   data: function data() {
     return {};
   },
   methods: {
     toggleModal: function toggleModal() {
-      showModal = false;
+      this.$bvModal.hide('EditSupplier');
     }
   }
   /* watch: {
@@ -3493,6 +3486,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3514,7 +3508,8 @@ __webpack_require__.r(__webpack_exports__);
       perPageCust: 2,
       pages: [],
       pagesCust: [],
-      showModal: false
+      showModal: false,
+      suppliersCount: null
     };
   },
   methods: {
@@ -3567,13 +3562,17 @@ __webpack_require__.r(__webpack_exports__);
       var from = pageCust * perPageCust - perPageCust;
       var to = pageCust * perPageCust;
       return customers.slice(from, to);
+    },
+    EditSuppl: function EditSuppl(key) {
+      console.log(this.$children[key]); //this.showModal ? true : false
     }
   },
   created: function created() {
     this.getSuppliers();
     this.getCustomers();
   },
-  mounted: function mounted() {//
+  mounted: function mounted() {
+    this.suppliersCount = this.countSuppliers();
   },
   watch: {
     suppliers: function suppliers() {
@@ -3589,6 +3588,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     displayedCustomers: function displayedCustomers() {
       return this.paginateCust(this.customers);
+    },
+    countSuppliers: function countSuppliers() {
+      return this.suppliers.length;
     }
   }
 });
@@ -76011,27 +76013,13 @@ var render = function() {
       ref: "editModal",
       attrs: {
         id: "EditSupplier",
+        size: "lg",
         scrollable: "",
         centered: "",
         title: "Редактирование поставщика"
-      },
-      model: {
-        value: _vm.showModal,
-        callback: function($$v) {
-          _vm.showModal = $$v
-        },
-        expression: "showModal"
       }
     },
     [
-      _vm._l(5, function(i) {
-        return _c("p", { key: i, staticClass: "my-4" }, [
-          _vm._v(
-            "\n        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis\n        in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.\n    "
-          )
-        ])
-      }),
-      _vm._v(" "),
       _c(
         "div",
         {
@@ -76044,14 +76032,16 @@ var render = function() {
             "div",
             { staticClass: "float-right" },
             [
-              _c("b-button", { attrs: { variant: "success", size: "sm" } }, [
-                _vm._v("Сохранить")
-              ]),
+              _c(
+                "b-button",
+                { attrs: { variant: "outline-success", size: "sm" } },
+                [_vm._v("Сохранить")]
+              ),
               _vm._v(" "),
               _c(
                 "b-button",
                 {
-                  attrs: { variant: "info", size: "sm" },
+                  attrs: { variant: "outline-info", size: "sm" },
                   on: { click: _vm.toggleModal }
                 },
                 [_vm._v("Отмена")]
@@ -76061,8 +76051,7 @@ var render = function() {
           )
         ]
       )
-    ],
-    2
+    ]
   )
 }
 var staticRenderFns = []
@@ -76134,7 +76123,14 @@ var render = function() {
                                   })
                                 ],
                                 1
-                              )
+                              ),
+                              _vm._v(" "),
+                              _c("span", [
+                                _vm._v(
+                                  " Всего поставщиков - " +
+                                    _vm._s(_vm.suppliersCount)
+                                )
+                              ])
                             ],
                             1
                           ),
@@ -76403,7 +76399,9 @@ var render = function() {
                                                 },
                                                 on: {
                                                   click: function($event) {
-                                                    _vm.showModal = !_vm.showModal
+                                                    return _vm.editSuppl(
+                                                      supplier.KLIENT_ID
+                                                    )
                                                   }
                                                 }
                                               },
@@ -76886,28 +76884,8 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "modal fade",
-                  attrs: {
-                    id: "editSupplier",
-                    tabindex: "-1",
-                    role: "dialog",
-                    "aria-labelledby": "editSupplierLabel",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c("div", {
-                    staticClass: "modal-dialog modal-dialog-centered",
-                    attrs: { role: "document" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
               _c("EditSupplier", {
-                attrs: { showModal: this.showModal ? true : false }
+                attrs: { "edit-supplier": _vm.EditSuppl(_vm.key) }
               })
             ],
             1
@@ -95917,8 +95895,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
