@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../components/auth/Login'
 import Home from "../components/Pages/Home";
 import DefaultContainer from '../components/containers/DefaultContainer'
+import Dashboard from '../components/Views/Dashboard'
 import SuppliersList from '../components/Pages/Dictionaries/Suppliers'
 //import SupplierView from '../components/views/SuppliersView'
 import ForgotPassword from "../components/auth/ForgotPassword";
@@ -45,6 +46,7 @@ const router = new VueRouter({
      },*/
      {
          path: '/',
+         redirect: '/dashboard',
          name: 'index',
          component: DefaultContainer,
          meta: {
@@ -58,7 +60,7 @@ const router = new VueRouter({
              {
                  path: '/dashboard',
                  name: 'dashboard',
-                 component: Home
+                 component: Dashboard
              },
              {
                  path: '/suppliers',

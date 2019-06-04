@@ -10,7 +10,7 @@
                                 <b-input-group size="sm" class="ml-1">
                                     <b-form-input  placeholder="Поиск" id="serch"></b-form-input>
                                 </b-input-group>
-                                <span> Всего поставщиков - {{ suppliersCount }}</span>
+                                <span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span>
                             </b-button-toolbar>
                             <div v-for="supplier in displayedSuppliers" :key="supplier.KLIENT_ID">
 
@@ -52,7 +52,7 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
-                                            <b-button variant="outline-success" v-b-modal.EditSupplier size="sm" ref="btnEdit" @click="editSuppl(supplier.KLIENT_ID)">Редактировать</b-button>
+                                            <b-button variant="outline-success" size="sm">Редактировать</b-button>
                                             <b-button variant="outline-danger" size="sm">Удалить</b-button>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
             </div>
         </div>-->
 
-     <EditSupplier :edit-supplier="EditSuppl(key)"></EditSupplier>
+     <EditSupplier></EditSupplier>
             </b-col>
 
         </b-row>
@@ -201,6 +201,7 @@
                   this.pagesCust.push(index)
               }
             },
+
             paginate(suppliers) {
                 let page = this.page;
                 let perPage = this.perPage;
@@ -215,19 +216,15 @@
                 let to = (pageCust * perPageCust);
                 return customers.slice(from, to)
             },
-            EditSuppl(key) {
-                console.log(this.$children[key])
-                //this.showModal ? true : false
-            }
+
         },
         created() {
             this.getSuppliers()
             this.getCustomers()
-
-
+            this.suppliersCount = this.countSuppliers;
         },
         mounted() {
-            this.suppliersCount = this.countSuppliers()
+            //
         },
         watch: {
             suppliers() {
@@ -235,7 +232,8 @@
             },
             customers() {
                 this.setPagesCust()
-            }
+            },
+
         },
         computed: {
             displayedSuppliers() {
