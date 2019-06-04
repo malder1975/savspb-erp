@@ -15,7 +15,10 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-       $suppliers = Suppliers::where(['KLIENT.POST' => 1, 'KLIENT.FDEL' => 0])->
+       /*$suppliers = Suppliers::where(['KLIENT.POST' => 1, 'KLIENT.FDEL' => 0])->
+       join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->select('KLIENT.*', 'ORG.ORG_NAME')->
+       orderBy('KLIENT.NAME', 'ASC')->get();*/
+       $suppliers = Suppliers::where([['KLIENT.KLIENT_ID', '>', 1], ['KLIENT.FDEL', '=', 0]])->
        join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->select('KLIENT.*', 'ORG.ORG_NAME')->
        orderBy('KLIENT.NAME', 'ASC')->get();
           return response()->json($suppliers, 200);
