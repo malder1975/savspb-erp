@@ -134,11 +134,13 @@
             </div>
         </div>-->
 
-     <EditSupplier></EditSupplier>
+
             </b-col>
 
         </b-row>
+        <EditSupplier ></EditSupplier>
     </b-container>
+
 
 </template>
 
@@ -165,7 +167,7 @@
                 perPageCust: 2,
                 pages: [],
                 pagesCust: [],
-                showModal: false,
+                showModal: '',
                 suppliersCount: null
             }
         },
@@ -217,11 +219,15 @@
                 return customers.slice(from, to)
             },
 
+            showEdit() {
+                this.showModal = 'is-active'
+            }
+
         },
         created() {
             this.getSuppliers()
             this.getCustomers()
-            this.suppliersCount = this.countSuppliers;
+            //this.suppliersCount = this.countSuppliers;
         },
         mounted() {
             //
