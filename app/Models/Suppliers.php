@@ -11,7 +11,7 @@ class Suppliers extends Model
 
     protected $fillable =
         [
-            'KLIENT_KOD', 'NAME', 'KL_CITY', 'KL_ADR', 'KL_REPRESENT', 'KL_TEL', 'KL_FAX', 'KL_EMAIL', 'KL_BANK', 'KL_KS',
+            'KLIENT_KOD', 'NAME', 'ORG_ID', 'GRAPH', 'FSALER_ID', 'KL_CITY', 'KL_ADR', 'KL_REPRESENT', 'KL_TEL', 'KL_FAX', 'KL_EMAIL', 'KL_BANK', 'KL_KS',
             'KL_RS', 'KL_BIK', 'KL_INN', 'KL_KPP', 'KL_OKPO', 'KL_OKNH', 'KL_NOTE', 'PREMIUM', 'KOMPENS', 'TRANSP'
         ];
 
@@ -22,6 +22,6 @@ class Suppliers extends Model
 
     public function merchandises()
     {
-        //
+        return $this->belongsTo('App\Models\Merchandises', 'FSALER_ID', 'FSALER_ID');
     }
 }

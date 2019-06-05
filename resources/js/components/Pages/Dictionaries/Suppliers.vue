@@ -20,6 +20,11 @@
                                     <h5 slot="header" class="text-center">{{supplier.ORG_NAME}}</h5>
                                     <b-card-body>
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <p class="text-right">Товаровед: <span class="text-info">{{supplier.FSALER_NAME}}</span> </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-3">
                                                 <img src="https://via.placeholder.com/80" alt="Лого" width="80px" height="80px"/>
                                             </div>
@@ -45,6 +50,9 @@
                                                         <p class="recv_post">Торговая наценка: {{ supplier.PREMIUM}}</p>
                                                         <p class="recv_post">Компенсация: {{supplier.KOMPENS}}</p>
                                                         <p class="recv_post">Трансп. расходы: {{supplier.TRANSP}}</p>
+                                                        <hr>
+                                                        <p class="recv_post">Сумма задолженности по реализации: <span class="text-warning">0.00</span> </p>
+                                                        <p class="recv_post">Сумма задолженности по графику: <span class="text-danger">0.00</span> </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,6 +60,7 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
+                                            <b-button variant="outline-info" size="sm">Прайс-лист поставщика</b-button>
                                             <b-button variant="outline-success" size="sm">Редактировать</b-button>
                                             <b-button variant="outline-danger" size="sm">Удалить</b-button>
                                         </div>
@@ -190,6 +199,9 @@
               }).catch((error) =>
               this.errors = error.response.data.errors || error.message);
             },
+
+
+
             setPages() {
                 let numOfPages = Math.ceil(this.suppliers.length / this.perPage);
                 console.log(numOfPages);

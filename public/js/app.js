@@ -3397,9 +3397,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
   data: function data() {
-    return {};
+    return {
+      organisations: [],
+      merchandises: []
+    };
   },
-  methods: {//
+  methods: {
+    getOrganisations: function getOrganisations() {
+      var _this = this;
+
+      axios.get('/auth/organisations').then(function (response) {
+        _this.organisations = response.data;
+      }).catch(function (error) {
+        return _this.errors = error.response.data.errors || error.message;
+      });
+    },
+    getMerchandises: function getMerchandises() {
+      var _this2 = this;
+
+      axios.get('/auth/merchandises').then(function (response) {
+        _this2.merchandises = response.data;
+      }).catch(function (error) {
+        return _this2.errors = error.response.data.errors || error.message;
+      });
+    }
+  },
+  created: function created() {
+    this.getOrganisations();
+    this.getMerchandises();
   }
 });
 
@@ -3436,6 +3461,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _EditSupplier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditSupplier */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11938,7 +11972,7 @@ var components = {
 /*!***********************************************************!*\
   !*** ./node_modules/bootstrap-vue/es/components/index.js ***!
   \***********************************************************/
-/*! exports provided: default, BVModalPlugin, BVToastPlugin, AlertPlugin, BadgePlugin, BreadcrumbPlugin, ButtonPlugin, ButtonGroupPlugin, ButtonToolbarPlugin, InputGroupPlugin, CardPlugin, CarouselPlugin, LayoutPlugin, CollapsePlugin, DropdownPlugin, EmbedPlugin, FormPlugin, FormGroupPlugin, FormCheckboxPlugin, FormRadioPlugin, FormInputPlugin, FormTextareaPlugin, FormFilePlugin, FormSelectPlugin, ImagePlugin, JumbotronPlugin, LinkPlugin, ListGroupPlugin, MediaPlugin, ModalPlugin, NavPlugin, NavbarPlugin, PaginationPlugin, PaginationNavPlugin, PopoverPlugin, ProgressPlugin, SpinnerPlugin, TablePlugin, TabsPlugin, ToastPlugin, TooltipPlugin, Alert, Badge, Breadcrumb, Button, ButtonGroup, ButtonToolbar, InputGroup, Card, Carousel, Layout, Collapse, Dropdown, Embed, Form, FormGroup, FormCheckbox, FormRadio, FormInput, FormTextarea, FormFile, FormSelect, Image, Jumbotron, Link, ListGroup, Media, Modal, Nav, Navbar, Pagination, PaginationNav, Popover, Progress, Spinner, Table, Tabs, Toast, Tooltip, BAlert, BBadge, BBreadcrumb, BBreadcrumbItem, BBreadcrumbLink, BButton, BButtonClose, BButtonGroup, BButtonToolbar, BInputGroup, BInputGroupAddon, BInputGroupPrepend, BInputGroupAppend, BInputGroupText, BCard, BCardHeader, BCardBody, BCardTitle, BCardSubTitle, BCardFooter, BCardImg, BCardImgLazy, BCardText, BCardGroup, BCarousel, BCarouselSlide, BContainer, BRow, BCol, BFormRow, BCollapse, BDropdown, BDropdownItem, BDropdownItemButton, BDropdownHeader, BDropdownDivider, BDropdownForm, BDropdownText, BDropdownGroup, BEmbed, BForm, BFormDatalist, BFormText, BFormInvalidFeedback, BFormValidFeedback, BFormGroup, BFormCheckbox, BFormCheckboxGroup, BFormRadio, BFormRadioGroup, BFormInput, BFormTextarea, BFormFile, BFormSelect, BImg, BImgLazy, BJumbotron, BLink, BListGroup, BListGroupItem, BMedia, BMediaAside, BMediaBody, BModal, BNav, BNavItem, BNavText, BNavForm, BNavItemDropdown, BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BPagination, BPaginationNav, BPopover, BProgress, BProgressBar, BSpinner, BTable, BTabs, BTab, BToast, BToaster, BTooltip */
+/*! exports provided: BVModalPlugin, BVToastPlugin, AlertPlugin, BadgePlugin, BreadcrumbPlugin, ButtonPlugin, ButtonGroupPlugin, ButtonToolbarPlugin, InputGroupPlugin, CardPlugin, CarouselPlugin, LayoutPlugin, CollapsePlugin, DropdownPlugin, EmbedPlugin, FormPlugin, FormGroupPlugin, FormCheckboxPlugin, FormRadioPlugin, FormInputPlugin, FormTextareaPlugin, FormFilePlugin, FormSelectPlugin, ImagePlugin, JumbotronPlugin, LinkPlugin, ListGroupPlugin, MediaPlugin, ModalPlugin, NavPlugin, NavbarPlugin, PaginationPlugin, PaginationNavPlugin, PopoverPlugin, ProgressPlugin, SpinnerPlugin, TablePlugin, TabsPlugin, ToastPlugin, TooltipPlugin, Alert, Badge, Breadcrumb, Button, ButtonGroup, ButtonToolbar, InputGroup, Card, Carousel, Layout, Collapse, Dropdown, Embed, Form, FormGroup, FormCheckbox, FormRadio, FormInput, FormTextarea, FormFile, FormSelect, Image, Jumbotron, Link, ListGroup, Media, Modal, Nav, Navbar, Pagination, PaginationNav, Popover, Progress, Spinner, Table, Tabs, Toast, Tooltip, BAlert, BBadge, BBreadcrumb, BBreadcrumbItem, BBreadcrumbLink, BButton, BButtonClose, BButtonGroup, BButtonToolbar, BInputGroup, BInputGroupAddon, BInputGroupPrepend, BInputGroupAppend, BInputGroupText, BCard, BCardHeader, BCardBody, BCardTitle, BCardSubTitle, BCardFooter, BCardImg, BCardImgLazy, BCardText, BCardGroup, BCarousel, BCarouselSlide, BContainer, BRow, BCol, BFormRow, BCollapse, BDropdown, BDropdownItem, BDropdownItemButton, BDropdownHeader, BDropdownDivider, BDropdownForm, BDropdownText, BDropdownGroup, BEmbed, BForm, BFormDatalist, BFormText, BFormInvalidFeedback, BFormValidFeedback, BFormGroup, BFormCheckbox, BFormCheckboxGroup, BFormRadio, BFormRadioGroup, BFormInput, BFormTextarea, BFormFile, BFormSelect, BImg, BImgLazy, BJumbotron, BLink, BListGroup, BListGroupItem, BMedia, BMediaAside, BMediaBody, BModal, BNav, BNavItem, BNavText, BNavForm, BNavItemDropdown, BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BPagination, BPaginationNav, BPopover, BProgress, BProgressBar, BSpinner, BTable, BTabs, BTab, BToast, BToaster, BTooltip, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22543,7 +22577,7 @@ var NAME = 'BTooltip'; // @vue/component
 /*!***********************************************************!*\
   !*** ./node_modules/bootstrap-vue/es/directives/index.js ***!
   \***********************************************************/
-/*! exports provided: default, VBTogglePlugin, VBModalPlugin, VBScrollspyPlugin, VBTooltipPlugin, VBPopoverPlugin, BToggle, BModal, BScrollspy, BTooltip, BPopover, VBToggle, VBModal, VBScrollspy, VBTooltip, VBPopover */
+/*! exports provided: VBTogglePlugin, VBModalPlugin, VBScrollspyPlugin, VBTooltipPlugin, VBPopoverPlugin, BToggle, BModal, BScrollspy, BTooltip, BPopover, VBToggle, VBModal, VBScrollspy, VBTooltip, VBPopover, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76280,6 +76314,33 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("b-card-body", [
                                       _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-12" },
+                                          [
+                                            _c(
+                                              "p",
+                                              { staticClass: "text-right" },
+                                              [
+                                                _vm._v("Товаровед: "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "text-info" },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        supplier.FSALER_NAME
+                                                      )
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row" }, [
                                         _c("div", { staticClass: "col-md-3" }, [
                                           _c("img", {
                                             attrs: {
@@ -76458,6 +76519,44 @@ var render = function() {
                                                         _vm._s(supplier.TRANSP)
                                                     )
                                                   ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("hr"),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Сумма задолженности по реализации: "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "text-warning"
+                                                      },
+                                                      [_vm._v("0.00")]
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  { staticClass: "recv_post" },
+                                                  [
+                                                    _vm._v(
+                                                      "Сумма задолженности по графику: "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "text-danger"
+                                                      },
+                                                      [_vm._v("0.00")]
+                                                    )
+                                                  ]
                                                 )
                                               ]
                                             )
@@ -76478,6 +76577,17 @@ var render = function() {
                                           "div",
                                           { staticClass: "ml-auto" },
                                           [
+                                            _c(
+                                              "b-button",
+                                              {
+                                                attrs: {
+                                                  variant: "outline-info",
+                                                  size: "sm"
+                                                }
+                                              },
+                                              [_vm._v("Прайс-лист поставщика")]
+                                            ),
+                                            _vm._v(" "),
                                             _c(
                                               "b-button",
                                               {
@@ -96202,8 +96312,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
