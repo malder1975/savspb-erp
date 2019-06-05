@@ -23,6 +23,7 @@ class SuppliersController extends Controller
        orderBy('KLIENT.NAME', 'ASC')->get();
           return response()->json($suppliers, 200);
 
+          //$dolg_realiz =
     }
 
     /**

@@ -10,6 +10,7 @@ import ForgotPassword from "../components/auth/ForgotPassword";
 import ResetPasswordForm from '../components/auth/ResetPasswordForm'
 import Persons from "../components/Pages/persons/Persons";
 import PersonProfile from "../components/Pages/persons/PersonProfile";
+import Organizations from "../components/Pages/Dictionaries/Organizations";
 
 
 const router = new VueRouter({
@@ -66,6 +67,11 @@ const router = new VueRouter({
                  path: '/suppliers',
                  name: 'suppliers',
                  component: SuppliersList
+             },
+             {
+                 path: '/organizations',
+                 name: 'Organizations',
+                 component: Organizations
              },
              {
                  path: '/users',

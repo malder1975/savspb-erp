@@ -10,7 +10,7 @@
         <b-navbar-nav>
             <b-nav-item-dropdown class="dropdown top-main-navbar" text="Справочники" :no-caret="noCaret">
                 <b-dropdown-item to="/suppliers">Поставщики/покупатели</b-dropdown-item>
-                <b-dropdown-item :to="{name: Organization}">Торговые организации</b-dropdown-item>
+                <b-dropdown-item :to="{name: Organizations}">Торговые организации</b-dropdown-item>
             </b-nav-item-dropdown>
         </b-navbar-nav>
         </b-navbar>
@@ -23,12 +23,14 @@
     import AppTopRightNav from './AppTopRightNav'
     import SidebarToggler from './sidebar/SidebarToggler'
     import AppNavToggler from './AppNavToggler'
+    import Organizations from '../Pages/Dictionaries/Organizations'
     export default {
         name: "AppNav",
         components: {
             AppTopRightNav,
             SidebarToggler,
-            AppNavToggler
+            AppNavToggler,
+            Organizations
         },
         props: {
             fixedtop: {
