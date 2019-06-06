@@ -60,17 +60,18 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
-                                            <b-button variant="outline-info" size="sm">Прайс-лист поставщика</b-button>
-                                            <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier">Редактировать</b-button>
-                                            <b-button variant="outline-danger" size="sm">Удалить</b-button>
+                                            <b-button variant="outline-info" size="sm"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
+                                            <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier"
+                                                      @click="getEditSuppl(supplier.KLIENT_ID)"><i class="fas fa-edit"></i> Редактировать</b-button>
+                                            <b-button variant="outline-danger" size="sm"><i class="fas fa-trash-alt"></i> Удалить</b-button>
                                         </div>
                                     </div>
                                 </b-card>
                             </div>
                             <b-button-toolbar class="mb-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page != 1" @click="page--"> << </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page != 1" @click="page--"> <i class="fas fa-angle-double-left"></i> </button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber in pages.slice(page-1, page+5)" @click="page = pageNumber"> {{pageNumber}} </button>
-                                <button type="button" @click="page++" v-if="page < pages.length" class="btn btn-sm btn-outline-secondary"> >> </button>
+                                <button type="button" @click="page++" v-if="page < pages.length" class="btn btn-sm btn-outline-secondary"> <i class="fas fa-angle-double-right"></i> </button>
                             </b-button-toolbar>
                         </b-tab>
                         <b-tab title="Покупатели">
@@ -147,7 +148,7 @@
             </b-col>
 
         </b-row>
-        <EditSupplier ></EditSupplier>
+        <EditSupplier :supplier="editSuppl"></EditSupplier>
     </b-container>
 
 
@@ -177,7 +178,8 @@
                 pages: [],
                 pagesCust: [],
                 showModal: '',
-                suppliersCount: null
+                suppliersCount: null,
+                editSuppl: []
             }
         },
 
@@ -200,7 +202,12 @@
               this.errors = error.response.data.errors || error.message);
             },
 
-
+            getEditSuppl(id) {
+                axios.get('/auth/supplier/' + id).then((response) => {
+                    this.editSuppl = response.data
+                }).catch((error) =>
+                this.errors = error.response.data.errors || error.message)
+            },
 
             setPages() {
                 let numOfPages = Math.ceil(this.suppliers.length / this.perPage);

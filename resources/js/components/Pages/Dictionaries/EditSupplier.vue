@@ -19,6 +19,14 @@
                                 <div slot="required">Введите код поставщика</div>
                             </field-messages>
                         </validate>
+                        <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.name)">
+                            <label>Наименование</label>
+                            <input v-model="supplier.NAME" name="supName" required />
+
+                            <field-messages name="supName" show="$touched || $submited" class="form-control-feedback">
+                                <div slot="required">Введите наименование поставщика</div>
+                            </field-messages>
+                        </validate>
                     </vue-form>
                 </div>
                 <div class="modal-footer">
@@ -39,7 +47,8 @@
                 organisations: [],
                 merchandises: [],
                 formstate: {},
-                KLIENT_KOD: ''
+                KLIENT_KOD: '',
+                NAME: ''
             }
         },
         methods: {

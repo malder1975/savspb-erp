@@ -3422,6 +3422,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
   props: ['supplier'],
@@ -3430,7 +3438,8 @@ __webpack_require__.r(__webpack_exports__);
       organisations: [],
       merchandises: [],
       formstate: {},
-      KLIENT_KOD: ''
+      KLIENT_KOD: '',
+      NAME: ''
     };
   },
   methods: {
@@ -3663,6 +3672,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3685,7 +3695,8 @@ __webpack_require__.r(__webpack_exports__);
       pages: [],
       pagesCust: [],
       showModal: '',
-      suppliersCount: null
+      suppliersCount: null,
+      editSuppl: []
     };
   },
   methods: {
@@ -3708,6 +3719,15 @@ __webpack_require__.r(__webpack_exports__);
         _this2.customers = response.data;
       }).catch(function (error) {
         return _this2.errors = error.response.data.errors || error.message;
+      });
+    },
+    getEditSuppl: function getEditSuppl(id) {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/auth/supplier/' + id).then(function (response) {
+        _this3.editSuppl = response.data;
+      }).catch(function (error) {
+        return _this3.errors = error.response.data.errors || error.message;
       });
     },
     setPages: function setPages() {
@@ -76354,6 +76374,62 @@ var render = function() {
                         )
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "validate",
+                      {
+                        staticClass: "form-group required-field",
+                        class: _vm.fieldClassName(_vm.formstate.name),
+                        attrs: { "auto-label": "" }
+                      },
+                      [
+                        _c("label", [_vm._v("Наименование")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.supplier.NAME,
+                              expression: "supplier.NAME"
+                            }
+                          ],
+                          attrs: { name: "supName", required: "" },
+                          domProps: { value: _vm.supplier.NAME },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.supplier,
+                                "NAME",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "field-messages",
+                          {
+                            staticClass: "form-control-feedback",
+                            attrs: {
+                              name: "supName",
+                              show: "$touched || $submited"
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { attrs: { slot: "required" }, slot: "required" },
+                              [_vm._v("Введите наименование поставщика")]
+                            )
+                          ]
+                        )
+                      ],
+                      1
                     )
                   ],
                   1
@@ -76840,7 +76916,13 @@ var render = function() {
                                                   size: "sm"
                                                 }
                                               },
-                                              [_vm._v("Прайс-лист поставщика")]
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "far fa-newspaper"
+                                                }),
+                                                _vm._v(" Прайс-лист поставщика")
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c(
@@ -76851,9 +76933,21 @@ var render = function() {
                                                   size: "sm",
                                                   "data-toggle": "modal",
                                                   "data-target": "#editSupplier"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.getEditSuppl(
+                                                      supplier.KLIENT_ID
+                                                    )
+                                                  }
                                                 }
                                               },
-                                              [_vm._v("Редактировать")]
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fas fa-edit"
+                                                }),
+                                                _vm._v(" Редактировать")
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c(
@@ -76864,7 +76958,13 @@ var render = function() {
                                                   size: "sm"
                                                 }
                                               },
-                                              [_vm._v("Удалить")]
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "fas fa-trash-alt"
+                                                }),
+                                                _vm._v(" Удалить")
+                                              ]
                                             )
                                           ],
                                           1
@@ -76896,7 +76996,11 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    [_vm._v(" << ")]
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-angle-double-left"
+                                      })
+                                    ]
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
@@ -76933,7 +77037,11 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    [_vm._v(" >> ")]
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-angle-double-right"
+                                      })
+                                    ]
                                   )
                                 : _vm._e()
                             ],
@@ -77338,7 +77446,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("EditSupplier")
+      _c("EditSupplier", { attrs: { supplier: _vm.editSuppl } })
     ],
     1
   )
@@ -94466,14 +94574,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************************************!*\
   !*** ./resources/js/components/Pages/Dictionaries/EditSupplier.vue ***!
   \*********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EditSupplier_vue_vue_type_template_id_6fda256a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditSupplier.vue?vue&type=template&id=6fda256a&scoped=true& */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=template&id=6fda256a&scoped=true&");
 /* harmony import */ var _EditSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditSupplier.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _EditSupplier_vue_vue_type_style_index_0_id_6fda256a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditSupplier.vue?vue&type=style&index=0&id=6fda256a&scoped=true&lang=css& */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=style&index=0&id=6fda256a&scoped=true&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _EditSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _EditSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _EditSupplier_vue_vue_type_style_index_0_id_6fda256a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditSupplier.vue?vue&type=style&index=0&id=6fda256a&scoped=true&lang=css& */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=style&index=0&id=6fda256a&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -94505,7 +94614,7 @@ component.options.__file = "resources/js/components/Pages/Dictionaries/EditSuppl
 /*!**********************************************************************************************!*\
   !*** ./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -96587,8 +96696,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
