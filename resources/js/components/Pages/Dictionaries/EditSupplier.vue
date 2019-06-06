@@ -1,15 +1,45 @@
 <template>
+    <div class="modal fade" id="editSupplier" tabindex="-1" role="dialog" aria-labelledby="supplierEditTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="supplierEditTitle">Поставщик: редактирование</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <vue-form :state="formstate" @submit.prevent="onSubmit">
+                        <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.name)">
+                            <label>Код</label>
+                            <input v-model="supplier.KLIENT_KOD" name="supCode" required />
 
+                            <field-messages name="supCode" show="$touched || $submitted" class="form-control-feedback">
+                                <div>Отлично</div>
+                                <div slot="required">Введите код поставщика</div>
+                            </field-messages>
+                        </validate>
+                    </vue-form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-sm btn-outline-success">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
     export default {
         name: "EditSupplier",
-
+        props: ['supplier'],
         data() {
             return {
                 organisations: [],
                 merchandises: [],
+                formstate: {},
+                KLIENT_KOD: ''
             }
         },
         methods: {
@@ -25,6 +55,21 @@
                     this.merchandises = response.data
                 }).catch((error) =>
                     this.errors = error.response.data.errors || error.message);
+            },
+
+            fieldClassName(field) {
+                if (!field) {
+                    return '';
+                }
+                if ((field.$touched || field.$submitted) && field.$valid) {
+                    return 'has-success'
+                }
+                if ((field.$touched || fiels.$submitted) && field.$invalid) {
+                    return 'has-danger'
+                }
+            },
+            onSubmit() {
+                console.log(this.formstate.$valid)
             }
         },
         created() {
@@ -34,3 +79,11 @@
 
     }
 </script>
+
+<style scoped>
+    .required-field > label::after {
+        content: '*';
+        color: red;
+        margin-left: 0.25rem;
+    }
+</style>

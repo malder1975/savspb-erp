@@ -61,7 +61,7 @@
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
                                             <b-button variant="outline-info" size="sm">Прайс-лист поставщика</b-button>
-                                            <b-button variant="outline-success" size="sm">Редактировать</b-button>
+                                            <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier">Редактировать</b-button>
                                             <b-button variant="outline-danger" size="sm">Удалить</b-button>
                                         </div>
                                     </div>
