@@ -10,22 +10,30 @@
                 </div>
                 <div class="modal-body">
                     <vue-form :state="formstate" @submit.prevent="onSubmit">
-                        <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.name)">
+                        <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
                             <label>Код</label>
-                            <input v-model="supplier.KLIENT_KOD" name="supCode" required />
+                            <input v-model="supplier.KLIENT_KOD" name="supCode" style="width: 40px" required />
 
                             <field-messages name="supCode" show="$touched || $submitted" class="form-control-feedback">
                                 <div>Отлично</div>
                                 <div slot="required">Введите код поставщика</div>
                             </field-messages>
                         </validate>
-                        <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.name)">
+                        <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
                             <label>Наименование</label>
-                            <input v-model="supplier.NAME" name="supName" required />
+                            <input v-model="supplier.NAME" name="supName" style="width: 300px" required />
 
                             <field-messages name="supName" show="$touched || $submited" class="form-control-feedback">
                                 <div slot="required">Введите наименование поставщика</div>
                             </field-messages>
+                        </validate>
+                        <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                            <label>Обслуживающая организация</label>
+                            <select v-model="supplier.ORG_ID" name="supOrg">
+                                <options v-for="org in organisations" v-bind:value="org.ORG_ID" v-text="org.ORG_FULL_NAME" :key="org.ORG_ID"></options>
+                            </select>
+
+
                         </validate>
                     </vue-form>
                 </div>
@@ -48,7 +56,8 @@
                 merchandises: [],
                 formstate: {},
                 KLIENT_KOD: '',
-                NAME: ''
+                NAME: '',
+                ORG_ID: 0,
             }
         },
         methods: {
@@ -94,5 +103,12 @@
         content: '*';
         color: red;
         margin-left: 0.25rem;
+    }
+    input {
+        font-size: 10px;
+    }
+    label {
+        font-size: 12px;
+        font-weight: bold;
     }
 </style>

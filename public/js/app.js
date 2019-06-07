@@ -3430,6 +3430,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
   props: ['supplier'],
@@ -3439,7 +3447,8 @@ __webpack_require__.r(__webpack_exports__);
       merchandises: [],
       formstate: {},
       KLIENT_KOD: '',
-      NAME: ''
+      NAME: '',
+      ORG_ID: 0
     };
   },
   methods: {
@@ -39728,7 +39737,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.required-field > label[data-v-6fda256a]::after {\n    content: '*';\n    color: red;\n    margin-left: 0.25rem;\n}\n", ""]);
+exports.push([module.i, "\n.required-field > label[data-v-6fda256a]::after {\n    content: '*';\n    color: red;\n    margin-left: 0.25rem;\n}\ninput[data-v-6fda256a] {\n    font-size: 10px;\n}\nlabel[data-v-6fda256a] {\n    font-size: 12px;\n    font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -76321,7 +76330,7 @@ var render = function() {
                     _c(
                       "validate",
                       {
-                        staticClass: "form-group required-field",
+                        staticClass: "form-group",
                         class: _vm.fieldClassName(_vm.formstate.name),
                         attrs: { "auto-label": "" }
                       },
@@ -76337,6 +76346,7 @@ var render = function() {
                               expression: "supplier.KLIENT_KOD"
                             }
                           ],
+                          staticStyle: { width: "40px" },
                           attrs: { name: "supCode", required: "" },
                           domProps: { value: _vm.supplier.KLIENT_KOD },
                           on: {
@@ -76379,7 +76389,7 @@ var render = function() {
                     _c(
                       "validate",
                       {
-                        staticClass: "form-group required-field",
+                        staticClass: "form-group",
                         class: _vm.fieldClassName(_vm.formstate.name),
                         attrs: { "auto-label": "" }
                       },
@@ -76395,6 +76405,7 @@ var render = function() {
                               expression: "supplier.NAME"
                             }
                           ],
+                          staticStyle: { width: "300px" },
                           attrs: { name: "supName", required: "" },
                           domProps: { value: _vm.supplier.NAME },
                           on: {
@@ -76430,6 +76441,62 @@ var render = function() {
                         )
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "validate",
+                      {
+                        staticClass: "form-group",
+                        class: _vm.fieldClassName(_vm.formstate.name),
+                        attrs: { "auto-label": "" }
+                      },
+                      [
+                        _c("label", [_vm._v("Обслуживающая организация")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.supplier.ORG_ID,
+                                expression: "supplier.ORG_ID"
+                              }
+                            ],
+                            attrs: { name: "supOrg" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.supplier,
+                                  "ORG_ID",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.organisations, function(org) {
+                            return _c("options", {
+                              key: org.ORG_ID,
+                              attrs: { value: org.ORG_ID },
+                              domProps: {
+                                textContent: _vm._s(org.ORG_FULL_NAME)
+                              }
+                            })
+                          }),
+                          1
+                        )
+                      ]
                     )
                   ],
                   1
@@ -94574,15 +94641,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************************************!*\
   !*** ./resources/js/components/Pages/Dictionaries/EditSupplier.vue ***!
   \*********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EditSupplier_vue_vue_type_template_id_6fda256a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditSupplier.vue?vue&type=template&id=6fda256a&scoped=true& */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=template&id=6fda256a&scoped=true&");
 /* harmony import */ var _EditSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditSupplier.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _EditSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _EditSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _EditSupplier_vue_vue_type_style_index_0_id_6fda256a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditSupplier.vue?vue&type=style&index=0&id=6fda256a&scoped=true&lang=css& */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=style&index=0&id=6fda256a&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _EditSupplier_vue_vue_type_style_index_0_id_6fda256a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditSupplier.vue?vue&type=style&index=0&id=6fda256a&scoped=true&lang=css& */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=style&index=0&id=6fda256a&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -94614,7 +94680,7 @@ component.options.__file = "resources/js/components/Pages/Dictionaries/EditSuppl
 /*!**********************************************************************************************!*\
   !*** ./resources/js/components/Pages/Dictionaries/EditSupplier.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -96696,8 +96762,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
