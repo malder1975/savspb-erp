@@ -76486,15 +76486,15 @@ var render = function() {
                             }
                           },
                           _vm._l(_vm.organisations, function(org) {
-                            return _c("options", {
+                            return _c("option", {
                               key: org.ORG_ID,
-                              attrs: { value: org.ORG_ID },
                               domProps: {
+                                value: org.ORG_ID,
                                 textContent: _vm._s(org.ORG_FULL_NAME)
                               }
                             })
                           }),
-                          1
+                          0
                         )
                       ]
                     )
@@ -96762,8 +96762,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

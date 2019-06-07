@@ -30,7 +30,7 @@
                         <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
                             <label>Обслуживающая организация</label>
                             <select v-model="supplier.ORG_ID" name="supOrg">
-                                <options v-for="org in organisations" v-bind:value="org.ORG_ID" v-text="org.ORG_FULL_NAME" :key="org.ORG_ID"></options>
+                                <option v-for="org in organisations" v-bind:value="org.ORG_ID" v-text="org.ORG_FULL_NAME" :key="org.ORG_ID"></option>
                             </select>
 
 
