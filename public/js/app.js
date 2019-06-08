@@ -3439,6 +3439,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
   props: ['supplier'],
@@ -3456,7 +3457,7 @@ __webpack_require__.r(__webpack_exports__);
     getOrganisations: function getOrganisations() {
       var _this = this;
 
-      axios.get('/auth/organisations/' + supplier.ORG_ID).then(function (response) {
+      axios.get('/auth/organisations/').then(function (response) {
         _this.organisations = response.data;
       }).catch(function (error) {
         return _this.errors = error.response.data.errors || error.message;
@@ -3527,6 +3528,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _EditSupplier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditSupplier */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue");
+//
 //
 //
 //
@@ -76328,6 +76330,8 @@ var render = function() {
                     }
                   },
                   [
+                    _c("div", [_vm._v(_vm._s(_vm.supplier.ORG_ID))]),
+                    _vm._v(" "),
                     _c(
                       "validate",
                       {
@@ -76496,7 +76500,10 @@ var render = function() {
                                 "option",
                                 {
                                   key: org.ORG_ID,
-                                  domProps: { value: org.ORG_ID }
+                                  domProps: {
+                                    value: org.ORG_ID,
+                                    textContent: _vm._s(org.ORG_FULL_NAME)
+                                  }
                                 },
                                 [_vm._v(_vm._s(org.ORG_FULL_NAME))]
                               )
@@ -76983,6 +76990,15 @@ var render = function() {
                                           "div",
                                           { staticClass: "ml-auto" },
                                           [
+                                            _c("router-link", {
+                                              staticClass:
+                                                "btn btn-outline-info",
+                                              attrs: {
+                                                to:
+                                                  "/supplier/${supplier.KLIENT_ID}"
+                                              }
+                                            }),
+                                            _vm._v(" "),
                                             _c(
                                               "b-button",
                                               {
@@ -96564,12 +96580,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Pages_persons_Persons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Pages/persons/Persons */ "./resources/js/components/Pages/persons/Persons.vue");
 /* harmony import */ var _components_Pages_persons_PersonProfile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Pages/persons/PersonProfile */ "./resources/js/components/Pages/persons/PersonProfile.vue");
 /* harmony import */ var _components_Pages_Dictionaries_Organizations__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Pages/Dictionaries/Organizations */ "./resources/js/components/Pages/Dictionaries/Organizations.vue");
+/* harmony import */ var _components_Pages_Dictionaries_EditSupplier__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Pages/Dictionaries/EditSupplier */ "./resources/js/components/Pages/Dictionaries/EditSupplier.vue");
 
 
 
 
 
  //import SupplierView from '../components/views/SuppliersView'
+
 
 
 
@@ -96626,7 +96644,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
     }, {
       path: '/suppliers',
       name: 'suppliers',
-      component: _components_Pages_Dictionaries_Suppliers__WEBPACK_IMPORTED_MODULE_5__["default"]
+      component: _components_Pages_Dictionaries_Suppliers__WEBPACK_IMPORTED_MODULE_5__["default"],
+      childern: [{
+        path: '/suppliers/:id',
+        name: 'supplier',
+        component: _components_Pages_Dictionaries_EditSupplier__WEBPACK_IMPORTED_MODULE_11__["default"]
+      }]
     }, {
       path: '/organizations',
       name: 'Organizations',
@@ -96770,8 +96793,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

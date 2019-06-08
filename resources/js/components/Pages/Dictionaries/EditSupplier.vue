@@ -10,6 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <vue-form :state="formstate" @submit.prevent="onSubmit">
+                        <div>{{supplier.ORG_ID}}</div>
                         <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
                             <label>Код</label>
                             <input v-model="supplier.KLIENT_KOD" name="supCode" style="width: 40px" required />
@@ -31,7 +32,7 @@
                             <label>Обслуживающая организация</label>
                             <select v-model="supplier.ORG_ID" name="supOrg">
                                 <option value="0">Выберите организацию</option>
-                                <option v-for="org in organisations" :value="org.ORG_ID" :key="org.ORG_ID">{{ org.ORG_FULL_NAME }}</option>
+                                <option v-for="org in organisations" :value="org.ORG_ID" v-text="org.ORG_FULL_NAME" :key="org.ORG_ID">{{ org.ORG_FULL_NAME }}</option>
                             </select>
 
 
@@ -63,7 +64,7 @@
         },
         methods: {
             getOrganisations() {
-                axios.get('/auth/organisations/' + supplier.ORG_ID).then((response) => {
+                axios.get('/auth/organisations/' ).then((response) => {
                     this.organisations = response.data
                 }).catch((error) =>
                     this.errors = error.response.data.errors || error.message);

@@ -60,6 +60,7 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
+                                            <router-link class="btn btn-outline-info" :to="'/supplier/${supplier.KLIENT_ID}'"></router-link>
                                             <b-button variant="outline-info" size="sm"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
                                             <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier"
                                                       @click="getEditSuppl(supplier.KLIENT_ID)"><i class="fas fa-edit"></i> Редактировать</b-button>
