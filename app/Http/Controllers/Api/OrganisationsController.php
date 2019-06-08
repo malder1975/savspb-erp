@@ -14,7 +14,8 @@ class OrganisationsController extends Controller
      */
     public function index()
     {
-        //
+        $organisations = Organisations::all();
+        return response()->json($organisations, 200);
     }
 
     /**

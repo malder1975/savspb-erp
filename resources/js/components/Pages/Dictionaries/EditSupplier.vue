@@ -30,7 +30,8 @@
                         <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
                             <label>Обслуживающая организация</label>
                             <select v-model="supplier.ORG_ID" name="supOrg">
-                                <option v-for="org in organisations" v-bind:value="org.ORG_ID" v-text="org.ORG_FULL_NAME" :key="org.ORG_ID"></option>
+                                <option value="0">Выберите организацию</option>
+                                <option v-for="org in organisations" :value="org.ORG_ID" :key="org.ORG_ID">{{ org.ORG_FULL_NAME }}</option>
                             </select>
 
 
@@ -62,7 +63,7 @@
         },
         methods: {
             getOrganisations() {
-                axios.get('/auth/organisations').then((response) => {
+                axios.get('/auth/organisations/' + supplier.ORG_ID).then((response) => {
                     this.organisations = response.data
                 }).catch((error) =>
                     this.errors = error.response.data.errors || error.message);

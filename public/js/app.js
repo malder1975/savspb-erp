@@ -3438,6 +3438,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
   props: ['supplier'],
@@ -3455,7 +3456,7 @@ __webpack_require__.r(__webpack_exports__);
     getOrganisations: function getOrganisations() {
       var _this = this;
 
-      axios.get('/auth/organisations').then(function (response) {
+      axios.get('/auth/organisations/' + supplier.ORG_ID).then(function (response) {
         _this.organisations = response.data;
       }).catch(function (error) {
         return _this.errors = error.response.data.errors || error.message;
@@ -76485,16 +76486,23 @@ var render = function() {
                               }
                             }
                           },
-                          _vm._l(_vm.organisations, function(org) {
-                            return _c("option", {
-                              key: org.ORG_ID,
-                              domProps: {
-                                value: org.ORG_ID,
-                                textContent: _vm._s(org.ORG_FULL_NAME)
-                              }
+                          [
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("Выберите организацию")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.organisations, function(org) {
+                              return _c(
+                                "option",
+                                {
+                                  key: org.ORG_ID,
+                                  domProps: { value: org.ORG_ID }
+                                },
+                                [_vm._v(_vm._s(org.ORG_FULL_NAME))]
+                              )
                             })
-                          }),
-                          0
+                          ],
+                          2
                         )
                       ]
                     )
@@ -96762,8 +96770,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
