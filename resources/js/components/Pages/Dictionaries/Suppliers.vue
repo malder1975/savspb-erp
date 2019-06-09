@@ -47,9 +47,9 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5>Финансовая информация</h5>
-                                                        <p class="recv_post">Торговая наценка: {{ supplier.PREMIUM}}</p>
-                                                        <p class="recv_post">Компенсация: {{supplier.KOMPENS}}</p>
-                                                        <p class="recv_post">Трансп. расходы: {{supplier.TRANSP}}</p>
+                                                        <p class="recv_post">Торговая наценка: {{ (Math.round(supplier.PREMIUM) == NaN ? 0 : Math.round(supplier.PREMIUM)) }}%</p>
+                                                        <p class="recv_post">Компенсация: {{ (Math.round(supplier.KOMPENS) == Nan ? 0 : Math.round(supplier.KOMPENS)) }}%</p>
+                                                        <p class="recv_post">Трансп. расходы: {{ Math.round(supplier.TRANSP) }}%</p>
                                                         <hr>
                                                         <p class="recv_post">Сумма задолженности по реализации: <span class="text-warning">0.00</span> </p>
                                                         <p class="recv_post">Сумма задолженности по графику: <span class="text-danger">0.00</span> </p>

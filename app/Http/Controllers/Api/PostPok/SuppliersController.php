@@ -112,11 +112,11 @@ class SuppliersController extends Controller
 
     public function organisations()
     {
-        return response()->json(['ORG' => Organisations::all()]);
+        return response()->json(Organisations::where('FDEL', 0)->get());
     }
 
     public function merchandises()
     {
-        return response()->json(['FSALER' => Merchandises::where(['FSALER.FDEL' => 0])]);
+        return response()->json(Merchandises::where('FDEL', 0)->get());
     }
 }

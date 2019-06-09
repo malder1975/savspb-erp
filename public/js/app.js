@@ -3440,6 +3440,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
   props: ['supplier'],
@@ -3450,7 +3455,8 @@ __webpack_require__.r(__webpack_exports__);
       formstate: {},
       KLIENT_KOD: '',
       NAME: '',
-      ORG_ID: 0
+      ORG_ID: 0,
+      FSALER_ID: 0
     };
   },
   methods: {
@@ -3458,7 +3464,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/auth/organisations/').then(function (response) {
-        _this.organisations = response.data;
+        return _this.organisations = response.data;
       }).catch(function (error) {
         return _this.errors = error.response.data.errors || error.message;
       });
@@ -3466,8 +3472,8 @@ __webpack_require__.r(__webpack_exports__);
     getMerchandises: function getMerchandises() {
       var _this2 = this;
 
-      axios.get('/auth/merchandises').then(function (response) {
-        _this2.merchandises = response.data;
+      axios.get('/auth/merchandises/').then(function (response) {
+        return _this2.merchandises = response.data;
       }).catch(function (error) {
         return _this2.errors = error.response.data.errors || error.message;
       });
@@ -76500,16 +76506,70 @@ var render = function() {
                                 "option",
                                 {
                                   key: org.ORG_ID,
-                                  domProps: {
-                                    value: org.ORG_ID,
-                                    textContent: _vm._s(org.ORG_FULL_NAME)
-                                  }
+                                  domProps: { value: org.ORG_ID }
                                 },
-                                [_vm._v(_vm._s(org.ORG_FULL_NAME))]
+                                [_vm._v(_vm._s(org.ORG_NAME))]
                               )
                             })
                           ],
                           2
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "validate",
+                      {
+                        staticClass: "form-group",
+                        class: _vm.fieldClassName(_vm.formstate.name),
+                        attrs: { "auto-label": "" }
+                      },
+                      [
+                        _c("label", [_vm._v("Товаровед")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.supplier.FSALER_ID,
+                                expression: "supplier.FSALER_ID"
+                              }
+                            ],
+                            attrs: { name: "supMerch" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.supplier,
+                                  "FSALER_ID",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.merchandises, function(merchandiser) {
+                            return _c(
+                              "option",
+                              {
+                                key: merchandiser.FSALER_ID,
+                                domProps: { value: merchandiser.FSALER_ID }
+                              },
+                              [_vm._v(_vm._s(merchandiser.FSALER_NAME))]
+                            )
+                          }),
+                          0
                         )
                       ]
                     )
@@ -76907,7 +76967,16 @@ var render = function() {
                                                   [
                                                     _vm._v(
                                                       "Торговая наценка: " +
-                                                        _vm._s(supplier.PREMIUM)
+                                                        _vm._s(
+                                                          Math.round(
+                                                            supplier.PREMIUM
+                                                          ) == NaN
+                                                            ? 0
+                                                            : Math.round(
+                                                                supplier.PREMIUM
+                                                              )
+                                                        ) +
+                                                        "%"
                                                     )
                                                   ]
                                                 ),
@@ -76918,7 +76987,16 @@ var render = function() {
                                                   [
                                                     _vm._v(
                                                       "Компенсация: " +
-                                                        _vm._s(supplier.KOMPENS)
+                                                        _vm._s(
+                                                          Math.round(
+                                                            supplier.KOMPENS
+                                                          ) == _vm.Nan
+                                                            ? 0
+                                                            : Math.round(
+                                                                supplier.KOMPENS
+                                                              )
+                                                        ) +
+                                                        "%"
                                                     )
                                                   ]
                                                 ),
@@ -76929,7 +77007,12 @@ var render = function() {
                                                   [
                                                     _vm._v(
                                                       "Трансп. расходы: " +
-                                                        _vm._s(supplier.TRANSP)
+                                                        _vm._s(
+                                                          Math.round(
+                                                            supplier.TRANSP
+                                                          )
+                                                        ) +
+                                                        "%"
                                                     )
                                                   ]
                                                 ),

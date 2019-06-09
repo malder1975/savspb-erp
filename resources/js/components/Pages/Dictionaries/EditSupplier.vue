@@ -32,10 +32,15 @@
                             <label>Обслуживающая организация</label>
                             <select v-model="supplier.ORG_ID" name="supOrg">
                                 <option value="0">Выберите организацию</option>
-                                <option v-for="org in organisations" :value="org.ORG_ID" v-text="org.ORG_FULL_NAME" :key="org.ORG_ID">{{ org.ORG_FULL_NAME }}</option>
+                                <option v-for="org in organisations" v-bind:value="org.ORG_ID" :key="org.ORG_ID">{{ org.ORG_NAME }}</option>
                             </select>
+                        </validate>
 
-
+                        <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                            <label>Товаровед</label>
+                            <select v-model="supplier.FSALER_ID" name="supMerch">
+                                <option v-for="merchandiser in merchandises" v-bind:value="merchandiser.FSALER_ID" :key="merchandiser.FSALER_ID">{{ merchandiser.FSALER_NAME }}</option>
+                            </select>
                         </validate>
                     </vue-form>
                 </div>
@@ -60,20 +65,21 @@
                 KLIENT_KOD: '',
                 NAME: '',
                 ORG_ID: 0,
+                FSALER_ID: 0
             }
         },
         methods: {
             getOrganisations() {
-                axios.get('/auth/organisations/' ).then((response) => {
+                axios.get('/auth/organisations/' ).then(response => (
                     this.organisations = response.data
-                }).catch((error) =>
+                )).catch((error) =>
                     this.errors = error.response.data.errors || error.message);
             },
 
             getMerchandises() {
-                axios.get('/auth/merchandises').then((response) => {
+                axios.get('/auth/merchandises/').then(response => (
                     this.merchandises = response.data
-                }).catch((error) =>
+                )).catch((error) =>
                     this.errors = error.response.data.errors || error.message);
             },
 
@@ -93,7 +99,7 @@
             }
         },
         created() {
-            this.getOrganisations()
+            this.getOrganisations();
             this.getMerchandises()
         }
 
