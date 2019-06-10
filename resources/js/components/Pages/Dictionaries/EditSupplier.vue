@@ -1,6 +1,6 @@
 <template>
     <div class="modal fade" id="editSupplier" tabindex="-1" role="dialog" aria-labelledby="supplierEditTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="supplierEditTitle">Поставщик: редактирование</h5>
@@ -10,38 +10,56 @@
                 </div>
                 <div class="modal-body">
                     <vue-form :state="formstate" @submit.prevent="onSubmit">
-                        <div>{{supplier.ORG_ID}}</div>
-                        <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
-                            <label>Код</label>
-                            <input v-model="supplier.KLIENT_KOD" name="supCode" style="width: 40px" required />
+                        <b-form-row>
+                            <b-col cols="6" sm="4">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Код</label>
+                                    <input v-model="supplier.KLIENT_KOD" name="supCode" style="width: 40px" required  placeholder="Код" class="input-sav"/>
 
-                            <field-messages name="supCode" show="$touched || $submitted" class="form-control-feedback">
-                                <div>Отлично</div>
-                                <div slot="required">Введите код поставщика</div>
-                            </field-messages>
-                        </validate>
-                        <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
-                            <label>Наименование</label>
-                            <input v-model="supplier.NAME" name="supName" style="width: 300px" required />
+                                    <field-messages name="supCode" show="$touched || $submitted" class="form-control-feedback">
+                                        <div>Отлично</div>
+                                        <div slot="required">Введите код поставщика</div>
+                                    </field-messages>
+                                </validate>
+                            </b-col>
+                            <b-col cols="12" sm="6">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Наименование</label>
+                                    <input v-model="supplier.NAME" name="supName" style="width: 300px" required class="input-sav"/>
 
-                            <field-messages name="supName" show="$touched || $submited" class="form-control-feedback">
-                                <div slot="required">Введите наименование поставщика</div>
-                            </field-messages>
-                        </validate>
-                        <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
-                            <label>Обслуживающая организация</label>
-                            <select v-model="supplier.ORG_ID" name="supOrg">
-                                <option value="0">Выберите организацию</option>
-                                <option v-for="org in organisations" v-bind:value="org.ORG_ID" :key="org.ORG_ID">{{ org.ORG_NAME }}</option>
-                            </select>
-                        </validate>
+                                    <field-messages name="supName" show="$touched || $submited" class="form-control-feedback">
+                                        <div slot="required">Введите наименование поставщика</div>
+                                    </field-messages>
+                                </validate>
+                            </b-col>
+                            <b-col cols="6" sm="2">
 
-                        <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
-                            <label>Товаровед</label>
-                            <select v-model="supplier.FSALER_ID" name="supMerch">
-                                <option v-for="merchandiser in merchandises" v-bind:value="merchandiser.FSALER_ID" :key="merchandiser.FSALER_ID">{{ merchandiser.FSALER_NAME }}</option>
-                            </select>
-                        </validate>
+                            </b-col>
+                        </b-form-row>
+
+                        <b-form-row>
+                            <b-col cols="12" sm="12">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Обслуживающая организация</label>
+                                    <select v-model="supplier.ORG_ID" name="supOrg" class="input-sav">
+                                        <option value="0">Выберите организацию</option>
+                                        <option v-for="org in organisations" v-bind:value="org.ORG_ID" :key="org.ORG_ID">{{ org.ORG_NAME }}</option>
+                                    </select>
+                                </validate>
+                            </b-col>
+                        </b-form-row>
+
+                        <b-form-row>
+                            <b-col cols="6" sm="4">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Товаровед</label>
+                                    <select v-model="supplier.FSALER_ID" name="supMerch" class="input-sav">
+                                        <option v-for="merchandiser in merchandises" v-bind:value="merchandiser.FSALER_ID" :key="merchandiser.FSALER_ID">{{ merchandiser.FSALER_NAME }}</option>
+                                    </select>
+                                </validate>
+                            </b-col>
+                            <b-col cols="6" sm="8"></b-col>
+                        </b-form-row>
                     </vue-form>
                 </div>
                 <div class="modal-footer">
@@ -112,11 +130,13 @@
         color: red;
         margin-left: 0.25rem;
     }
-    input {
+
+
+    /*input {
         font-size: 10px;
     }
     label {
         font-size: 12px;
         font-weight: bold;
-    }
+    }*/
 </style>
