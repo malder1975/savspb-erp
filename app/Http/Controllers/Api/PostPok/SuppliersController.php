@@ -17,7 +17,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-       $suppliers = Suppliers::where(['KLIENT.POST' => 1, 'KLIENT.FDEL' => 0])->
+       /*$suppliers = Suppliers::where(['KLIENT.POST' => 1, 'KLIENT.FDEL' => 0])->
        join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->
        join('FSALER', 'KLIENT.FSALER_ID', '=', 'FSALER.FSALER_ID')->
        select('KLIENT.*', 'ORG.ORG_NAME')->
@@ -25,8 +25,8 @@ class SuppliersController extends Controller
                                                  GRAPH, FSALER.FSALER_ID AS FSALER_ID, FSALER.FSALER_NAME,
                                                  KL_CITY, KL_ADR, KL_REPRESENT, KL_TEL, KL_FAX, KL_EMAIL,
                                                  KL_BANK, KL_KS, KL_RS, KL_BIK, KL_INN, KL_KPP, KL_OKPO,
-                                                 KL_OKONH, KL_NOTE, PREMIUM')->get();
-       /*$suppliers = Suppliers::where([['KLIENT.KLIENT_ID', '>', 1], ['KLIENT.FDEL', '=', 0]])->
+                                                 KL_OKONH, KL_NOTE, PREMIUM')->get();*/
+       $suppliers = Suppliers::where([['KLIENT.KLIENT_ID', '>', 1], ['KLIENT.FDEL', '=', 0]])->
        join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->
        join('FSALER', 'KLIENT.FSALER_ID', '=', 'FSALER.FSALER_ID')->
        select('KLIENT.*', 'ORG.ORG_NAME', 'FSALER.FSALER_NAME')->
@@ -34,7 +34,7 @@ class SuppliersController extends Controller
                                                  GRAPH, FSALER.FSALER_ID AS FSALER_ID, FSALER.FSALER_NAME,
                                                  KL_CITY, KL_ADR, KL_REPRESENT, KL_TEL, KL_FAX, KL_EMAIL,
                                                  KL_BANK, KL_KS, KL_RS, KL_BIK, KL_INN, KL_KPP, KL_OKPO,
-                                                 KL_OKONH, KL_NOTE, PREMIUM')->get();*/
+                                                 KL_OKONH, KL_NOTE, PREMIUM')->get();
           return response()->json($suppliers, 200);
 
           //$dolg_realiz =
