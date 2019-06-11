@@ -98,3 +98,23 @@ $spacers: map-merge(
         ),
         $spacers
 );
+
+// Switches
+
+$switch-width:          2.5rem !default;
+$switch-height:         1.625rem !default;
+$switch-font-size:      0.625rem !default;
+
+$switch-lg-width:       3rem !default;
+$switch-lg-height:      1.875rem !default;
+$switch-lg-font-size:   0.75rem !default;
+
+$switch-sm-width:       2rem !default;
+$switch-sm-height:      1.375rem !default;
+$switch-sm-font-size:   0.5rem !default;
+
+$switch-label-width:    3rem !default;
+$switch-label-lg-width: 3.5rem !default;
+$switch-label-sm-width: 2.5rem !default;
+
+$switch-handle-margin:  0.125rem !default;

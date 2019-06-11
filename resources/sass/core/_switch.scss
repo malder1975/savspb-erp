@@ -1,0 +1,148 @@
+//---------------
+// Стандартный переключатель
+//---------------
+.switch {
+  display: inline-block;
+  width: $switch-width;
+  height: $switch-height;
+}
+
+.switch-input {
+  display: none;
+}
+
+.switch-slider {
+  position: relative;
+  display: block;
+  height: inherit;
+  cursor: pointer;
+  background-color: #fff;
+  border: $border-width solid $border-color;
+  transition: 0.15s ease-out;
+  @include border-radius($border-radius);
+
+  &::before {
+    position: absolute;
+    top: $switch-handle-margin;
+    left: $switch-handle-margin;
+    box-sizing: border-box;
+    width: $switch-height - ($switch-handle-margin * 2) - ($border-width * 2);
+    height: $switch-height - ($switch-handle-margin * 2) - ($border-width * 2);
+    content: "";
+    background-color: #fff;
+    border: 0.0625rem solid $border-color;
+    transition: 0.15s ease-out;
+    @include border-radius($border-radius / 2);
+  }
+}
+
+.switch-input:checked ~ .switch-slider {
+  &::before {
+    transform: translateX($switch-width - $switch-height);
+  }
+}
+
+.switch-input:disabled ~ .switch-slider {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+
+// Размеры переключателя
+.switch-lg {
+  @include switch-size($switch-lg-width, $switch-lg-height, $switch-lg-font-size, $switch-handle-margin);
+}
+
+.switch-sm {
+  @include switch-size($switch-sm-width, $switch-sm-height, $switch-sm-font-size, $switch-handle-margin);
+}
+
+
+
+//---------------------
+//  Переключатель с надписью
+//---------------------
+.switch-label {
+  width: $switch-label-width;
+
+  .switch-slider {
+    &::before {
+      z-index: 2;
+    }
+    &::after {
+      position: absolute;
+      top: 50%;
+      right: 0.0625rem;
+      z-index: 1;
+      width: 50%;
+      margin-top: -0.5em;
+      font-size: $switch-font-size;
+      font-weight: 600;
+      line-height: 1;
+      color: $gray-300;
+      text-align: center;
+      text-transform: uppercase;
+      content: attr(data-unchecked);
+      transition: inherit;
+    }
+  }
+
+  .switch-input:checked ~ .switch-slider {
+    &::before {
+      transform: translateX($switch-label-width - $switch-height);
+    }
+    &::after {
+      left: 0.0625rem;
+      color: #fff;
+      content: attr(data-checked);
+    }
+  }
+
+  &.switch-lg {
+    @include switch-size($switch-label-lg-width, $switch-lg-height, $switch-lg-font-size, $switch-handle-margin);
+  }
+  &.switch-sm {
+    @include switch-size($switch-label-sm-width, $switch-sm-height, $switch-sm-font-size, $switch-handle-margin);
+  }
+}
+
+//-------------------
+// 3D переключатель
+//-------------------
+
+.switch-3d {
+  .switch-slider {
+    background-color: $gray-100;
+    border-radius: 50em;
+
+    &::before {
+      top: -0.0625rem;
+      left: -0.0625rem;
+      width: $switch-width;
+      height: $switch-height;
+      border: 0;
+      border-radius: 50em;
+      box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  &.switch-lg {
+    @include switch-3d-size($switch-lg-width, $switch-lg-height);
+  }
+  &.switch-sm {
+    @include switch-3d-size($switch-sm-width, $switch-sm-height);
+  }
+}
+
+
+
+.switch-pill {
+  .switch-slider {
+    border-radius: 50em;
+
+    &::before {
+      border-radius: 50em;
+    }
+  }
+}
+
