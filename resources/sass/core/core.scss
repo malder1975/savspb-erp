@@ -1,12 +1,16 @@
 @import "variables";
 
+//@import "~bootstrap/scss/bootstrap";
+@import "bootstrap";
+
 @import "mixins";
 
 @import "navbar";
 //@import "sidebar";
-
 @import "switch";
 
+
+@import "utils";
 
 @media (max-width: 991.98px) {
     .d-md-down-none {

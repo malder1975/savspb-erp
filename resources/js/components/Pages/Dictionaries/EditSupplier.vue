@@ -33,7 +33,9 @@
                                 </validate>
                             </b-col>
                             <b-col cols="6" sm="2">
-
+                                <div class="switch-label" >
+                                    <div class="switch-slider" v-model="supplier.GRAF" color="primary"></div>
+                                </div>
                             </b-col>
                         </b-form-row>
 
@@ -58,7 +60,36 @@
                                     </select>
                                 </validate>
                             </b-col>
-                            <b-col cols="6" sm="8"></b-col>
+
+                        </b-form-row>
+                        <b-form-row>
+                            <b-col cols="12" sm="12">
+                                <hr>
+                                <h5>Адрес организации</h5>
+                            </b-col>
+                        </b-form-row>
+                        <b-form-row>
+                                <b-col cols="6" sm="3">
+                                    <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                        <label>Индекс</label>
+                                        <input v-model="supplier.KL_CITY" name="supCity" class="input-sav"/>
+
+                                        <field-messages name="supCity" show="$touched || $submited" class="form-control-feedback" required>
+                                            <div slot="required">Введите индекс</div>
+                                        </field-messages>
+                                    </validate>
+                                </b-col>
+                                <b-col cols="12" sm="9">
+                                    <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                        <label>Адрес</label>
+                                        <input v-model="supplier.KL_ADR" name="supAdr" class="input-sav">
+
+                                        <field-messages name="supAdr" show="$touched || $submited" class="form-control-feedback" required>
+                                            <div slot="required">Введите адрес организации</div>
+                                        </field-messages>
+                                    </validate>
+                                </b-col>
+
                         </b-form-row>
                     </vue-form>
                 </div>

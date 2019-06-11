@@ -1,5 +1,12 @@
 @import "vars/colors";
 
+@import "mixins/bootstrap/border-radius";
+@import "vars/bootstrap/variables";
+
+//
+//@import "~bootstrap/scss/functions";
+//@import "~bootstrap/scss/variables";
+
 //Навбар
 $navbar-min-height:           66px !default;
 $navbar-bg-color:             linear-gradient(to top, #ecd0e9, #812a78) !default;
