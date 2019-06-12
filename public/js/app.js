@@ -3390,6 +3390,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _elements_switch_Switch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../elements/switch/Switch */ "./resources/js/components/elements/switch/Switch.vue");
 //
 //
 //
@@ -3502,8 +3503,122 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditSupplier",
+  components: {
+    Switch: _elements_switch_Switch__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: ['supplier'],
   data: function data() {
     return {
@@ -5397,6 +5512,164 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/switch/Switch.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/elements/switch/Switch.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var _name$model$data$prop;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = (_name$model$data$prop = {
+  name: 'Switch',
+  model: {
+    prop: 'modelChecked',
+    event: 'change'
+  },
+  data: function data() {
+    return {
+      checkedData: this.isChecked ? this.value : this.ucheckedValue
+    };
+  },
+  props: {
+    id: {
+      type: String,
+      default: function _default() {
+        return 'switch-id-' + this._uid;
+      }
+    },
+    color: {
+      type: String,
+      default: 'secondary'
+    },
+    label: {
+      type: Boolean,
+      default: false
+    },
+    outline: {
+      type: [Boolean, String],
+      default: null,
+      validator: function validator(value) {
+        return [false, true, '', 'alt'].indexOf(value) !== -1;
+      }
+    },
+    size: {
+      type: String,
+      default: null,
+      validator: function validator(value) {
+        return ['', 'lg', 'sm'].indexOf(value) !== -1;
+      }
+    },
+    checked: {
+      type: Boolean,
+      default: false
+    },
+    defaultChecked: {
+      type: Boolean,
+      default: false
+    },
+    modelChecked: {
+      default: undefined
+    },
+    value: {
+      default: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    name: {
+      type: String,
+      default: null
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    onChange: {
+      type: Function
+    },
+    uncheckedValue: {
+      default: false
+    },
+    variant: {
+      type: String,
+      default: null,
+      validator: function validator(value) {
+        return [null, '3d', 'pill'].indexOf(value) !== -1;
+      }
+    },
+    dataOn: {
+      type: String,
+      default: 'ON'
+    },
+    dataOff: {
+      type: String,
+      default: 'OFF'
+    }
+  }
+}, _defineProperty(_name$model$data$prop, "data", function data() {
+  return {
+    checkedData: this.isChecked ? this.value : this.uncheckedValue
+  };
+}), _defineProperty(_name$model$data$prop, "computed", {
+  classList: function classList() {
+    return ['switch', this.label ? 'switch-label' : '', this.size ? 'switch-${this.size}' : '', this.variant ? 'switch-${this.variant}' : '', "switch".concat(this.outline ? '-outline' : '', "-").concat(this.color).concat(this.outline === 'alt' ? '-alt' : ''), 'form-check-label'];
+  },
+  isChecked: function isChecked() {
+    if (this.modelChecked === undefined) {
+      return this.checkedData === this.value;
+    }
+
+    return this.modelChecked === this.value;
+  }
+}), _defineProperty(_name$model$data$prop, "mounted", function mounted() {
+  this.toggle(this.defaultChecked || this.checked || this.isChecked);
+}), _defineProperty(_name$model$data$prop, "methods", {
+  handleChange: function handleChange(event) {
+    this.toggle(event.target.checked);
+  },
+  toggle: function toggle(checked) {
+    this.checkedData = checked ? this.value : this.uncheckedValue;
+    this.$emit('change', this.checkedData);
+  }
+}), _name$model$data$prop);
 
 /***/ }),
 
@@ -39803,7 +40076,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.required-field > label[data-v-6fda256a]::after {\n    content: '*';\n    color: red;\n    margin-left: 0.25rem;\n}\n\n\n/*input {\n    font-size: 10px;\n}\nlabel {\n    font-size: 12px;\n    font-weight: bold;\n}*/\n", ""]);
+exports.push([module.i, "\n.required-field > label[data-v-6fda256a]::after {\n    content: '*';\n    color: red;\n    margin-left: 0.25rem;\n}\n.custom-file-input:lang(en) ~ .custom-file-label[data-v-6fda256a]::after {\n    content: '\\41E\\442\\43A\\440\\44B\\442\\44C';\n}\n\n\n/*input {\n    font-size: 10px;\n}*/\nlabel[data-v-6fda256a] {\n    font-size: 12px;\n    font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -76543,6 +76816,32 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("b-col", { attrs: { cols: "6", sm: "2" } }, [
+                          _c(
+                            "Switch",
+                            _vm._b(
+                              {
+                                staticClass: "mx-1",
+                                attrs: {
+                                  color: "info",
+                                  size: "sm",
+                                  label: "",
+                                  outline: "alt",
+                                  variant: "pill"
+                                },
+                                model: {
+                                  value: _vm.supplier.GRAF,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.supplier, "GRAF", $$v)
+                                  },
+                                  expression: "supplier.GRAF"
+                                }
+                              },
+                              "Switch",
+                              _vm.labelIcon,
+                              false
+                            )
+                          ),
+                          _vm._v(" "),
                           _c("div", { staticClass: "switch-label" }, [
                             _c("div", {
                               staticClass: "switch-slider",
@@ -76859,7 +77158,7 @@ var render = function() {
                       [
                         _c(
                           "b-col",
-                          { attrs: { cols: "12", sm: "12" } },
+                          { attrs: { cols: "12", sm: "6" } },
                           [
                             _c(
                               "validate",
@@ -76924,7 +77223,668 @@ var render = function() {
                             )
                           ],
                           1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6", sm: "3" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("ОКПО")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.supplier.KL_OKPO,
+                                      expression: "supplier.KL_OKPO"
+                                    }
+                                  ],
+                                  staticClass: "input-sav",
+                                  attrs: { name: "supOkpo", type: "number" },
+                                  domProps: { value: _vm.supplier.KL_OKPO },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.supplier,
+                                        "KL_OKPO",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6", sm: "3" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("ОКНХ")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.supplier.KL_OKONH,
+                                      expression: "supplier.KL_OKONH"
+                                    }
+                                  ],
+                                  staticClass: "input-sav",
+                                  attrs: { name: "supOknh", type: "number" },
+                                  domProps: { value: _vm.supplier.KL_OKONH },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.supplier,
+                                        "KL_OKONH",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]
+                            )
+                          ],
+                          1
                         )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c(
+                      "b-form-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6", sm: "3" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("ИНН")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.supplier.KL_INN,
+                                      expression: "supplier.KL_INN"
+                                    }
+                                  ],
+                                  staticClass: "input-sav",
+                                  attrs: {
+                                    name: "supInn",
+                                    required: "",
+                                    type: "number"
+                                  },
+                                  domProps: { value: _vm.supplier.KL_INN },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.supplier,
+                                        "KL_INN",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "field-messages",
+                                  {
+                                    staticClass: "form-control-feedback",
+                                    attrs: {
+                                      name: "supInn",
+                                      show: "$touched || $submited",
+                                      required: ""
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        attrs: { slot: "required" },
+                                        slot: "required"
+                                      },
+                                      [_vm._v("ИНН должен быть указан")]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6", sm: "3" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("КПП")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.supplier.KL_KPP,
+                                      expression: "supplier.KL_KPP"
+                                    }
+                                  ],
+                                  staticClass: "input-sav",
+                                  attrs: {
+                                    name: "supKpp",
+                                    required: "",
+                                    type: "number"
+                                  },
+                                  domProps: { value: _vm.supplier.KL_KPP },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.supplier,
+                                        "KL_KPP",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "field-messages",
+                                  {
+                                    staticClass: "form-control-feedback",
+                                    attrs: {
+                                      name: "supKpp",
+                                      show: "$touched || $submited",
+                                      required: ""
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        attrs: { slot: "required" },
+                                        slot: "required"
+                                      },
+                                      [_vm._v("КПП должен быть указан")]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6", sm: "3" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("БИК")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.supplier.KL_BIK,
+                                      expression: "supplier.KL_BIK"
+                                    }
+                                  ],
+                                  staticClass: "input-sav",
+                                  attrs: {
+                                    name: "supBik",
+                                    required: "",
+                                    type: "number"
+                                  },
+                                  domProps: { value: _vm.supplier.KL_BIK },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.supplier,
+                                        "KL_BIK",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "field-messages",
+                                  {
+                                    staticClass: "form-control-feedback",
+                                    attrs: {
+                                      name: "supBik",
+                                      show: "$touched || $submited",
+                                      required: ""
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        attrs: { slot: "required" },
+                                        slot: "required"
+                                      },
+                                      [_vm._v("БИК должен быть указан")]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-form-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6", sm: "6" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("Р/счет")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.supplier.KL_RS,
+                                      expression: "supplier.KL_RS"
+                                    }
+                                  ],
+                                  staticClass: "input-sav",
+                                  attrs: {
+                                    name: "supRs",
+                                    required: "",
+                                    type: "number"
+                                  },
+                                  domProps: { value: _vm.supplier.KL_RS },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.supplier,
+                                        "KL_RS",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "field-messages",
+                                  {
+                                    staticClass: "form-control-feedback",
+                                    attrs: {
+                                      name: "supRs",
+                                      show: "$touched || $submited",
+                                      required: ""
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        attrs: { slot: "required" },
+                                        slot: "required"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "Расчетный счет должен быть указан"
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6", sm: "6" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("К/счет")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.supplier.KL_KS,
+                                      expression: "supplier.KL_KS"
+                                    }
+                                  ],
+                                  staticClass: "input-sav",
+                                  attrs: {
+                                    name: "supKs",
+                                    required: "",
+                                    type: "number"
+                                  },
+                                  domProps: { value: _vm.supplier.KL_KS },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.supplier,
+                                        "KL_KS",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "field-messages",
+                                  {
+                                    staticClass: "form-control-feedback",
+                                    attrs: {
+                                      name: "supKs",
+                                      show: "$touched || $submited",
+                                      required: ""
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        attrs: { slot: "required" },
+                                        slot: "required"
+                                      },
+                                      [_vm._v("Корр.счет должен быть указан")]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-form-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "12", sm: "12" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("Банк")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.supplier.KL_BANK,
+                                      expression: "supplier.KL_BANK"
+                                    }
+                                  ],
+                                  staticClass: "input-sav",
+                                  staticStyle: { width: "750px" },
+                                  attrs: { name: "supBank", required: "" },
+                                  domProps: { value: _vm.supplier.KL_BANK },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.supplier,
+                                        "KL_BANK",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "field-messages",
+                                  {
+                                    staticClass: "form-control-feedback",
+                                    attrs: {
+                                      name: "supBank",
+                                      show: "$touched || $submited",
+                                      required: ""
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        attrs: { slot: "required" },
+                                        slot: "required"
+                                      },
+                                      [_vm._v("Банк должен быть указан")]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-form-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "8", sm: "9" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [
+                                _c("label", [_vm._v("Примечание")]),
+                                _vm._v(" "),
+                                _c("b-form-textarea", {
+                                  attrs: {
+                                    name: "supNote",
+                                    rows: "3",
+                                    cols: "150",
+                                    placeholder: "Примечание"
+                                  },
+                                  model: {
+                                    value: _vm.supplier.NOTE,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.supplier, "NOTE", $$v)
+                                    },
+                                    expression: "supplier.NOTE"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "4", sm: "3" } },
+                          [
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [_c("label", [_vm._v("Торговая наценка")])]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [_c("label", [_vm._v("Транспортные расходы")])]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "validate",
+                              {
+                                staticClass: "form-group",
+                                class: _vm.fieldClassName(_vm.formstate.name),
+                                attrs: { "auto-label": "" }
+                              },
+                              [_c("label", [_vm._v("Компенсация")])]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-form-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "12", sm: "6" } },
+                          [
+                            _c("b-form-file", {
+                              attrs: {
+                                state: Boolean(_vm.supplier.logo_URL),
+                                placeholder: "Выберите логотип",
+                                accept: "image/jpeg, image/png, image/gif"
+                              },
+                              model: {
+                                value: _vm.supplier.logo_url,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.supplier, "logo_url", $$v)
+                                },
+                                expression: "supplier.logo_url"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("b-col", { attrs: { cols: "12", sm: "6" } }, [
+                          _c("img", {
+                            attrs: {
+                              src: "https://via.placeholder.com/80",
+                              alt: "Лого",
+                              width: "120px",
+                              height: "120px"
+                            }
+                          })
+                        ])
                       ],
                       1
                     )
@@ -79765,6 +80725,62 @@ var render = function() {
       on: { click: _vm.SidebarToggle }
     },
     [_c("span", { staticClass: "navbar-toggler-icon fas fa-bars" })]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/switch/Switch.vue?vue&type=template&id=42694c02&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/elements/switch/Switch.vue?vue&type=template&id=42694c02& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "label",
+    { class: _vm.classList },
+    [
+      _c("input", {
+        staticClass: "switch-input form-check-input",
+        attrs: {
+          id: _vm.id,
+          disabled: _vm.disabled,
+          required: _vm.required,
+          name: _vm.name,
+          type: "checkbox",
+          "true-value": "value",
+          "false-value": "uncheckedValue"
+        },
+        domProps: { checked: _vm.isChecked, value: _vm.value },
+        on: { change: _vm.handleChange }
+      }),
+      _vm._v(" "),
+      _vm.label
+        ? [
+            _c("span", {
+              staticClass: "switch-slider",
+              attrs: {
+                "data-checked": _vm.dataOn,
+                "data-unchecked": _vm.dataOff
+              }
+            })
+          ]
+        : [_c("span", { staticClass: "switch-slider" })]
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -97002,6 +98018,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/elements/switch/Switch.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/elements/switch/Switch.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Switch_vue_vue_type_template_id_42694c02___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Switch.vue?vue&type=template&id=42694c02& */ "./resources/js/components/elements/switch/Switch.vue?vue&type=template&id=42694c02&");
+/* harmony import */ var _Switch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Switch.vue?vue&type=script&lang=js& */ "./resources/js/components/elements/switch/Switch.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Switch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Switch_vue_vue_type_template_id_42694c02___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Switch_vue_vue_type_template_id_42694c02___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/elements/switch/Switch.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/elements/switch/Switch.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/elements/switch/Switch.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Switch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Switch.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/switch/Switch.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Switch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/elements/switch/Switch.vue?vue&type=template&id=42694c02&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/elements/switch/Switch.vue?vue&type=template&id=42694c02& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Switch_vue_vue_type_template_id_42694c02___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Switch.vue?vue&type=template&id=42694c02& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/switch/Switch.vue?vue&type=template&id=42694c02&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Switch_vue_vue_type_template_id_42694c02___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Switch_vue_vue_type_template_id_42694c02___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/router/index.js":
 /*!**************************************!*\
   !*** ./resources/js/router/index.js ***!
@@ -97235,8 +98320,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\savspb-erp.loc\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

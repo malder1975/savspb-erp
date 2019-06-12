@@ -28,7 +28,7 @@
 
 <script>
     export default {
-        name: "Switch",
+        name: 'Switch',
         model: {
             prop: 'modelChecked',
             event: 'change'
