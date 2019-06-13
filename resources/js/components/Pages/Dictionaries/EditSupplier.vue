@@ -33,6 +33,7 @@
                                 </validate>
                             </b-col>
                             <b-col cols="6" sm="2">
+                                <Switch v-model="supplier.GRAF" class="mx-1" color="info" size="sm" label outline="alt" variant="pill" v-bind="labelIcon"/>
                                 <div class="switch-label" >
                                     <div class="switch-slider" v-model="supplier.GRAF" color="primary"></div>
                                 </div>
@@ -88,16 +89,131 @@
                             </b-col>
                         </b-form-row>
                         <b-form-row>
-                                <b-col cols="12" sm="12">
-                                    <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
-                                        <label>Адрес</label>
-                                        <input v-model="supplier.KL_ADR" name="supAdr" class="input-sav" style="width: 480px">
+                            <b-col cols="12" sm="6">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Адрес</label>
+                                    <input v-model="supplier.KL_ADR" name="supAdr" class="input-sav" style="width: 480px">
 
-                                        <field-messages name="supAdr" show="$touched || $submited" class="form-control-feedback" required>
-                                            <div slot="required">Введите адрес организации</div>
-                                        </field-messages>
-                                    </validate>
-                                </b-col>
+                                    <field-messages name="supAdr" show="$touched || $submited" class="form-control-feedback" required>
+                                        <div slot="required">Введите адрес организации</div>
+                                    </field-messages>
+                                </validate>
+                            </b-col>
+                            <b-col cols="6" sm="3">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>ОКПО</label>
+                                    <input v-model="supplier.KL_OKPO" name="supOkpo" class="input-sav">
+                                </validate>
+                            </b-col>
+                            <b-col cols="6" sm="3">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>ОКНХ</label>
+                                    <input v-model="supplier.KL_OKONH" name="supOknh" class="input-sav">
+                                </validate>
+                            </b-col>
+                        </b-form-row>
+                        <hr/>
+                        <b-form-row>
+                            <b-col cols="6" sm="3">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>ИНН</label>
+                                    <input v-model="supplier.KL_INN" name="supInn" class="input-sav" required/>
+
+                                    <field-messages name="supInn" show="$touched || $submited" class="form-control-feedback" required>
+                                        <div slot="required">ИНН должен быть указан</div>
+                                    </field-messages>
+                                </validate>
+                            </b-col>
+                            <b-col cols="6" sm="3">
+                            <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                <label>КПП</label>
+                                <input v-model="supplier.KL_KPP" name="supKpp" class="input-sav" required type="number"/>
+
+                                <field-messages name="supKpp" show="$touched || $submited" class="form-control-feedback" required>
+                                    <div slot="required">КПП должен быть указан</div>
+                                </field-messages>
+                            </validate>
+                            </b-col>
+                            <b-col cols="6" sm="3">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>БИК</label>
+                                    <input v-model="supplier.KL_BIK" name="supBik" class="input-sav" required />
+
+                                    <field-messages name="supBik" show="$touched || $submited" class="form-control-feedback" required>
+                                        <div slot="required">БИК должен быть указан</div>
+                                    </field-messages>
+                                </validate>
+                            </b-col>
+                        </b-form-row>
+                        <b-form-row>
+                            <b-col cols="6" sm="6">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Р/счет</label>
+                                    <input v-model="supplier.KL_RS" name="supRs" class="input-sav" required />
+
+                                    <field-messages name="supRs" show="$touched || $submited" class="form-control-feedback" required>
+                                        <div slot="required">Расчетный счет должен быть указан</div>
+                                    </field-messages>
+                                </validate>
+                            </b-col>
+                            <b-col cols="6" sm="6">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>К/счет</label>
+                                    <input v-model="supplier.KL_KS" name="supKs" class="input-sav" required />
+
+                                    <field-messages name="supKs" show="$touched || $submited" class="form-control-feedback" required>
+                                        <div slot="required">Корр.счет должен быть указан</div>
+                                    </field-messages>
+                                </validate>
+                            </b-col>
+                        </b-form-row>
+                        <b-form-row>
+                            <b-col cols="12" sm="12">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Банк</label>
+                                    <input v-model="supplier.KL_BANK" name="supBank" class="input-sav" required style="width: 750px"/>
+
+                                    <field-messages name="supBank" show="$touched || $submited" class="form-control-feedback" required>
+                                        <div slot="required">Банк должен быть указан</div>
+                                    </field-messages>
+                                </validate>
+                            </b-col>
+                        </b-form-row>
+                        <b-form-row>
+                            <b-col cols="8" sm="9">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Примечание</label>
+                                    <b-form-textarea v-model="supplier.NOTE" name="supNote" rows="3" cols="150" placeholder="Примечание"></b-form-textarea>
+                                </validate>
+                            </b-col>
+                            <b-col cols="4" sm="3">
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Торговая наценка</label>
+                                    <b-inpu-group class="mt-3" append="%">
+                                        <b-form-input v-model="supplier.PREMIUM" name="supPrem" type="number" class="input-sav"></b-form-input>
+                                    </b-inpu-group>
+                                </validate>
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Транспортные расходы</label>
+                                    <b-inpu-group class="mt-3" append="%">
+                                        <b-form-input v-model="supplier.TRANSP" name="supTransp" type="number" class="input-sav"></b-form-input>
+                                    </b-inpu-group>
+                                </validate>
+                                <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
+                                    <label>Компенсация</label>
+                                    <b-inpu-group class="mt-3" append="%">
+                                        <b-form-input v-model="supplier.KOMPENS" name="supKompens" type="number" class="input-sav"></b-form-input>
+                                    </b-inpu-group>
+                                </validate>
+                            </b-col>
+                        </b-form-row>
+                        <b-form-row>
+                            <b-col cols="12" sm="6">
+                                <b-form-file v-model="supplier.logo_url" :state="Boolean(supplier.logo_URL)" placeholder="Выберите логотип" accept="image/jpeg, image/png, image/gif"></b-form-file>
+                            </b-col>
+                            <b-col cols="12" sm="6">
+                                <img src="https://via.placeholder.com/80" alt="Лого" width="120px" height="120px"/>
+                            </b-col>
                         </b-form-row>
                     </vue-form>
                 </div>
@@ -111,9 +227,12 @@
 </template>
 
 <script>
-    import Switch from '../../elements/switch/Switch'
+    import Switch  from '../../elements/switch/Switch'
     export default {
         name: "EditSupplier",
+        components: {
+          Switch
+        },
         props: ['supplier'],
         data() {
             return {
@@ -171,12 +290,16 @@
         margin-left: 0.25rem;
     }
 
+    .custom-file-input:lang(en) ~ .custom-file-label::after {
+        content: 'Открыть';
+    }
+
 
     /*input {
         font-size: 10px;
-    }
+    }*/
     label {
         font-size: 12px;
         font-weight: bold;
-    }*/
+    }
 </style>

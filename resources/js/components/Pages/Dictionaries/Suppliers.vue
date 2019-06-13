@@ -10,7 +10,16 @@
                                 <b-input-group size="sm" class="ml-1">
                                     <b-form-input  placeholder="Поиск" id="serch"></b-form-input>
                                 </b-input-group>
+
                                 <span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span>
+                                <b-button-group class="mx-1">
+                                    <b-button id="all" v-b-tooltip.hover title="Все" variant="outline-info">Все</b-button>
+                                    <b-button id="work" v-b-tooltip.hover title="Действующие" variant="outline-success"></b-button>
+                                    <b-button id="deleted" v-b-tooltip.hover title="Неработающие" variant="outline-warning"></b-button>
+                                </b-button-group>
+                                <div class="float-right">
+
+                                </div>
                             </b-button-toolbar>
                             <div v-for="supplier in displayedSuppliers" :key="supplier.KLIENT_ID">
 
