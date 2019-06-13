@@ -111,6 +111,7 @@
 </template>
 
 <script>
+    import Switch from '../../elements/switch/Switch'
     export default {
         name: "EditSupplier",
         props: ['supplier'],
