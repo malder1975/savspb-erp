@@ -12,11 +12,13 @@
                                 </b-input-group>
 
                                 <span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span>
+                                <div class="fl-right">
                                 <b-button-group class="mx-1">
-                                    <b-button id="all" v-b-tooltip.hover title="Все" variant="outline-info">Все</b-button>
-                                    <b-button id="work" v-b-tooltip.hover title="Действующие" variant="outline-success"></b-button>
+                                    <b-button id="all" v-b-tooltip.hover title="Все" variant="outline-info"><span class="mdi mdi-filter"></span> </b-button>
+                                    <b-button id="work" v-b-tooltip.hover title="Действующие" variant="outline-success"><span class="mdi mdi-filter-outline"></span> </b-button>
                                     <b-button id="deleted" v-b-tooltip.hover title="Неработающие" variant="outline-warning"></b-button>
                                 </b-button-group>
+                                </div>
                                 <div class="float-right">
 
                                 </div>
@@ -283,3 +285,9 @@
         }
     }
 </script>
+
+<style>
+    .fl-right {
+        float: right;
+    }
+</style>
