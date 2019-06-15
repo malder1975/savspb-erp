@@ -8,10 +8,10 @@
                             <b-button-toolbar class="mb-2">
                                     <b-button variant="outline-primary" size="sm">Добавить поставщика</b-button>
                                 <b-input-group size="sm" class="ml-1">
-                                    <b-form-input  placeholder="Поиск" id="serch"></b-form-input>
+                                    <b-form-input  placeholder="Поиск" id="search"></b-form-input>
                                 </b-input-group>
 
-                                <span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span>
+                                <!--span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span-->
                                 <div class="fl-right">
                                 <b-button-group class="mx-1">
                                     <b-button id="all" v-b-tooltip.hover title="Все" variant="outline-info"><span class="mdi mdi-filter"></span> </b-button>

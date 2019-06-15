@@ -10,7 +10,7 @@ class Karta extends Model
     protected $primaryKey = 'KARTA_ID';
 
     protected $fillable = [
-
+        'KLIENT_ID', 'PR_LIST_ID', 'NDOK', 'DATA_DOK', 'KOL', 'PRICE_IN', 'PRICE_OUT', 'UCENKA', 'PRICE_TYPE_ID', 'FLIKV'
     ];
 
     public function priceList()
