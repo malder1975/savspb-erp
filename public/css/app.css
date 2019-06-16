@@ -1382,6 +1382,35 @@ input[type="color"].form-control:disabled {
   border-left: 0.125rem solid #83878d;
 }
 
+@media all and (-ms-high-contrast: none) {
+  html {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.app,
+app-dashboard,
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  flex: 0 0 66px;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+.app-body .main {
+  flex: 1;
+  min-width: 0;
+}
+
 @media (max-width: 991.98px) {
   .d-md-down-none {
     display: none !important;

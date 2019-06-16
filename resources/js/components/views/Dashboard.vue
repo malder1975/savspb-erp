@@ -7,12 +7,22 @@
                 </b-card>
             </b-col>
             <b-col sm="6" lg="3">
-                <b-card no-body class="bg-primary">
+                <router-link to="suppliers">
+                <b-card no-body class="bg-primary card-suppliers">
                     <b-card-body class="pb-0">
-                        <h4 class="mb-0">{{ suppliers.length }}</h4>
-                        <p> Поставщики </p>
+                        <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
+                            <template slot="button-content">
+                                <i class="far fa-handshake"></i>
+                            </template>
+                            <b-dropdown-item>Прайс-листы поставщиков</b-dropdown-item>
+                            <b-dropdown-item>Оплаты по реализации</b-dropdown-item>
+                            <b-dropdown-item>Оплаты по графику</b-dropdown-item>
+                        </b-dropdown>
+                        <h4 class="mb-0 counter-suppliers">{{ suppliers.length }}</h4>
+                        <p class="counter-suppliers"> Поставщики </p>
                     </b-card-body>
                 </b-card>
+                </router-link>
             </b-col>
             <b-col sm="6" lg="3">
                 <b-card no-body class="bg-primary">
