@@ -10,7 +10,11 @@
                 <SidebarMinimizer></SidebarMinimizer>
             </Sidebar>
             <main class="main">
-                <router-view></router-view>
+                <Breadcrumb :list="list"/>
+                <div class="container-fluid">
+                    <router-view></router-view>
+                </div>
+
             </main>
         </div>
     </div>
@@ -24,10 +28,12 @@
     import SidebarNav from '../elements/sidebar/SidebarNav'
     import SidebarFooter from "../elements/sidebar/SidebarFooter";
     import SidebarMinimizer from "../elements/sidebar/SidebarMinimizer";
+    import Breadcrumb from "../elements/Breadcrumb/Breadcrumb";
 
     export default {
         name: "DefaultContainer",
         components: {
+            Breadcrumb,
             SidebarMinimizer,
             SidebarFooter,
             AppHeader,

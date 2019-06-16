@@ -1322,6 +1322,21 @@ input[type="color"].form-control:disabled {
   border-radius: 50em;
 }
 
+.breadcrumb {
+  position: relative;
+  border-radius: 0;
+}
+
+/*
+.breadcrumb-item:before {
+  padding-right: 0;
+  padding-left: $breadcrumb-item-padding;
+}
+
+.breadcrumb-item {
+  padding-right: $breadcrumb-item-padding;
+  padding-left: 0;
+}*/
 .b-a-0 {
   border: 0 !important;
 }
@@ -5849,7 +5864,7 @@ input[type=button].btn-block {
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   margin-bottom: 1.5rem;
   list-style: none;
   background-color: #fff;
@@ -5857,11 +5872,11 @@ input[type=button].btn-block {
 }
 
 .breadcrumb-item + .breadcrumb-item {
-  padding-left: 0.5rem;
+  padding-left: 8px;
 }
 .breadcrumb-item + .breadcrumb-item::before {
   display: inline-block;
-  padding-right: 0.5rem;
+  padding-right: 8px;
   color: #6c757d;
   content: "/";
 }

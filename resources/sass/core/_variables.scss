@@ -43,6 +43,22 @@ $sidebar-border: (            //none !default; //{
         color: #812a78
     )
 ) !default;
+
+// Breadcrumb
+$breadcrumb-borders: (
+        bottom: (
+                size:                             1px,
+                style:                            solid,
+                color:                            $border-color
+        )
+) !default;
+
+$breadcrumb-padding-y:              12px !default;
+$breadcrumb-padding-x:              16px !default;
+$breadcrumb-item-padding:           8px !default;
+
+$breadcrumb-margin-bottom:          16px !default;
+
 $sidebar-minimized-width:          50px !default;
 $sidebar-compact-width:            150px !default;
 $sidebar-mobile-width:             220px !default;
