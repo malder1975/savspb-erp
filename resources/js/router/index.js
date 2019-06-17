@@ -73,6 +73,14 @@ const router = new VueRouter({
                          path: '/suppliers/:id',
                          name: 'supplier',
                          component: EditSupplier
+                     },
+                     {
+                         path: '/suppliers/price-lists',
+                         name: 'supplprices'
+                     },
+                     {
+                         path: '/suppliers/:id/price-list',
+                         name: 'supplprice'
                      }
                  ]
              },

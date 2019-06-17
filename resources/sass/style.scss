@@ -101,3 +101,30 @@ float: right;
 .recv_post {
     font-size: 11px;
 }
+
+.card-suppliers {
+    color: $white;
+    text-decoration: none;
+
+    &:hover {
+        color: $white;
+        text-decoration: none;
+        box-shadow: 0 0 4px #0d1a41;
+    }
+    & button i {
+        color: $white;
+    }
+
+    & .dashboard-card:hover {
+        box-shadow: 0 0 4px #0d1a41;
+    }
+}
+.counter-suppliers {
+    font-weight: 600;
+    margin-top: 3px;
+    font-size: 38px;
+}
+.cart-title {
+    font-size: 22px;
+    font-weight: 200;
+}

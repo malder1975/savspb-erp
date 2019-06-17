@@ -25,6 +25,11 @@ class Suppliers extends Model
         return $this->belongsTo('App\Models\Merchandises', 'FSALER_ID', 'FSALER_ID');
     }
 
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
+
     public function getSuppliers()
     {
         /*$suppliers = Suppliers::where(['KLIENT.POST' => 1, 'KLIENT.FDEL' => 0])->

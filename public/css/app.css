@@ -1532,6 +1532,33 @@ app-root {
   font-size: 11px;
 }
 
+.card-suppliers {
+  color: #fff;
+  text-decoration: none;
+}
+.card-suppliers:hover {
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 0 4px #0d1a41;
+}
+.card-suppliers button i {
+  color: #fff;
+}
+.card-suppliers .dashboard-card:hover {
+  box-shadow: 0 0 4px #0d1a41;
+}
+
+.counter-suppliers {
+  font-weight: 600;
+  margin-top: 3px;
+  font-size: 38px;
+}
+
+.cart-title {
+  font-size: 22px;
+  font-weight: 200;
+}
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
