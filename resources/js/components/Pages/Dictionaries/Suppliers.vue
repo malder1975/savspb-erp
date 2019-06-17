@@ -12,7 +12,18 @@
                                 </b-input-group>
 
                                 <!--span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span-->
-                                <div class="fl-right">
+                                <div class="float-right">
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-outline-info active">
+                                            <input type="radio" name="filter" id="all1" autocomplete="off" checked> Все
+                                        </label>
+                                        <label class="btn btn-outline-success">
+                                            <input type="radio" name="filter" id="allw" autocomplete="off" checked> Все
+                                        </label>
+                                        <label class="btn btn-outline-warning">
+                                            <input type="radio" name="filter" id="alld" autocomplete="off" checked> Все
+                                        </label>
+                                    </div>
                                 <b-button-group class="mx-1">
                                     <b-button id="all" v-b-tooltip.hover title="Все" variant="outline-info"><span class="mdi mdi-filter"></span> </b-button>
                                     <b-button id="work" v-b-tooltip.hover title="Действующие" variant="outline-success"><span class="mdi mdi-filter-outline"></span> </b-button>
