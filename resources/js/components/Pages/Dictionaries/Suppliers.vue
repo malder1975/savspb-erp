@@ -5,33 +5,28 @@
                 <b-card no-body>
                     <b-tabs card>
                         <b-tab title="Поставщики" active>
-                            <b-button-toolbar class="mb-2">
-                                    <b-button variant="outline-primary" size="sm">Добавить поставщика</b-button>
+                            <b-button-toolbar class="mb-3">
+                                    <b-button variant="outline-primary" size="sm" class="mr-2">Добавить поставщика</b-button>
                                 <b-input-group size="sm" class="ml-1">
-                                    <b-form-input  placeholder="Поиск" id="search"></b-form-input>
+                                    <b-form-input  placeholder="Поиск" id="search" v-model="searchSuppl"></b-form-input>
+                                    <b-input-group-append>
+                                        <b-button variant="outline-success"><i class="fas fa-search"></i> </b-button>
+                                    </b-input-group-append>
                                 </b-input-group>
 
                                 <!--span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span-->
                                 <div class="float-right">
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <div class="btn-group btn-group-sm btn-group-toggle mx-2" data-toggle="buttons">
                                         <label class="btn btn-outline-info active">
-                                            <input type="radio" name="filter" id="all1" autocomplete="off" checked> Все
+                                            <input type="radio" name="filter" data-toggle="tooltip" title="Все" id="all" autocomplete="off" checked v-model="FDEL"> <i class="fas fa-hourglass"></i>
                                         </label>
                                         <label class="btn btn-outline-success">
-                                            <input type="radio" name="filter" id="allw" autocomplete="off" checked> Все
+                                            <input type="radio" name="filter1" data-toggle="tooltip" title="Действующие" id="allw" autocomplete="off" > <i class="fas fa-hourglass-end"></i>
                                         </label>
                                         <label class="btn btn-outline-warning">
-                                            <input type="radio" name="filter" id="alld" autocomplete="off" checked> Все
+                                            <input type="radio" name="filter2" data-toggle="tooltip" title="Неактуальные" id="alld" autocomplete="off" > <i class="far fa-hourglass"></i>
                                         </label>
                                     </div>
-                                <b-button-group class="mx-1">
-                                    <b-button id="all" v-b-tooltip.hover title="Все" variant="outline-info"><span class="mdi mdi-filter"></span> </b-button>
-                                    <b-button id="work" v-b-tooltip.hover title="Действующие" variant="outline-success"><span class="mdi mdi-filter-outline"></span> </b-button>
-                                    <b-button id="deleted" v-b-tooltip.hover title="Неработающие" variant="outline-warning"></b-button>
-                                </b-button-group>
-                                </div>
-                                <div class="float-right">
-
                                 </div>
                             </b-button-toolbar>
                             <div v-for="supplier in displayedSuppliers" :key="supplier.KLIENT_ID">
@@ -40,6 +35,7 @@
 
                                     <h4 slot="header" class="text-center">{{supplier.KLIENT_KOD}} - {{ supplier.NAME }}</h4>
                                     <h5 slot="header" class="text-center">{{supplier.ORG_NAME}}</h5>
+                                    <p>{{ supplier.FDEL}}</p>
                                     <b-card-body>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -194,6 +190,7 @@
                 customers: [],
                 errors: [],
                 errorsCust: [],
+                searchSuppl: '',
                 page: 1,
                 pageCust: 1,
                 perPage: 2,
@@ -233,7 +230,7 @@
             },
 
             setPages() {
-                let numOfPages = Math.ceil(this.suppliers.length / this.perPage);
+                let numOfPages = Math.ceil(this.filteredSuppliers.length / this.perPage);
                 console.log(numOfPages);
                 for (let index = 1; index <= numOfPages; index++) {
                     this.pages.push(index)
@@ -284,14 +281,21 @@
 
         },
         computed: {
+            filteredSuppliers() {
+              let klCod = this.searchSuppl;
+                return this.suppliers.filter((supplier) => {
+                    if (klCod === '') return true;
+                else return supplier.KLIENT_KOD.toUpperCase().indexOf(klCod.toUpperCase()) > -1})
+            },
+
             displayedSuppliers() {
-                return this.paginate(this.suppliers)
+                return this.paginate(this.filteredSuppliers)
             },
             displayedCustomers() {
                 return this.paginateCust(this.customers)
             },
             countSuppliers() {
-                return this.suppliers.length;
+                return this.filteredSuppliers.length;
             },
         }
     }
