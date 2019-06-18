@@ -9,22 +9,19 @@
                                     <b-button variant="outline-primary" size="sm" class="mr-2">Добавить поставщика</b-button>
                                 <b-input-group size="sm" class="ml-1">
                                     <b-form-input  placeholder="Поиск" id="search" v-model="searchSuppl"></b-form-input>
-                                    <b-input-group-append>
-                                        <b-button variant="outline-success"><i class="fas fa-search"></i> </b-button>
-                                    </b-input-group-append>
                                 </b-input-group>
 
                                 <!--span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span-->
                                 <div class="float-right">
                                     <div class="btn-group btn-group-sm btn-group-toggle mx-2" data-toggle="buttons">
-                                        <label class="btn btn-outline-info active">
-                                            <input type="radio" name="filter" data-toggle="tooltip" title="Все" id="all" autocomplete="off" checked v-model="FDEL"> <i class="fas fa-hourglass"></i>
+                                        <label class="btn btn-outline-info ">
+                                            <input type="radio" name="filter" data-toggle="tooltip" title="Все" id="all" autocomplete="off" value="-1" v-model="fdel"> <i class="fas fa-hourglass"></i>
                                         </label>
-                                        <label class="btn btn-outline-success">
-                                            <input type="radio" name="filter1" data-toggle="tooltip" title="Действующие" id="allw" autocomplete="off" > <i class="fas fa-hourglass-end"></i>
+                                        <label class="btn btn-outline-success active">
+                                            <input type="radio" name="filter1" data-toggle="tooltip" title="Действующие" id="allw" autocomplete="off" value="0" checked v-model="fdel"> <i class="fas fa-hourglass-end"></i>
                                         </label>
                                         <label class="btn btn-outline-warning">
-                                            <input type="radio" name="filter2" data-toggle="tooltip" title="Неактуальные" id="alld" autocomplete="off" > <i class="far fa-hourglass"></i>
+                                            <input type="radio" name="filter2" data-toggle="tooltip" title="Неактуальные" id="alld" autocomplete="off" value="1" v-model="fdel" > <i class="far fa-hourglass"></i>
                                         </label>
                                     </div>
                                 </div>
@@ -191,6 +188,7 @@
                 errors: [],
                 errorsCust: [],
                 searchSuppl: '',
+                fdel: 0,
                 page: 1,
                 pageCust: 1,
                 perPage: 2,
@@ -285,7 +283,7 @@
               let klCod = this.searchSuppl;
                 return this.suppliers.filter((supplier) => {
                     if (klCod === '') return true;
-                else return supplier.KLIENT_KOD.toUpperCase().indexOf(klCod.toUpperCase()) > -1})
+                else return supplier.KLIENT_KOD && supplier.KLIENT_KOD.toUpperCase().indexOf(klCod.toUpperCase()) > -1})
             },
 
             displayedSuppliers() {
