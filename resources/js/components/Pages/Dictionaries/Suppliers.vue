@@ -15,7 +15,7 @@
                                 <div class="float-right">
                                     <div class="btn-group btn-group-sm btn-group-toggle mx-2" data-toggle="buttons">
                                         <label class="btn btn-outline-info ">
-                                            <input type="radio" name="filter" data-toggle="tooltip" title="Все" id="all" autocomplete="off" value="-1" v-model="fdel"> <i class="fas fa-hourglass"></i>
+                                            <input type="radio" name="all" data-toggle="tooltip" title="Все" id="all" autocomplete="off" value="-1" v-model="fdel"> <i class="fas fa-hourglass"></i>
                                         </label>
                                         <label class="btn btn-outline-success active">
                                             <input type="radio" name="filter1" data-toggle="tooltip" title="Действующие" id="allw" autocomplete="off" value="0" checked v-model="fdel"> <i class="fas fa-hourglass-end"></i>
@@ -188,7 +188,7 @@
                 errors: [],
                 errorsCust: [],
                 searchSuppl: '',
-                fdel: 0,
+                fdel: 1,
                 page: 1,
                 pageCust: 1,
                 perPage: 2,
@@ -281,9 +281,14 @@
         computed: {
             filteredSuppliers() {
               let klCod = this.searchSuppl;
+              let Fdel = this.checked(fdel);
                 return this.suppliers.filter((supplier) => {
                     if (klCod === '') return true;
                 else return supplier.KLIENT_KOD && supplier.KLIENT_KOD.toUpperCase().indexOf(klCod.toUpperCase()) > -1})
+                    .filter((supplier) => {
+                        if (Fdel !== -1)
+                        return supplier.FDEL = Fdel;
+                    })
             },
 
             displayedSuppliers() {
