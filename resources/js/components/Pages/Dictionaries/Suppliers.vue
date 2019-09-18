@@ -15,13 +15,13 @@
                                 <div class="float-right">
                                     <div class="btn-group btn-group-sm btn-group-toggle mx-2" data-toggle="buttons">
                                         <label class="btn btn-outline-info ">
-                                            <input type="radio" name="all" data-toggle="tooltip" title="Все" id="all" autocomplete="off" value="-1" v-model="fdel"> <i class="fas fa-hourglass"></i>
+                                            <input type="radio" name="all" data-toggle="tooltip" title="Все" id="all" autocomplete="off" value="-1" v-model="fdel" v-on:change="fdel")> <i class="fas fa-hourglass"></i>
                                         </label>
                                         <label class="btn btn-outline-success active">
-                                            <input type="radio" name="filter1" data-toggle="tooltip" title="Действующие" id="allw" autocomplete="off" value="0" checked v-model="fdel"> <i class="fas fa-hourglass-end"></i>
+                                            <input type="radio" name="filter1" data-toggle="tooltip" title="Действующие" id="allw" autocomplete="off" value="0" checked v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass-end"></i>
                                         </label>
                                         <label class="btn btn-outline-warning">
-                                            <input type="radio" name="filter2" data-toggle="tooltip" title="Неактуальные" id="alld" autocomplete="off" value="1" v-model="fdel" > <i class="far fa-hourglass"></i>
+                                            <input type="radio" name="filter2" data-toggle="tooltip" title="Неактуальные" id="alld" autocomplete="off" value="1" v-model="fdel" v-on:change="fdel" > <i class="far fa-hourglass"></i>
                                         </label>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
                                             <router-link class="btn btn-outline-info" :to="'/supplier/${supplier.KLIENT_ID}'"></router-link>
-                                            <b-button variant="outline-info" size="sm"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
+                                            <b-button variant="outline-info" size="sm" :to="'/suppliers/${supplier.KLIENT_ID}/price-list'"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
                                             <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier"
                                                       @click="getEditSuppl(supplier.KLIENT_ID)"><i class="fas fa-edit"></i> Редактировать</b-button>
                                             <b-button variant="outline-danger" size="sm"><i class="fas fa-trash-alt"></i> Удалить</b-button>
@@ -111,7 +111,7 @@
                                             <div class="col-md-9">
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <h5>Адрес поставщика</h5>
+                                                        <h5>Адрес покупателя</h5>
                                                         <p class="recv_post">Город: {{ customer.KL_CITY }}</p>
                                                         <p class="recv_post">Адрес: {{ customer.KL_ADR }}</p>
                                                         <p class="recv_post">Телефон: {{ customer.KL_TEL }}</p>
@@ -125,12 +125,12 @@
                                                         <p class="recv_post">Р/сч: {{ customer.KL_RS }}</p>
                                                         <p class="recv_post">Банк: {{ customer.KL_BANK }}</p>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <!--<div class="col-md-4">
                                                         <h5>Финансовая информация</h5>
                                                         <p class="recv_post">Торговая наценка: {{ customer.PREMIUM}}</p>
                                                         <p class="recv_post">Компенсация: {{customer.KOMPENS}}</p>
                                                         <p class="recv_post">Трансп. расходы: {{customer.TRANSP}}</p>
-                                                    </div>
+                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -188,7 +188,7 @@
                 errors: [],
                 errorsCust: [],
                 searchSuppl: '',
-                fdel: 1,
+                fdel: null,
                 page: 1,
                 pageCust: 1,
                 perPage: 2,
@@ -258,7 +258,8 @@
 
             showEdit() {
                 this.showModal = 'is-active'
-            }
+            },
+
 
         },
         created() {
@@ -280,15 +281,17 @@
         },
         computed: {
             filteredSuppliers() {
+               // fdel = this.checked(value);
+
               let klCod = this.searchSuppl;
-              let Fdel = this.checked(fdel);
+              //let Fdel = this.checked(fdel);
                 return this.suppliers.filter((supplier) => {
                     if (klCod === '') return true;
                 else return supplier.KLIENT_KOD && supplier.KLIENT_KOD.toUpperCase().indexOf(klCod.toUpperCase()) > -1})
-                    .filter((supplier) => {
+                   /* .filter((supplier) => {
                         if (Fdel !== -1)
                         return supplier.FDEL = Fdel;
-                    })
+                    })*/
             },
 
             displayedSuppliers() {

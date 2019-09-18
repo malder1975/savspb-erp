@@ -12,6 +12,7 @@ import Persons from "../components/Pages/persons/Persons";
 import PersonProfile from "../components/Pages/persons/PersonProfile";
 import Organizations from "../components/Pages/Dictionaries/Organizations";
 import EditSupplier from "../components/Pages/Dictionaries/EditSupplier";
+import SupPricelists from "../components/views/SupPricelists";
 
 
 const router = new VueRouter({
@@ -80,7 +81,8 @@ const router = new VueRouter({
                      },
                      {
                          path: '/suppliers/:id/price-list',
-                         name: 'supplprice'
+                         name: 'supplprice',
+                         component: SupPricelists
                      }
                  ]
              },
