@@ -15,7 +15,7 @@
                                 <div class="float-right">
                                     <div class="btn-group btn-group-sm btn-group-toggle mx-2" data-toggle="buttons">
                                         <label class="btn btn-outline-info ">
-                                            <input type="radio" name="all" data-toggle="tooltip" title="Все" id="all" autocomplete="off" value="-1" v-model="fdel" v-on:change="fdel")> <i class="fas fa-hourglass"></i>
+                                            <input type="radio" name="all" data-toggle="tooltip" title="Все" id="all" autocomplete="off" value="-1" v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass"></i>
                                         </label>
                                         <label class="btn btn-outline-success active">
                                             <input type="radio" name="filter1" data-toggle="tooltip" title="Действующие" id="allw" autocomplete="off" value="0" checked v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass-end"></i>
@@ -295,7 +295,7 @@
             },
 
             displayedSuppliers() {
-                return this.paginate(this.filteredSuppliers)
+                return this.paginate(this.suppliers)
             },
             displayedCustomers() {
                 return this.paginateCust(this.customers)

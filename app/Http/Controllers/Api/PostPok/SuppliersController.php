@@ -17,7 +17,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-       $suppliers = Suppliers::where(['KLIENT.POST' => 1])->    //, 'KLIENT.FDEL' => 0
+       $suppliers = Suppliers::where(['KLIENT.POST' => 1, 'KLIENT.FDEL' => 0])->    //, 'KLIENT.FDEL' => 0
         join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->
         join('FSALER', 'KLIENT.FSALER_ID', '=', 'FSALER.FSALER_ID')->
         select('KLIENT.*', 'ORG.ORG_NAME')->
