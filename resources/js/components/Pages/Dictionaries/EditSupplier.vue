@@ -189,21 +189,21 @@
                             <b-col cols="4" sm="3">
                                 <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
                                     <label>Торговая наценка</label>
-                                    <b-inpu-group class="mt-3" append="%">
+                                    <b-input-group class="mt-3" append="%">
                                         <b-form-input v-model="supplier.PREMIUM" name="supPrem" type="number" class="input-sav"></b-form-input>
-                                    </b-inpu-group>
+                                    </b-input-group>
                                 </validate>
                                 <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
                                     <label>Транспортные расходы</label>
-                                    <b-inpu-group class="mt-3" append="%">
+                                    <b-input-group class="mt-3" append="%">
                                         <b-form-input v-model="supplier.TRANSP" name="supTransp" type="number" class="input-sav"></b-form-input>
-                                    </b-inpu-group>
+                                    </b-input-group>
                                 </validate>
                                 <validate auto-label class="form-group" :class="fieldClassName(formstate.name)">
                                     <label>Компенсация</label>
-                                    <b-inpu-group class="mt-3" append="%">
+                                    <b-input-group class="mt-3" append="%">
                                         <b-form-input v-model="supplier.KOMPENS" name="supKompens" type="number" class="input-sav"></b-form-input>
-                                    </b-inpu-group>
+                                    </b-input-group>
                                 </validate>
                             </b-col>
                         </b-form-row>

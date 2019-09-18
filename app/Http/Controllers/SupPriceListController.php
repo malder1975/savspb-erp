@@ -14,7 +14,11 @@ class SupPriceListController extends Controller
      */
     public function index()
     {
-        //
+        $supprlist = SupPriceList::where(['SUP_PRLIST.DEL' => 0])->
+            join('KLIENT', 'SUP_PRLIST.KLIENT_ID', '=', 'KLIENT.KLIENT_ID')->
+            select('SUP_PRLIST.*', 'KLIENT.NAME')->get();
+
+        return response()->json($supprlist, 200);
     }
 
     /**

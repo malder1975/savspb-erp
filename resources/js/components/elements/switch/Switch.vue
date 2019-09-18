@@ -15,8 +15,8 @@
         >
         <template v-if="label">
             <span
-                :data-checked="dataOn"
-                :data-unchecked="dataOff"
+                :data-checked="1"
+                :data-unchecked="0"
                 class="switch-slider">
             </span>
         </template>
@@ -35,7 +35,7 @@
         },
         data() {
             return {
-                checkedData: this.isChecked ? this.value : this.ucheckedValue
+                checkedData: this.isChecked ? this.value : this.uncheckedValue
             }
         },
         props: {

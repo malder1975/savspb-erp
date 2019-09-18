@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\PostPok;
 
+use App\Models\Karta;
 use App\Models\Merchandises;
 use App\Models\Organisations;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-       $suppliers = Suppliers::where(['KLIENT.POST' => 1])->    //, 'KLIENT.FDEL' => 0
+       $suppliers = Suppliers::where(['KLIENT.POST' => 1, 'KLIENT.FDEL' => 0])->    //, 'KLIENT.FDEL' => 0
         join('ORG', 'KLIENT.ORG_ID', '=', 'ORG.ORG_ID')->
         join('FSALER', 'KLIENT.FSALER_ID', '=', 'FSALER.FSALER_ID')->
         select('KLIENT.*', 'ORG.ORG_NAME')->
@@ -120,5 +121,11 @@ class SuppliersController extends Controller
     public function merchandises()
     {
         return response()->json(Merchandises::where('FDEL', 0)->get());
+    }
+
+    // Сумма задолженности поставщику
+    public function supplier_debt()
+    {
+        $debt = Karta::where();
     }
 }

@@ -950,9 +950,7 @@ input[type="color"].form-control:disabled {
 }
 
 .b-toaster.b-toaster-top-right .b-toast.b-toaster-enter-active, .b-toaster.b-toaster-top-right .b-toast.b-toaster-leave-active, .b-toaster.b-toaster-top-right .b-toast.b-toaster-move, .b-toaster.b-toaster-top-left .b-toast.b-toaster-enter-active, .b-toaster.b-toaster-top-left .b-toast.b-toaster-leave-active, .b-toaster.b-toaster-top-left .b-toast.b-toaster-move, .b-toaster.b-toaster-bottom-right .b-toast.b-toaster-enter-active, .b-toaster.b-toaster-bottom-right .b-toast.b-toaster-leave-active, .b-toaster.b-toaster-bottom-right .b-toast.b-toaster-move, .b-toaster.b-toaster-bottom-left .b-toast.b-toaster-enter-active, .b-toaster.b-toaster-bottom-left .b-toast.b-toaster-leave-active, .b-toaster.b-toaster-bottom-left .b-toast.b-toaster-move {
-  transition: -webkit-transform 0.175s;
   transition: transform 0.175s;
-  transition: transform 0.175s, -webkit-transform 0.175s;
 }
 
 .b-toaster.b-toaster-top-right .b-toast.b-toaster-enter-to .toast.fade, .b-toaster.b-toaster-top-right .b-toast.b-toaster-enter-active .toast.fade, .b-toaster.b-toaster-top-left .b-toast.b-toaster-enter-to .toast.fade, .b-toaster.b-toaster-top-left .b-toast.b-toaster-enter-active .toast.fade, .b-toaster.b-toaster-bottom-right .b-toast.b-toaster-enter-to .toast.fade, .b-toaster.b-toaster-bottom-right .b-toast.b-toaster-enter-active .toast.fade, .b-toaster.b-toaster-bottom-left .b-toast.b-toaster-enter-to .toast.fade, .b-toaster.b-toaster-bottom-left .b-toast.b-toaster-enter-active .toast.fade {
@@ -1162,8 +1160,7 @@ input[type="color"].form-control:disabled {
 }
 
 .switch-input:checked ~ .switch-slider::before {
-  -webkit-transform: translateX(0.875rem);
-          transform: translateX(0.875rem);
+  transform: translateX(0.875rem);
 }
 
 .switch-input:disabled ~ .switch-slider {
@@ -1186,8 +1183,7 @@ input[type="color"].form-control:disabled {
   font-size: 0.75rem;
 }
 .switch-lg .switch-input:checked ~ .switch-slider::before {
-  -webkit-transform: translateX(1.125rem);
-          transform: translateX(1.125rem);
+  transform: translateX(1.125rem);
 }
 
 .switch-sm {
@@ -1205,8 +1201,7 @@ input[type="color"].form-control:disabled {
   font-size: 0.5rem;
 }
 .switch-sm .switch-input:checked ~ .switch-slider::before {
-  -webkit-transform: translateX(0.625rem);
-          transform: translateX(0.625rem);
+  transform: translateX(0.625rem);
 }
 
 .switch-label {
@@ -1232,8 +1227,7 @@ input[type="color"].form-control:disabled {
   transition: inherit;
 }
 .switch-label .switch-input:checked ~ .switch-slider::before {
-  -webkit-transform: translateX(1.375rem);
-          transform: translateX(1.375rem);
+  transform: translateX(1.375rem);
 }
 .switch-label .switch-input:checked ~ .switch-slider::after {
   left: 0.0625rem;
@@ -1255,8 +1249,7 @@ input[type="color"].form-control:disabled {
   font-size: 0.75rem;
 }
 .switch-label.switch-lg .switch-input:checked ~ .switch-slider::before {
-  -webkit-transform: translateX(1.625rem);
-          transform: translateX(1.625rem);
+  transform: translateX(1.625rem);
 }
 .switch-label.switch-sm {
   width: 2.5rem;
@@ -1273,8 +1266,7 @@ input[type="color"].form-control:disabled {
   font-size: 0.5rem;
 }
 .switch-label.switch-sm .switch-input:checked ~ .switch-slider::before {
-  -webkit-transform: translateX(1.125rem);
-          transform: translateX(1.125rem);
+  transform: translateX(1.125rem);
 }
 
 .switch-3d .switch-slider {
@@ -1299,8 +1291,7 @@ input[type="color"].form-control:disabled {
   height: 1.875rem;
 }
 .switch-3d.switch-lg .switch-input:checked ~ .switch-slider::before {
-  -webkit-transform: translateX(1.125rem);
-          transform: translateX(1.125rem);
+  transform: translateX(1.125rem);
 }
 .switch-3d.switch-sm {
   width: 2rem;
@@ -1311,8 +1302,7 @@ input[type="color"].form-control:disabled {
   height: 1.375rem;
 }
 .switch-3d.switch-sm .switch-input:checked ~ .switch-slider::before {
-  -webkit-transform: translateX(0.625rem);
-          transform: translateX(0.625rem);
+  transform: translateX(0.625rem);
 }
 
 .switch-pill .switch-slider {
@@ -1557,6 +1547,11 @@ app-root {
 .cart-title {
   font-size: 22px;
   font-weight: 200;
+}
+
+/* Прайс-листы поставщиков*/
+.top-toolbar {
+  background-color: #ccf7ff;
 }
 
 /*!
@@ -3412,6 +3407,10 @@ pre code {
   color: #6c757d;
   opacity: 1;
 }
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
 .form-control:-ms-input-placeholder {
   color: #6c757d;
   opacity: 1;
@@ -4987,9 +4986,7 @@ input[type=button].btn-block {
   height: calc(1rem - 0.25rem);
   background-color: #adb5bd;
   border-radius: 0.5rem;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
   transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .custom-switch .custom-control-label::after {
@@ -4998,8 +4995,7 @@ input[type=button].btn-block {
 }
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
   background-color: #fff;
-  -webkit-transform: translateX(0.75rem);
-          transform: translateX(0.75rem);
+  transform: translateX(0.75rem);
 }
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(23, 126, 193, 0.5);
@@ -5852,10 +5848,10 @@ input[type=button].btn-block {
 }
 @media (min-width: 576px) {
   .card-columns {
-    -webkit-column-count: 3;
-            column-count: 3;
-    -webkit-column-gap: 1.25rem;
-            column-gap: 1.25rem;
+    -moz-column-count: 3;
+         column-count: 3;
+    -moz-column-gap: 1.25rem;
+         column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
   }
@@ -6723,11 +6719,8 @@ a.close.disabled {
   pointer-events: none;
 }
 .modal.fade .modal-dialog {
-  transition: -webkit-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
-  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
-  -webkit-transform: translate(0, -50px);
-          transform: translate(0, -50px);
+  transform: translate(0, -50px);
 }
 @media (prefers-reduced-motion: reduce) {
   .modal.fade .modal-dialog {
@@ -6735,8 +6728,7 @@ a.close.disabled {
   }
 }
 .modal.show .modal-dialog {
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
 }
 
 .modal-dialog-scrollable {
@@ -7162,9 +7154,7 @@ a.close.disabled {
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  transition: -webkit-transform 0.6s ease-in-out;
   transition: transform 0.6s ease-in-out;
-  transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .carousel-item {
@@ -7180,21 +7170,18 @@ a.close.disabled {
 
 .carousel-item-next:not(.carousel-item-left),
 .active.carousel-item-right {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 .carousel-item-prev:not(.carousel-item-right),
 .active.carousel-item-left {
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .carousel-fade .carousel-item {
   opacity: 0;
   transition-property: opacity;
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
 }
 .carousel-fade .carousel-item.active,
 .carousel-fade .carousel-item-next.carousel-item-left,
@@ -7321,15 +7308,13 @@ a.close.disabled {
 
 @-webkit-keyframes spinner-border {
   to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes spinner-border {
   to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 .spinner-border {
@@ -7352,8 +7337,7 @@ a.close.disabled {
 
 @-webkit-keyframes spinner-grow {
   0% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
   }
   50% {
     opacity: 1;
@@ -7362,8 +7346,7 @@ a.close.disabled {
 
 @keyframes spinner-grow {
   0% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
   }
   50% {
     opacity: 1;

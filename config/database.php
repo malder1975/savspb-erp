@@ -89,7 +89,7 @@ return [
             'driver' => 'firebird',
             'host' => env("DB_HOST", 'localhost'),
             'port' => env('DB_PORT', '3050'),
-            'database' => env('DB_DATABASE', 'D:\DB\base_sav.fdb'),
+            'database' => env('DB_DATABASE', 'g:\WBase\base_sav.fdb'),
             'username' => env('DB_USERNAME', 'sysdba'),
             'password' => env('DB_PASSWORD', 'masterkey'),
             'charset' => env('DB_CHARSET', 'UTF8'),
