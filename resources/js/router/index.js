@@ -71,7 +71,7 @@ const router = new VueRouter({
                  component: SuppliersList,
                  childern: [
                      {
-                         path: '/suppliers/:id',
+                         path: '/supplier/:id',
                          name: 'supplier',
                          component: EditSupplier
                      },
@@ -81,16 +81,13 @@ const router = new VueRouter({
                      },
                      {
                          path: '/suppliers/:id/price-list',
-                         name: 'supplprice'
+                         name: 'supplprice',
+                         component: SupplierPrices
                      }
                  ]
              },
 
-             {
-               path: '/supp-pricelist',
-               name: 'supp-pricelists',
-               component: SupplierPrices
-             },
+
 
              /*{
                  path: '/organizations',

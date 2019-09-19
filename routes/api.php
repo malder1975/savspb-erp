@@ -30,10 +30,11 @@ Route::prefix('v1')->group(function () {
             Route::get('person-account', 'Personal\PersonController@index');
             Route::get('suppliers', 'Api\PostPok\SuppliersController@index');
             Route::get('supplier/{id}', 'Api\PostPok\SuppliersController@show');
-            Route::post('supplier/{id}', 'Api\PostPok\SuppliersController@update');
+            Route::put('supplier/{id}', 'Api\PostPok\SuppliersController@update');
             Route::post('supplier/{id}', 'Api\PostPok\SuppliersController@destroy');
             Route::get('organisations', 'Api\PostPok\SuppliersController@organisations');
             Route::get('merchandises', 'Api\PostPok\SuppliersController@merchandises');
+            Route::get('supplier/{id}/price-list', 'Api\PostPok\SuppliersController@supplprlist');
             Route::get('customers', 'Api\PostPok\CustomersController@index');
         });
 

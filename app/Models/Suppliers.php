@@ -25,6 +25,11 @@ class Suppliers extends Model
         return $this->belongsTo('App\Models\Merchandises', 'FSALER_ID', 'FSALER_ID');
     }
 
+    public function supprlist()
+    {
+        return $this->hasManyThrough('App\Models\SupPricelist', 'KLIENT_ID', 'KLIENT_ID');
+    }
+
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\PostPok;
 use App\Models\Karta;
 use App\Models\Merchandises;
 use App\Models\Organisations;
+use App\Models\SupPriceList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Suppliers;
@@ -121,6 +122,11 @@ class SuppliersController extends Controller
     public function merchandises()
     {
         return response()->json(Merchandises::where('FDEL', 0)->get());
+    }
+
+    public function supplprlist($id)
+    {
+        return response()->json(SupPriceList::where('KLIENT_ID', $id)->get());
     }
 
     // Сумма задолженности поставщику
