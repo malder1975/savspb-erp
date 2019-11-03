@@ -14,14 +14,14 @@
                                 <!--span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span-->
                                 <div class="float-right">
                                     <div class="btn-group btn-group-sm btn-group-toggle mx-2" data-toggle="buttons">
-                                        <label class="btn btn-outline-info ">
-                                            <input type="radio" name="all" data-toggle="tooltip" title="Все" id="all" autocomplete="off" value="-1" v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass"></i>
+                                        <label class="btn btn-outline-info " data-toggle="tooltip" title="Все">
+                                            <input type="radio" name="all"  id="all" autocomplete="off" value="-1" v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass"></i>
                                         </label>
-                                        <label class="btn btn-outline-success active">
-                                            <input type="radio" name="filter1" data-toggle="tooltip" title="Действующие" id="allw" autocomplete="off" value="0" checked v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass-end"></i>
+                                        <label class="btn btn-outline-success active" data-toggle="tooltip" title="Действующие">
+                                            <input type="radio" name="filter1"  id="allw" autocomplete="off" value="0" checked v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass-end"></i>
                                         </label>
-                                        <label class="btn btn-outline-warning">
-                                            <input type="radio" name="filter2" data-toggle="tooltip" title="Неактуальные" id="alld" autocomplete="off" value="1" v-model="fdel" v-on:change="fdel" > <i class="far fa-hourglass"></i>
+                                        <label class="btn btn-outline-warning" data-toggle="tooltip" title="Неактуальные">
+                                            <input type="radio" name="filter2"  id="alld" autocomplete="off" value="1" v-model="fdel" v-on:change="fdel" > <i class="far fa-hourglass"></i>
                                         </label>
                                     </div>
                                 </div>
@@ -63,8 +63,8 @@
                                                     <div class="col-md-4">
                                                         <h5>Финансовая информация</h5>
                                                         <p class="recv_post">Торговая наценка: {{ (Math.round(supplier.PREMIUM) == NaN ? 0 : Math.round(supplier.PREMIUM)) }}%</p>
-                                                        <p class="recv_post">Компенсация: {{ (Math.round(supplier.KOMPENS) == Nan ? 0 : Math.round(supplier.KOMPENS)) }}%</p>
-                                                        <p class="recv_post">Трансп. расходы: {{ Math.round(supplier.TRANSP) == Nan ? 0 : Math.round(supplier.TRANSP) }}%</p>
+                                                        <p class="recv_post">Компенсация: {{ (Math.round(supplier.KOMPENS) == NaN ? 0 : Math.round(supplier.KOMPENS)) }}%</p>
+                                                        <p class="recv_post">Трансп. расходы: {{ Math.round(supplier.TRANSP) == NaN ? 0 : Math.round(supplier.TRANSP) }}%</p>
                                                         <hr>
                                                         <p class="recv_post">Сумма задолженности по реализации: <span class="text-warning">0.00</span> </p>
                                                         <p class="recv_post">Сумма задолженности по графику: <span class="text-danger">0.00</span> </p>

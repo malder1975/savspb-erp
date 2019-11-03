@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class CheckIsAdmin
+class CheckLevel
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,9 @@ class CheckIsAdmin
      */
     public function handle($request, Closure $next, $level)
     {
-       if (JWTAuth::user()->LEVELS_ID === 100) {
-            return $next($request);
-        } else {
-            return response()->json(['error' => 'Unauthorized'], 403);
+        if (!$request->user()->hasLevel($level)) {
+            return response()->json(['error' => 'Нет прав доступа.'], 401);
         }
+        return $next($request);
     }
 }

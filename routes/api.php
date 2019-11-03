@@ -23,7 +23,7 @@ Route::prefix('v1')->group(function () {
 
         Route::group(['middleware' => 'jwt.auth'], function () {
             Route::get('user', 'AuthController@getAuthenticatedUser');
-            Route::get('personal', 'Personal\PersonalController@index')->middleware('isAdmin');
+            Route::get('personal', 'Personal\PersonalController@index')->middleware('isSuperAdmin');
             Route::get('personal/{id}', 'Personal\PersonalController@show')->middleware('isAdminOrSelf');
             //Route::resource('personal', 'Personal\PersonalController', ['except' => ['create', 'edit']]);
             Route::post('logout', 'AuthController@logout');
@@ -32,6 +32,7 @@ Route::prefix('v1')->group(function () {
             Route::get('supplier/{id}', 'Api\PostPok\SuppliersController@show');
             Route::post('supplier/{id}', 'Api\PostPok\SuppliersController@update');
             Route::post('supplier/{id}', 'Api\PostPok\SuppliersController@destroy');
+            Route::get('suppliers/{id}/price-lists', 'Api\PostPok\SuppliersController@suplprlists');
             Route::get('organisations', 'Api\PostPok\SuppliersController@organisations');
             Route::get('merchandises', 'Api\PostPok\SuppliersController@merchandises');
             Route::get('customers', 'Api\PostPok\CustomersController@index');

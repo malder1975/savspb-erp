@@ -140,6 +140,7 @@
                 // get the redirect object
                 let redirect = this.$auth.redirect();
                 let app = this;
+
                 this.$auth.login({
                     data: {
                         email: app.email,
@@ -149,6 +150,12 @@
                     success: function() {
                         // handle redirection
                         app.success = true;
+                        response => {
+                            let token = response.token
+                            if (token) {
+                                localStorage.setItem('token', token)
+                            }
+                        }
                         const redirectTo = 'index';
                         this.$router.push({name: redirectTo})
                     },

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Models\Personal;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -38,7 +37,7 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $v = Validator::make($request->json()->all(), [
-            'LOGIN' => 'required|string|min:3|max:255',
+            'FAM' => 'required|string|min:3|max:255',
             'email' => 'required|email|unique:users',
             'PASS' => 'required|min:3|confirmed'
         ]);
@@ -47,7 +46,7 @@ class AuthController extends Controller
             return response()->json($v->errors()->toJson(), 400);
         }
         $user = Personal::create([
-            'LOGIN' => $request->json()->get('LOGIN'),
+            'FAM' => $request->json()->get('FAM'),
             'email' => $request->json()->get('email'),
             'PASS' => Hash::make($request->json()->get('PASS')),
         ]);
@@ -59,7 +58,7 @@ class AuthController extends Controller
 
     public function login(Request $request, $remember = false)
     {
-        $credentials = $request->json()->all();
+        $credentials = $request->only('email', 'password');
 
         try
         {
@@ -116,7 +115,7 @@ class AuthController extends Controller
         if ($token = JWTAuth::refresh($token)) {
             return response()->json([
                 'status' => 'Success'
-            ], 200)->header('Authorization', $token);
+            ], 200)->header('Authorization', 'Bearer '.$token);
         }
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
