@@ -27,7 +27,7 @@ class Pricelist extends Model
 
     public function tarifAsm()
     {
-        return $this->belongsTo('App\Models\DictTarifAsm', 'TARIFF_ASM_ID', 'TARIFF_ASM_Wa');
+        return $this->belongsTo('App\Models\DictTarifAsm', 'TARIFF_ASM_ID', 'TARIFF_ASM_ID');
     }
 
     public function tarifWarp()
