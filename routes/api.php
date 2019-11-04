@@ -36,6 +36,7 @@ Route::prefix('v1')->group(function () {
             Route::get('organisations', 'Api\PostPok\SuppliersController@organisations');
             Route::get('merchandises', 'Api\PostPok\SuppliersController@merchandises');
             Route::get('customers', 'Api\PostPok\CustomersController@index');
+            Route::get('inetaccnts', 'InetAccController@index');
         });
 
         Route::group(['middleware' => 'jwt.refresh'], function () {
