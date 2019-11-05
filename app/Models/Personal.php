@@ -18,7 +18,7 @@ class Personal extends Authenticatable implements JWTSubject
 
 
     protected $fillable = [
-        'LOGIN', 'PASS', 'email', 'LEVELS_ID'
+        'FAM', 'PASS', 'email', 'LEVELS_ID'
     ];
 
     protected $hidden = [
@@ -51,12 +51,13 @@ class Personal extends Authenticatable implements JWTSubject
 
     public function levels()
     {
-        return $this->belongsTo(Levels::class);
+        return $this->belongsToMany(Levels::class);
     }
 
-    public function isAdmin()
+    public function isSuperAdmin()
     {
-        //return $this->levels->LEVELS_ID == 100;
-        return (boolean)$this->levels->where('NAME', 'Supervisor')->count();
+        return (boolean)$this->levels()->where('LEVELS_ID', '=', 100)->count();
+        //return console.log()
+        //return (boolean)$this->levels->where('NAME', 'Supervisor')->count();
     }
 }

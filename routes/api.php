@@ -17,24 +17,27 @@ Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('register', 'AuthController@signup');
         Route::post('login', 'AuthController@login');
+        Route::get('refresh', 'AuthController@refresh');
         Route::post('reset-password', 'AuthController@sendPasswordResetLink');
         //Route::post('reset/password', 'AuthController@callResetPassword');
 
 
+
+
         Route::group(['middleware' => 'jwt.auth'], function () {
             Route::get('user', 'AuthController@getAuthenticatedUser');
-            Route::get('personal', 'Personal\PersonalController@index')->middleware('isAdmin');
+            Route::get('personal', 'Personal\PersonalController@index')->middleware('isSuperAdmin');
             Route::get('personal/{id}', 'Personal\PersonalController@show')->middleware('isAdminOrSelf');
             //Route::resource('personal', 'Personal\PersonalController', ['except' => ['create', 'edit']]);
             Route::post('logout', 'AuthController@logout');
             Route::get('person-account', 'Personal\PersonController@index');
             Route::get('suppliers', 'Api\PostPok\SuppliersController@index');
-            Route::get('supplier/{id}', 'Api\PostPok\SuppliersController@show');
-            Route::put('supplier/{id}', 'Api\PostPok\SuppliersController@update');
+            Route::get('supplier/{id}/edit', 'Api\PostPok\SuppliersController@show');
+            Route::patch('supplier/{id}/edit', 'Api\PostPok\SuppliersController@update');
             Route::post('supplier/{id}', 'Api\PostPok\SuppliersController@destroy');
             Route::get('organisations', 'Api\PostPok\SuppliersController@organisations');
             Route::get('merchandises', 'Api\PostPok\SuppliersController@merchandises');
-            Route::get('supplier/{id}/price-list', 'Api\PostPok\SuppliersController@supplprlist');
+            //Route::get('supplprlists', 'Api\SuplPlrlist\SupPriseListController@index');
             Route::get('customers', 'Api\PostPok\CustomersController@index');
         });
 
@@ -49,9 +52,15 @@ Route::prefix('v1')->group(function () {
         }); */
     });
 
-    Route::middleware('auth:api')->get('/user', function(Request $request) {
+    Route::middleware('auth:api')->get('/user', function (Request $request) {
         return $request->user();
     });
+    /*Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('user', 'AuthController@getAuthenticatedUser');
+        Route::get('personal', 'Personal\PersonalController@index')->middleware('isSuperAdmin');
+        Route::get('personal/{id}', 'Personal\PersonalController@show')->middleware('isAdminOrSelf');
+    });*/
+
 
 });
 

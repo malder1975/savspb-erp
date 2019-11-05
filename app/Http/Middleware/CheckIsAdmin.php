@@ -16,7 +16,8 @@ class CheckIsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (JWTAuth::user()->LEVELS_ID === 100) {
+        if (JWTauth::check() && JWTAuth::user()->LEVELS_ID === 100) {
+            //return console.log(JWTAuth::user()->LEVELS_ID);
             return $next($request);
         } else {
             return response()->json(['error' => 'Unauthorized'], 403);

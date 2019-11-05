@@ -9,6 +9,9 @@ class Suppliers extends Model
    protected $table = 'KLIENT';
    protected $primaryKey = 'KLIENT_ID';
 
+   const CREATED_AT = 'DATA_MODIFY';
+   const UPDATED_AT = 'DATA_MODIFY';
+
     protected $fillable =
         [
             'KLIENT_KOD', 'NAME', 'ORG_ID', 'GRAPH', 'FSALER_ID', 'KL_CITY', 'KL_ADR', 'KL_REPRESENT', 'KL_TEL', 'KL_FAX', 'KL_EMAIL', 'KL_BANK', 'KL_KS',

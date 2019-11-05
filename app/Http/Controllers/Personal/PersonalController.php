@@ -11,11 +11,23 @@ class PersonalController extends Controller
     public function index(Request $request)
     {
         return Personal::all();
+
+       /* return response()->json([
+            'status' => 'success',
+            'users' => $users->toArray()
+        ], 200);*/
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         return Personal::findOrFail($id);
+
+        /*return response()->json([
+            'status' => 'success',
+            'user' => $user->toArray()
+        ], 200);*/
+
+
     }
 
     public function update(Request $request, $id)

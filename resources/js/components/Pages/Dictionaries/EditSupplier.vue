@@ -219,7 +219,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-sm btn-outline-success">Сохранить</button>
+                    <button type="button" class="btn btn-sm btn-outline-success" @click="onSubmit">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -227,6 +227,8 @@
 </template>
 
 <script>
+    import VueForm from 'vue-form'
+    import axios from 'axios'
     import Switch  from '../../elements/switch/Switch'
     export default {
         name: "EditSupplier",
@@ -267,12 +269,18 @@
                 if ((field.$touched || field.$submitted) && field.$valid) {
                     return 'has-success'
                 }
-                if ((field.$touched || fiels.$submitted) && field.$invalid) {
+                if ((field.$touched || field.$submitted) && field.$invalid) {
                     return 'has-danger'
                 }
             },
             onSubmit() {
-                console.log(this.formstate.$valid)
+                //console.log(this.supplier)
+                axios.patch(`/auth/supplier/${this.supplier.KLIENT_ID}/edit`,  this.supplier).then(this.close())
+                    .catch((error) => this.errors = error.response.data.errors || error.message)
+            },
+
+            close() {
+                this.showModal = ''
             }
         },
         created() {

@@ -55,7 +55,11 @@
                     success: function() {
                         // handle redirection
                         app.success = true;
-                        const redirectTo = 'dashboard';
+                        console.log(this.$auth.user().levels);
+                        const redirectTo = redirect ? redirect.from.name :
+                            this.$auth.user().levels === 100 ? 'sadmin.dashboard' : 'dashboard';
+
+                       // const redirectTo = 'dashboard';
                         this.$router.push({name: redirectTo})
                     },
                     error: function() {

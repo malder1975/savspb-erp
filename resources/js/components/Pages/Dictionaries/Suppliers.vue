@@ -63,9 +63,9 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5>Финансовая информация</h5>
-                                                        <p class="recv_post">Торговая наценка: {{ (Math.round(supplier.PREMIUM) == NaN ? 0 : Math.round(supplier.PREMIUM)) }}%</p>
-                                                        <p class="recv_post">Компенсация: {{ (Math.round(supplier.KOMPENS) == Nan ? 0 : Math.round(supplier.KOMPENS)) }}%</p>
-                                                        <p class="recv_post">Трансп. расходы: {{ Math.round(supplier.TRANSP) == Nan ? 0 : Math.round(supplier.TRANSP) }}%</p>
+                                                        <p class="recv_post">Торговая наценка: {{ (Math.round(supplier.PREMIUM) == null ? 0 : Math.round(supplier.PREMIUM)) }}%</p>
+                                                        <p class="recv_post">Компенсация: {{ (Math.round(supplier.KOMPENS) == null ? 0 : Math.round(supplier.KOMPENS)) }}%</p>
+                                                        <p class="recv_post">Трансп. расходы: {{ Math.round(supplier.TRANSP) == null ? 0 : Math.round(supplier.TRANSP) }}%</p>
                                                         <hr>
                                                         <p class="recv_post">Сумма задолженности по реализации: <span class="text-warning">0.00</span> </p>
                                                         <p class="recv_post">Сумма задолженности по графику: <span class="text-danger">0.00</span> </p>
@@ -76,11 +76,11 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
-                                            <router-link class="btn btn-outline-info" :to="'/supplier/${supplier.KLIENT_ID}'"></router-link>
-                                            <b-button class="btn btn-outline-info btn-sm" :to="{ path: '/supplier/${supplier.KLIENT_ID}/price-list' }"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
-                                            <b-button variant="outline-info" size="sm" :to="{ name: 'supplprice' }"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
-                                            <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier"
-                                                      @click="getEditSuppl(supplier.KLIENT_ID)"><i class="fas fa-edit"></i> Редактировать</b-button>
+                                            <router-link class="btn btn-outline-info" :to="{ name: 'supplprice' }"></router-link>
+                                            <b-button class="btn btn-outline-info btn-sm" to="{name:'supplprice', path: `/supplier/${supplier.KLIENT_ID}/price-lists` }"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
+                                            <b-button variant="outline-info" size="sm" :to="`/supplier/${supplier.KLIENT_ID}/price-lists`"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
+                                           <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier"
+                                                      @click="getEditSuppl(supplier.KLIENT_ID)"><i class="fas fa-edit"></i> Редактировать</b-button> <!--:to="{name: 'supplier', params: {id: supplier.KLIENT_ID}}"-->
                                             <b-button variant="outline-danger" size="sm"><i class="fas fa-trash-alt"></i> Удалить</b-button>
                                         </div>
                                     </div>
@@ -224,7 +224,8 @@
             },
 
             getEditSuppl(id) {
-                axios.get('/auth/supplier/' + id).then((response) => {
+                /*this.$router.push('/auth/supplier/' + supplier.KLIENT_ID );*/
+                axios.get(`/auth/supplier/${id}/edit`).then((response) => {
                     this.editSuppl = response.data
                 }).catch((error) =>
                 this.errors = error.response.data.errors || error.message)
