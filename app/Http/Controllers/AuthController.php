@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Models\Personal;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -35,11 +34,6 @@ class AuthController extends Controller
         //
     }
 
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login']]);
-    }
-
     public function signup(Request $request)
     {
         $v = Validator::make($request->json()->all(), [
@@ -49,8 +43,7 @@ class AuthController extends Controller
         ]);
         if ($v->fails())
         {
-            return response()->json(['status' => 'error',
-                'errors' => $v->errors()], 422);
+            return response()->json($v->errors()->toJson(), 400);
         }
         $user = Personal::create([
             'FAM' => $request->json()->get('FAM'),
@@ -60,13 +53,12 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user', 'token'), 200);
+        return response()->json(compact('user', 'token'), 201);
     }
 
     public function login(Request $request, $remember = false)
     {
-       // $credentials = $request->json()->all();
-        $credentials = $request->only('email', 'password', 'LEVELS_ID');
+        $credentials = $request->only('email', 'password');
 
         try
         {
@@ -76,7 +68,7 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-        return response()->json(['status' => 'success'], 200)->header('Authorization', 'bearer '.$token);
+        return response()->json(['status' => 'success'], 200)->header('Authorization', 'Bearer '.$token);
     }
 
     public function getAuthenticatedUser(Request $request)
@@ -123,24 +115,10 @@ class AuthController extends Controller
         if ($token = JWTAuth::refresh($token)) {
             return response()->json([
                 'status' => 'Success'
-            ], 200)->header('Authorization', 'Bearer ' .$token);
+            ], 200)->header('Authorization', 'Bearer '.$token);
         }
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
-
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
-    }
-
-/*    protected function guard()
-    {
-        return Auth::guard();
-    }*/
 
    /* public function sendPasswordResetLink(Request $request)
     {

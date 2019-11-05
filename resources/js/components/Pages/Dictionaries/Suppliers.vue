@@ -14,15 +14,14 @@
                                 <!--span class="ml-2"> Всего поставщиков - {{ suppliers.length }}</span-->
                                 <div class="float-right">
                                     <div class="btn-group btn-group-sm btn-group-toggle mx-2" data-toggle="buttons">
-                                        <label class="btn btn-outline-info" data-toggle="tooltip" data-placement="top" title="Все">
-                                            <input type="radio" name="all"  id="all" autocomplete="off" value="-1" > <i class="fas fa-hourglass"></i>
+                                        <label class="btn btn-outline-info " data-toggle="tooltip" title="Все">
+                                            <input type="radio" name="all"  id="all" autocomplete="off" value="-1" v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass"></i>
                                         </label>
-
-                                        <label class="btn btn-outline-success active" data-toggle="tooltip" data-placement="top" title="Действующие">
-                                            <input type="radio" name="filter1"  id="allw" autocomplete="off" value="0" checked > <i class="fas fa-hourglass-end"></i>
+                                        <label class="btn btn-outline-success active" data-toggle="tooltip" title="Действующие">
+                                            <input type="radio" name="filter1"  id="allw" autocomplete="off" value="0" checked v-model="fdel" v-on:change="fdel"> <i class="fas fa-hourglass-end"></i>
                                         </label>
-                                        <label class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Неактуальные">
-                                            <input type="radio" name="filter2"  id="alld" autocomplete="off" value="1" > <i class="far fa-hourglass"></i>
+                                        <label class="btn btn-outline-warning" data-toggle="tooltip" title="Неактуальные">
+                                            <input type="radio" name="filter2"  id="alld" autocomplete="off" value="1" v-model="fdel" v-on:change="fdel" > <i class="far fa-hourglass"></i>
                                         </label>
                                     </div>
                                 </div>
@@ -63,9 +62,9 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5>Финансовая информация</h5>
-                                                        <p class="recv_post">Торговая наценка: {{ (Math.round(supplier.PREMIUM) == null ? 0 : Math.round(supplier.PREMIUM)) }}%</p>
-                                                        <p class="recv_post">Компенсация: {{ (Math.round(supplier.KOMPENS) == null ? 0 : Math.round(supplier.KOMPENS)) }}%</p>
-                                                        <p class="recv_post">Трансп. расходы: {{ Math.round(supplier.TRANSP) == null ? 0 : Math.round(supplier.TRANSP) }}%</p>
+                                                        <p class="recv_post">Торговая наценка: {{ (Math.round(supplier.PREMIUM) == NaN ? 0 : Math.round(supplier.PREMIUM)) }}%</p>
+                                                        <p class="recv_post">Компенсация: {{ (Math.round(supplier.KOMPENS) == NaN ? 0 : Math.round(supplier.KOMPENS)) }}%</p>
+                                                        <p class="recv_post">Трансп. расходы: {{ Math.round(supplier.TRANSP) == NaN ? 0 : Math.round(supplier.TRANSP) }}%</p>
                                                         <hr>
                                                         <p class="recv_post">Сумма задолженности по реализации: <span class="text-warning">0.00</span> </p>
                                                         <p class="recv_post">Сумма задолженности по графику: <span class="text-danger">0.00</span> </p>
@@ -76,11 +75,10 @@
                                     </b-card-body>
                                     <div slot="footer" class="text-right">
                                         <div class="ml-auto">
-                                            <router-link class="btn btn-outline-info" :to="{ name: 'supplprice' }"></router-link>
-                                            <b-button class="btn btn-outline-info btn-sm" to="{name:'supplprice', path: `/supplier/${supplier.KLIENT_ID}/price-lists` }"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
-                                            <b-button variant="outline-info" size="sm" :to="`/supplier/${supplier.KLIENT_ID}/price-lists`"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
-                                           <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier"
-                                                      @click="getEditSuppl(supplier.KLIENT_ID)"><i class="fas fa-edit"></i> Редактировать</b-button> <!--:to="{name: 'supplier', params: {id: supplier.KLIENT_ID}}"-->
+                                            <router-link class="btn btn-outline-info" :to="'/supplier/${supplier.KLIENT_ID}'"></router-link>
+                                            <b-button variant="outline-info" size="sm" :to="'/suppliers/${supplier.KLIENT_ID}/price-list'"><i class="far fa-newspaper"></i> Прайс-лист поставщика</b-button>
+                                            <b-button variant="outline-success" size="sm" data-toggle="modal" data-target="#editSupplier"
+                                                      @click="getEditSuppl(supplier.KLIENT_ID)"><i class="fas fa-edit"></i> Редактировать</b-button>
                                             <b-button variant="outline-danger" size="sm"><i class="fas fa-trash-alt"></i> Удалить</b-button>
                                         </div>
                                     </div>
@@ -175,7 +173,6 @@
 <script>
     import axios from 'axios'
     import EditSupplier from './EditSupplier'
-    import reuter from '../../../router'
     export default {
         name: "SuppliersList",
         props: {
@@ -191,7 +188,7 @@
                 errors: [],
                 errorsCust: [],
                 searchSuppl: '',
-                fdel: -1,
+                fdel: null,
                 page: 1,
                 pageCust: 1,
                 perPage: 2,
@@ -208,7 +205,7 @@
             getSuppliers() {
                 //let app = this;
                 axios.get('/auth/suppliers').then((response) => (
-                    //console.log(response.data);
+                    //console.log(response.data)
                         this.suppliers = response.data
                     )).catch((error) =>
                         this.errors = error.response.data.errors || error.message
@@ -224,16 +221,15 @@
             },
 
             getEditSuppl(id) {
-                /*this.$router.push('/auth/supplier/' + supplier.KLIENT_ID );*/
-                axios.get(`/auth/supplier/${id}/edit`).then((response) => {
+                axios.get('/auth/supplier/' + id + '/edit').then((response) => {
                     this.editSuppl = response.data
                 }).catch((error) =>
                 this.errors = error.response.data.errors || error.message)
             },
 
             setPages() {
-                let numOfPages = Math.ceil(this.suppliers.length / this.perPage);
-                //console.log(numOfPages);
+                let numOfPages = Math.ceil(this.filteredSuppliers.length / this.perPage);
+                console.log(numOfPages);
                 for (let index = 1; index <= numOfPages; index++) {
                     this.pages.push(index)
                 }
@@ -284,24 +280,28 @@
 
         },
         computed: {
-     filteredSuppliers() {
+            filteredSuppliers() {
                // fdel = this.checked(value);
 
               let klCod = this.searchSuppl;
-            //  let Fdel = this.checked(fdel);
+              //let Fdel = this.checked(fdel);
                 return this.suppliers.filter((supplier) => {
                     if (klCod === '') return true;
                 else return supplier.KLIENT_KOD && supplier.KLIENT_KOD.toUpperCase().indexOf(klCod.toUpperCase()) > -1})
+                   /* .filter((supplier) => {
+                        if (Fdel !== -1)
+                        return supplier.FDEL = Fdel;
+                    })*/
             },
 
             displayedSuppliers() {
-                return this.paginate(this.filteredSuppliers)
+                return this.paginate(this.suppliers)
             },
             displayedCustomers() {
                 return this.paginateCust(this.customers)
             },
             countSuppliers() {
-                return this.suppliers.length;
+                return this.filteredSuppliers.length;
             },
         }
     }

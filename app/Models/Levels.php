@@ -11,6 +11,8 @@ class Levels extends Model
         'NAME', 'NOTE'
     ];
 
+    //public $timestamps = false;
+
     public function personal()
     {
         return $this->belongsToMany(Personal::class)->withTimestamps();

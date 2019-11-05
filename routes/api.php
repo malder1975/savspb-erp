@@ -35,10 +35,13 @@ Route::prefix('v1')->group(function () {
             Route::get('supplier/{id}/edit', 'Api\PostPok\SuppliersController@show');
             Route::patch('supplier/{id}/edit', 'Api\PostPok\SuppliersController@update');
             Route::post('supplier/{id}', 'Api\PostPok\SuppliersController@destroy');
+            Route::get('suppliers/{id}/price-lists', 'Api\PostPok\SuppliersController@suplprlists');
             Route::get('organisations', 'Api\PostPok\SuppliersController@organisations');
             Route::get('merchandises', 'Api\PostPok\SuppliersController@merchandises');
             //Route::get('supplprlists', 'Api\SuplPlrlist\SupPriseListController@index');
             Route::get('customers', 'Api\PostPok\CustomersController@index');
+            Route::get('inetaccnts', 'InetAccController@index');
+            Route::get('inetaccsumm', 'InetAccController@accSummTotal');
         });
 
         Route::group(['middleware' => 'jwt.refresh'], function () {

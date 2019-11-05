@@ -51,13 +51,44 @@ class Personal extends Authenticatable implements JWTSubject
 
     public function levels()
     {
-        return $this->belongsToMany(Levels::class);
+        return $this->belongsToMany(Levels::class)->withTimestamps();
+    }
+
+    public function hasLevel($level)
+    {
+        if ($this->levels()->where('LEVELS_ID', '=', $level)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function authorizeLevels($levels)
+    {
+        if ($this->hasAnyLevels($levels)) {
+            return true;
+        }
+        abort(401, 'Отсутствуют необходимые права для доступа');
+    }
+
+    public function hasAnyLevels($levels)
+    {
+        if (is_array($levels)) {
+            foreach ($levels as $level) {
+                if ($this->hasLevel($level)) {
+                    return true;
+                }
+            }
+        } else {
+            if ($this->hasLevel($levels)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function isSuperAdmin()
     {
         return (boolean)$this->levels()->where('LEVELS_ID', '=', 100)->count();
-        //return console.log()
-        //return (boolean)$this->levels->where('NAME', 'Supervisor')->count();
+        //return (boolean)$this->levels()->where('NAME', '=', 'Supervisor')->count();
     }
 }

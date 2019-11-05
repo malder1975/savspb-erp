@@ -3,8 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../components/auth/Login'
 import Home from "../components/Pages/Home";
 import DefaultContainer from '../components/containers/DefaultContainer'
-import Dashboard from '../components/views/Dashboard'
-import SuperAdminDashboard from '../components/views/SuperAdmin/Dashboard'
+import Dashboard from '../components/Views/Dashboard'
 import SuppliersList from '../components/Pages/Dictionaries/Suppliers'
 //import SupplierView from '../components/views/SuppliersView'
 import ForgotPassword from "../components/auth/ForgotPassword";
@@ -13,9 +12,7 @@ import Persons from "../components/Pages/persons/Persons";
 import PersonProfile from "../components/Pages/persons/PersonProfile";
 import Organizations from "../components/Pages/Dictionaries/Organizations";
 import EditSupplier from "../components/Pages/Dictionaries/EditSupplier";
-import SupplierPrices from "../components/views/SuppPriceList";
-import Register from "../components/Pages/Register";
-//import store from '../store/index'
+import SupPricelists from "../components/views/SupPricelists";
 
 
 const router = new VueRouter({
@@ -35,14 +32,6 @@ const router = new VueRouter({
          }
      },
      {
-       path: '/register',
-       name: 'register',
-       component: Register,
-       meta: {
-           auth: false
-       }
-     },
-     {
        path: '/reset-password',
          name: 'Забыли пароль',
          component: ForgotPassword,
@@ -58,7 +47,6 @@ const router = new VueRouter({
            auth: false
          }
      },*/
-
      {
          path: '/',
          redirect: '/dashboard',
@@ -75,40 +63,30 @@ const router = new VueRouter({
              {
                  path: '/dashboard',
                  name: 'dashboard',
-                 component: Dashboard,
-                 meta: {
-                     auth: true
-                 }
+                 component: Dashboard
              },
-             /*{
-                 path: '/superadmin',
-                 name: 'sadmin.dashboard',
-                 component: SuperAdminDashboard,
-                 meta: {
-                     auth: {levels: 100, redirect: { name: 'login'}, forbiddenRedirect: '/403'}
-                 }
-             },*/
-
              {
                  path: '/suppliers',
                  name: 'suppliers',
                  component: SuppliersList,
                  childern: [
                      {
-                         path: '/supplier/:id/edit',
+                         path: '/suppliers/:id',
                          name: 'supplier',
                          component: EditSupplier,
                          children: [
                              {
-                                 path: 'price-lists',
+                                 path: '/price-lists',
                                  name: 'supplprices',
-                                 component: SupplierPrices
-
+                                 component: SupPricelists,
+                                 children: [
+                                     {
+                                         path: '/price-list/:id',
+                                         name: 'supplprice',
+                                     }
+                                 ]
                              },
-
                              {
-                                 path: 'price-lists/:id',
-                                 name: 'supplprice'
 
                              }
                          ]
@@ -116,11 +94,11 @@ const router = new VueRouter({
                  ]
              },
 
-             /*{
+             {
                  path: '/organizations',
                  name: 'Organizations',
                  component: Organizations
-             },*/
+             },
              {
                  path: '/users',
                  name: 'users',
@@ -144,18 +122,7 @@ const router = new VueRouter({
                  ]
              }
          ]
-     },
+     }
 ]
 });
-
-/*router.beforeEach((to, from, next) => {
-   if(to.matched.some(route => route.meta.auth) && !store.state.isLoggedIn) {
-       next({ name: 'login' })
-       return
-   }
-   if (to.path === '/login' && store.state.isLoggedIn) {
-       next({ name: 'dashboard' })
-   }
-   next()
-});*/
 export default router;

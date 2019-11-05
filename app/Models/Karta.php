@@ -23,4 +23,9 @@ class Karta extends Model
     {
         return $this->belongsTo('App\Models\Suppliers', 'KLIENT_ID', 'KLIENT_ID');
     }
+
+    public function inetAccGoods()
+    {
+        return $this->belongsToMany('App\Models\InetAccGoods', 'ACCPREDOPL2', 'KARTA_ID', 'KARTA_ID');
+    }
 }

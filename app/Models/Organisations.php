@@ -24,4 +24,9 @@ class Organisations extends Model
     {
         return $this->hasManyThrough('App\Models\Customers', 'ORG_ID', 'KLIENT_ID');
     }
+
+    public function inetAccounts()
+    {
+        return $this->hasManyThrough('App\Models\InetAcc', 'ORG_ID', 'ACCPREDOPL1_ID');
+    }
 }

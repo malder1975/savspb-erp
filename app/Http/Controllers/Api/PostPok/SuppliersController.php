@@ -98,6 +98,7 @@ class SuppliersController extends Controller
     public function update(Request $request, $id)
     {
         //$response =
+
         return Suppliers::find($id)->update($request->all());
         //return response()->json($edit);
     }

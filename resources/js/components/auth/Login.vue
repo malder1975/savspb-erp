@@ -61,17 +61,14 @@
                     </div>
                     <div class="row login-remember">
                     <div class="col-lg-6 col-md-6">
-                        <!--<div class="form-group">
+                        <div class="form-group">
                         <input type="checkbox" id="rememberme" class="form-check-input" v-model="rememberMe"/>
                         <label for="rememberme" class="form-check-label">Запомнить</label>
-                        </div>-->
-                        <div class="form-group">
-                            <router-link :to="{name: 'register'} ">Регистрация</router-link> <!-- reset-password -->
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 text-right login-forgot">
                         <div class="form-group">
-                        <router-link :to="{name: 'Забыли пароль'} ">Забыли пароль?</router-link> <!-- reset-password -->
+                        <router-link to="reset-password">Забыли пароль?</router-link>
                         </div>
                     </div>
                     </div>
@@ -106,13 +103,10 @@
 
 <script>
     import ForgotPassword from './ForgotPassword'
-    import Registration from '../Pages/Register'
-    import store from '../../store/index'
     export default {
         name: "Login",
         components: {
-          ForgotPassword,
-            Registration
+          ForgotPassword
         },
         /*data: {
             formstate: {},
@@ -146,29 +140,30 @@
                 // get the redirect object
                 let redirect = this.$auth.redirect();
                 let app = this;
+
                 this.$auth.login({
                     data: {
                         email: app.email,
                         password: app.password,
                         rememberMe: app.remember
                     },
-
                     success: function() {
                         // handle redirection
                         app.success = true;
-                        //
+                        response => {
+                            let token = response.token
+                            if (token) {
+                                localStorage.setItem('token', token)
+                            }
+                        }
                         const redirectTo = 'index';
-                        //localStorage.setItem('token', response.data.accessToken);
-                        /*const redirectTo = redirect ? redirect.from.name :
-                            this.$auth.user().LEVELS_ID === 100 ? 'sadmin.dashboard' : 'dashboard';*/
                         this.$router.push({name: redirectTo})
                     },
                     error: function() {
                         app.has_error = true;
                     },
                     rememberMe: true,
-                    fetchUser: true,
-                    //localStorage.setItem('token', response.data.access_token)
+                    fetchUser: true
                 })
             }
         }
