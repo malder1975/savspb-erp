@@ -9,7 +9,8 @@
 </template>
 
 <script>
-    import toggleClasses from "../../sidebar/toggle-classes.js"
+    import toggleClasses from '../../sidebar/toggle-classes.js'
+    import {navbarCssClasses, validBreakpoints, checkBreakpoint} from '../../navbar/appNavbarClasses'
     export default {
         name: "AppNavToggler",
         props: {
@@ -38,8 +39,8 @@
         },
         methods: {
             toggle(force) {
-                const [display, mobile] = [this.display, this.mobile]
-                let cssClass = navbarCssClasses[0]
+                const [display, mobile] = [this.display, this.mobile];
+                let cssClass = navbarCssClasses[0];
                 if (!mobile && display && checkBreakpoint(display, validBreakpoints)) {
                     cssClass = 'sidebar-${display}-show'
                 }

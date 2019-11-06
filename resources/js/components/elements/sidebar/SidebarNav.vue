@@ -56,12 +56,6 @@
     import SidebarNavItem from "./SidebarNavItem";
     export default {
         name: "SidebarNav",
-        components: {
-            SidebarNavItem,
-            SidebarNavLink,
-            SidebarNavDropdown,
-            SidebarNavLabel, SidebarNavDivider, SidebarNavTitle, VuePerfectScrollbar, SidebarHeader
-        },
         props: {
             navItems: {
                 type: Array,
@@ -69,6 +63,17 @@
                 default: () => []
             }
         },
+        components: {
+            SidebarNavItem,
+            SidebarNavLink,
+            SidebarNavDropdown,
+            SidebarNavLabel,
+            SidebarNavDivider,
+            SidebarNavTitle,
+            SidebarHeader,
+            VuePerfectScrollbar
+        },
+
         data() {
             return {}
         },

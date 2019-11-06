@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    import nav from '../../_nav'
     import AppHeader from '../elements/header/Header'
     import AppNav from '../elements/AppNav'
     import Sidebar from '../elements/sidebar/Sidebar'
@@ -28,12 +29,12 @@
     import SidebarNav from '../elements/sidebar/SidebarNav'
     import SidebarFooter from "../elements/sidebar/SidebarFooter";
     import SidebarMinimizer from "../elements/sidebar/SidebarMinimizer";
-   // import Breadcrumb from "../elements/Breadcrumb/Breadcrumb";
+    import Breadcrumb from "../elements/Breadcrumb/Breadcrumb";
 
     export default {
         name: "DefaultContainer",
         components: {
-          //  Breadcrumb,
+            Breadcrumb,
             SidebarMinimizer,
             SidebarFooter,
             AppHeader,
@@ -44,7 +45,7 @@
         },
         data() {
             return {
-                //nav: nav.items
+                nav: nav.items
             }
         },
         computed: {

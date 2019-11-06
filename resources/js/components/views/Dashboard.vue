@@ -62,8 +62,8 @@
                                 <i class="fas fa-handshake fa-4x"></i>
                             </b-col>
                             <b-col sm="8">
-                                <h2 class="mb-0 counter-suppliers float-right">{{ netPayAcc.length }}</h2>
-                                <p class="card-text">{{ SumTotal.SUM_TOTAL }}</p>
+                                <h2 class="mb-0 counter-suppliers float-right">{{ netPayAccs.length }}</h2>
+                                <p class="card-text">{{ sumTotal }}</p>
                             </b-col>
                         </b-row>
                         <p class="cart-title"> Счета NetPay </p>
@@ -80,9 +80,9 @@
         data() {
             return {
                 suppliers: [],
-                netPayAcc: [],
+                netPayAccs: [],
                 results: [],
-                sumTotal: null
+                sumTotal: []
             }
         },
         mounted() {
@@ -96,12 +96,12 @@
 
             // Кол-во счетов NetPay на сумму
             axios.get('/auth/inetaccnts').then((response) => {
-                this.netPayAcc = response.data
+                this.netPayAccs = response.data
             }).catch((error) =>
                 this.errors = error.response.data.errors || error.message
             );
 
-            axios.get('/auth/inetaccsumm').then((response) => {
+           axios.get('/auth/inetaccsumm').then((response) => {
                 this.SumTotal = response.data
             }).catch((error) =>
                 this.errors = error.response.data.errors || error.message
@@ -114,14 +114,23 @@
 
 
         methods: {
-            getSummAccs() {
+            //
+        },
 
+        created: {
+
+        },
+
+        computed: {
+            /*getSummAccs() {
+                Object.entries(this.netPayAccs).forEach(([key, val]) => {
+                    results.push(val.S_OPL)
+                });
+                return results.reduce(function (results, num) {
+                    return results + num
+                })
+                } */
             }
-        },
-
-        created() {
-            //sumTotal = this.getSummAccs()
-        },
     }
 </script>
 
