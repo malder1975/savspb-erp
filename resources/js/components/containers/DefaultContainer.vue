@@ -5,12 +5,12 @@
         </AppHeader>
         <div class="app-body">
             <Sidebar fixed>
-                <!--<SidebarNav ></SidebarNav>-->
-                <SidebarFooter></SidebarFooter>
-                <SidebarMinimizer></SidebarMinimizer>
+                <SidebarNav ></SidebarNav>
+<!--                <SidebarFooter></SidebarFooter>-->
+<!--                <SidebarMinimizer></SidebarMinimizer>-->
             </Sidebar>
             <main class="main">
-<!--                <Breadcrumb :list="list"/>-->
+               <Breadcrumb :list="list"/>
                 <div class="container-fluid">
                     <router-view></router-view>
                 </div>
@@ -35,8 +35,8 @@
         name: "DefaultContainer",
         components: {
             Breadcrumb,
-            SidebarMinimizer,
-            SidebarFooter,
+            //SidebarMinimizer,
+            //SidebarFooter,
             AppHeader,
             AppNav,
             Sidebar,

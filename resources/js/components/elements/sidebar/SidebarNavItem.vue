@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: "SidebarNavItem",
+        name: "sidebar-nav-item",
         props: {
             classes: {
                 type: String,

@@ -101,11 +101,11 @@
                 this.errors = error.response.data.errors || error.message
             );
 
-           axios.get('/auth/inetaccsumm').then((response) => {
+            /* axios.get('/auth/inetaccsumm').then((response) => {
                 this.SumTotal = response.data
             }).catch((error) =>
                 this.errors = error.response.data.errors || error.message
-            );
+            ); */
 
 
 

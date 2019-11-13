@@ -156,7 +156,7 @@
                                 localStorage.setItem('token', token)
                             }
                         }
-                        const redirectTo = 'index';
+                        const redirectTo = 'Главная';
                         this.$router.push({name: redirectTo})
                     },
                     error: function() {

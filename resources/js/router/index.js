@@ -25,7 +25,7 @@ const router = new VueRouter({
  routes: [
      {
          path: '/login',
-         name: 'login',
+         name: 'Вход',
          component: Login,
          meta: {
              auth: false
@@ -50,7 +50,7 @@ const router = new VueRouter({
      {
          path: '/',
          redirect: '/dashboard',
-         name: 'index',
+         name: 'Главная',
          component: DefaultContainer,
          meta: {
              auth: true
@@ -62,27 +62,27 @@ const router = new VueRouter({
              },
              {
                  path: '/dashboard',
-                 name: 'dashboard',
+                 name: 'Рабочий стол',
                  component: Dashboard
              },
              {
                  path: '/suppliers',
-                 name: 'suppliers',
+                 name: 'Поставщики',
                  component: SuppliersList,
                  childern: [
                      {
                          path: '/suppliers/:id',
-                         name: 'supplier',
+                         name: 'Поставщик',
                          component: EditSupplier,
                          children: [
                              {
                                  path: '/price-lists',
-                                 name: 'supplprices',
+                                 name: 'Прайс-листы поставщиков',
                                  component: SupPricelists,
                                  children: [
                                      {
                                          path: '/price-list/:id',
-                                         name: 'supplprice',
+                                         name: 'Прайс-лист поставщика',
                                      }
                                  ]
                              },
@@ -96,7 +96,7 @@ const router = new VueRouter({
 
              {
                  path: '/organizations',
-                 name: 'Organizations',
+                 name: 'Организации',
                  component: Organizations
              },
              {
@@ -111,12 +111,12 @@ const router = new VueRouter({
                  childern: [
                      {
                          path: 'persons',
-                         name: 'Persons',
+                         name: 'Персонал',
                          component: Persons
                      },
                      {
                          path: 'profile',
-                         name: 'Profile',
+                         name: 'Профиль',
                          component: PersonProfile
                      }
                  ]

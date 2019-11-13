@@ -3,7 +3,7 @@
         <SidebarHeader></SidebarHeader>
         <VuePerfectScrollbar class="scroll-area" :settings="psSettings" @ps-scroll-y="scrollHandle">
             <ul class="nav">
-                <template v-for="(item, index) in navItems">
+                <template v-for="(item,index) in navItems">
                     <template v-if="item.title">
                         <SidebarNavTitle :key="index" :name="item.name" :classes="item.class" :wrapper="item.wrapper"></SidebarNavTitle>
                     </template>
@@ -46,14 +46,15 @@
 </template>
 
 <script>
-    import SidebarHeader from "./SidebarHeader";
-    import VuePerfectScrollbar from "vue-perfect-scrollbar";
+
     import SidebarNavTitle from "./SidebarNavTitle";
     import SidebarNavDivider from "./SidebarNavDivider";
     import SidebarNavLabel from "./SidebarNavLabel";
     import SidebarNavDropdown from "./SidebarNavDropdown";
     import SidebarNavLink from "./SidebarNavLink";
     import SidebarNavItem from "./SidebarNavItem";
+    import SidebarHeader from "./SidebarHeader";
+    import VuePerfectScrollbar from "vue-perfect-scrollbar";
     export default {
         name: "SidebarNav",
         props: {
@@ -95,3 +96,11 @@
         }
     }
 </script>
+
+<style scoped lang="css">
+    .scroll-area {
+        position: absolute;
+        height: 100%;
+        margin: auto;
+    }
+</style>
