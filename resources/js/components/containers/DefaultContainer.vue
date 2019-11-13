@@ -5,7 +5,7 @@
         </AppHeader>
         <div class="app-body">
             <Sidebar fixed>
-                <SidebarNav ></SidebarNav>
+                <SidebarNav :navItems="nav"></SidebarNav>
 <!--                <SidebarFooter></SidebarFooter>-->
 <!--                <SidebarMinimizer></SidebarMinimizer>-->
             </Sidebar>

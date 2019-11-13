@@ -1,7 +1,7 @@
 <template>
     <nav class="sidebar-nav">
         <SidebarHeader></SidebarHeader>
-        <VuePerfectScrollbar class="scroll-area" :settings="psSettings" @ps-scroll-y="scrollHandle">
+<!--        <VuePerfectScrollbar class="scroll-area" :settings="psSettings" @ps-scroll-y="scrollHandle">-->
             <ul class="nav">
                 <template v-for="(item,index) in navItems">
                     <template v-if="item.title">
@@ -41,7 +41,7 @@
                 </template>
             </ul>
             <slot></slot>
-        </VuePerfectScrollbar>
+<!--        </VuePerfectScrollbar>-->
     </nav>
 </template>
 

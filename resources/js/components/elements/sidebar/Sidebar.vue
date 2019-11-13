@@ -1,7 +1,10 @@
 <template>
-    <div class="sidebar" v-on-clickaway="hideMobile">
+    <aside class="sidebar" v-on-clickaway="hideMobile">
         <slot>Sidebar</slot>
-    </div>
+    </aside>
+    <!--div class="sidebar" >
+
+    </div-->
 </template>
 
 <script>
@@ -9,7 +12,7 @@
     import { hideMobile } from "../../../sidebar/mixins/hideMobile.js";
 
     export default {
-        name: "Sidebar",
+        name: 'Sidebar',
         mixins: [ clickaway, hideMobile ],
         props: {
             fixed: {

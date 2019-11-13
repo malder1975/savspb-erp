@@ -1,6 +1,11 @@
 export default {
     items: [
         {
+          name: 'Рабочий стол',
+          url: '/dashboard',
+          icon: '',
+        },
+        {
             title: true,
             name: 'Интернет заказы',
             class: '',
