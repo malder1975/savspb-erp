@@ -5,7 +5,7 @@
         </AppHeader>
         <div class="app-body">
             <Sidebar fixed>
-                <SidebarNav :navItems="nav"></SidebarNav>
+                <Sidebar-Nav :navItems="nav"></Sidebar-Nav>
 <!--                <SidebarFooter></SidebarFooter>-->
 <!--                <SidebarMinimizer></SidebarMinimizer>-->
             </Sidebar>
@@ -30,6 +30,7 @@
     import SidebarFooter from "../elements/sidebar/SidebarFooter";
     import SidebarMinimizer from "../elements/sidebar/SidebarMinimizer";
     import Breadcrumb from "../elements/Breadcrumb/Breadcrumb";
+    import SidebarToggler from '../elements/sidebar/SidebarToggler'
 
     export default {
         name: "DefaultContainer",

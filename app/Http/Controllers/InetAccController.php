@@ -18,7 +18,7 @@ class InetAccController extends Controller
             join('ORG', 'ACCPREDOPL1.ORG_ID', '=', 'ORG.ORG_ID')->
             select('ACCPREDOPL1.*', 'ORG.ORG_NAME')->
 
-            orderby('ACCPREDOPL1.NUM', 'ASC')->selectRaw('ACCPREDOPL1_ID, NUM, DAT, BUYER_NAME, ORG.ORG_ID AS ORG_ID,
+            orderby('ACCPREDOPL1.NUM', 'ASC')->selectRaw('ACCPREDOPL1_ID, NUM, DAT, BUYER_NAME, FSTATE, ORG.ORG_ID AS ORG_ID,
                     ORG.ORG_NAME, ORG.ORG_ADDRESS, ORG.ORG_INN, ORG.ORG_KPP, ORG.OKPO, ORG.OKONH, ORG.BANK,
                     ORG.R_ACC, ORG.K_ACC, ORG.BIK, ORG.GLAVBUH, ORG.GENDIR, ORG.NDSPROC, S_US1, S_US2, S_US3,
                     S_DELIV, S_ASSEMB, S_WRAP, S_GOOD, S_OPL, EMAIL')->

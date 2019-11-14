@@ -13,6 +13,7 @@ import PersonProfile from "../components/Pages/persons/PersonProfile";
 import Organizations from "../components/Pages/Dictionaries/Organizations";
 import EditSupplier from "../components/Pages/Dictionaries/EditSupplier";
 import SupPricelists from "../components/views/SupPricelists";
+import InetAccs from '../components/views/InetAccs'
 
 
 const router = new VueRouter({
@@ -98,6 +99,11 @@ const router = new VueRouter({
                  path: '/organizations',
                  name: 'Организации',
                  component: Organizations
+             },
+             {
+               path: '/inetaccs',
+               name: 'Счета NetPay',
+               component: InetAccs
              },
              {
                  path: '/users',

@@ -37,7 +37,7 @@
         "laravel-vue-pagination": "^2.3.0",
         "material-design-icons": "^3.0.1",
         "materialize-css": "^1.0.0",
-        "npm": "^6.12.1",
+        "npm": "^6.13.0",
         "popper": "^1.0.1",
         "vue-axios": "^2.1.4",
         "vue-clickaway": "^2.2.2",
@@ -46,6 +46,7 @@
         "vue-perfect-scrollbar": "^0.1.0",
         "vue-resource": "^1.5.1",
         "vue-router": "^3.0.6",
+        "vuejs-datatable": "^2.0.0-alpha.3",
         "vuejs-paginator": "^2.0.2"
     }
 }

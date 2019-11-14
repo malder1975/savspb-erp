@@ -20,8 +20,8 @@ export default {
             icon: ''
         },
         {
-            name: 'NetPay заказы',
-            url: '#',
+            name: 'Net Pay заказы',
+            url: '/inetaccs',
             icon: ''
         },
         {

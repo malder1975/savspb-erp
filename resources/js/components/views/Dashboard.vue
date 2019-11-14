@@ -1,7 +1,7 @@
 <template>
     <div class="fade-in">
         <b-row>
-            <b-col sm="6" lg="3" md="3">
+            <b-col sm="6" lg="3">
                 <b-card no-body class="bg-info">
                     <b-card-body class="pb-0">
                         <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
@@ -19,7 +19,7 @@
                     </b-card-body>
                 </b-card>
             </b-col>
-            <b-col sm="6" lg="3" md="3" >
+            <b-col sm="6" lg="3" >
                 <router-link to="suppliers" class="card-suppliers">
                 <b-card no-body class="bg-primary dashboard-card">
                     <b-card-body class="pb-0">
@@ -48,7 +48,7 @@
                 </b-card>
                 </router-link>
             </b-col>
-            <b-col sm="6" lg="3" md="3">
+            <b-col sm="6" lg="3">
                 <b-card no-body class="bg-success">
                     <b-card-body class="pb-0">
                         <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
