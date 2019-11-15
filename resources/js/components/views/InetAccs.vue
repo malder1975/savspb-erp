@@ -2,6 +2,7 @@
     <div class="animated fade-in">
         <b-row>
             <vuetable ref="vuetable"
+                api-url="/api/v1/auth/inetaccnts"
                 :fields="fields"
                 :per-page="perPage"
                 pagination-path="pagination"
@@ -24,11 +25,14 @@
     import FieldsDef from '../../fielddefs/netpayacc.js'
     import _ from 'lodash'
     import moment from 'moment'
+    import axios from 'axios'
     export default {
         name: "InetAccs",
         components: {
             Vuetable,
-            VuetablePagination
+            VuetablePagination,
+            VueTablePaginationDropDown,
+            TablePaginationInfo
         },
         data(){
             return {
@@ -56,18 +60,22 @@
             },
             formatDate(value, fmt = 'DD.MM.YYYY') {
                 return (value == null) ? '' : moment(value, 'YYYY-MM-DD').format(fmt)
+            },
+
+            getAsscs() {
+                axios.get('/auth/inetaccnts').then((response) => {
+                    this.data = response.data.data;
+                }).catch((error) =>
+                    this.errors = error.response.data.errors || error.message)
+                console.log(this.data)
             }
         },
         mounted() {
-            axios.get('/auth/inetaccnts').then((response) => {
-                this.data = response.data;
-            }).catch((error) =>
-                this.errors = error.response.data.errors || error.message)
-            console.log(this.data)
+
         },
 
         created () {
-
+            this.getAsscs()
         }
     }
 </script>

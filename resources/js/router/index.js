@@ -98,12 +98,18 @@ const router = new VueRouter({
              {
                  path: '/organizations',
                  name: 'Организации',
-                 component: Organizations
+                 component: Organizations,
+                 meta: {
+                     auth: true
+                 }
              },
              {
                path: '/inetaccs',
                name: 'Счета Net Pay',
-               component: InetAccs
+               component: InetAccs,
+               meta: {
+                   auth: true
+               }
              },
              {
                  path: '/users',
