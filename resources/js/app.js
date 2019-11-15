@@ -7,7 +7,7 @@ import VueForm from 'vue-form'
 import VueAuth from '@websanova/vue-auth'
 import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router'
-import DatatableFactory from 'vuejs-datatable'
+//import DatatableFactory from 'vuejs-datatable'
 //import Vuex from 'vuex'
 import App from './components/App'
 import Index from './components/Index'
@@ -28,7 +28,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueForm);
 Vue.router = routes;
 Vue.use(VueRouter);
-Vue.use(DatatableFactory);
+//Vue.use(DatatableFactory);
 //Vue.use(Vuex);
 
 

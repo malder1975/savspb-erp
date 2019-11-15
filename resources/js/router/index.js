@@ -102,7 +102,7 @@ const router = new VueRouter({
              },
              {
                path: '/inetaccs',
-               name: 'Счета NetPay',
+               name: 'Счета Net Pay',
                component: InetAccs
              },
              {
