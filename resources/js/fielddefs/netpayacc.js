@@ -4,43 +4,40 @@ export default [
         name: 'NUM',
         title: '№ заказа',
         sortField: 'NUM',
-        titleClass: 'center alignet'
+        titleClass: 'text-center'
     },
     {
         name: 'DAT',
         title: 'Дата',
         sortField: 'DAT',
-        titleClass: 'center alignet',
+        titleClass: 'text-center',
         callback: 'formatDate|DD.MM.YYYY'
     },
     {
         name: 'BUYER_NAME',
         title: 'ФИО покупателя',
         sortField: 'BUYER_NAME',
-        titleClass: 'center alignet'
+        titleClass: 'text-center'
     },
     {
         name: 'S_GOOD',
         title: 'Сумма заказа',
-        titleClass: "center alignet"
+        titleClass: "text-center",
+        dataClass: "text-right",
+        callback: "formatNumber"
     },
     {
         name: 'S_OPL',
         title: 'Сумма оплаты',
-        titleClass: "center alignet"
+        titleClass: "text-center",
+        dataClass: "text-right",
+        callback: 'formatNumber'
     },
     {
         name: 'FSTATE',
         title: 'Статус заказа',
         sortField: 'FSTATE',
-        titleClass: "center alignet",
-        formatter(value) {
-            if (value == 0) {
-                return 'Новый заказ'
-            } else if (value == 1) {
-                return 'Реализован'
-            } else
-                return 'В доставке'
-        }
+        titleClass: "text-center",
+        callback: 'zakazState'
     }
 ]

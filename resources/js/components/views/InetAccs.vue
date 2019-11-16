@@ -1,18 +1,23 @@
 <template>
     <div class="animated fade-in">
+        <b-container>
         <b-row>
             <vuetable ref="vuetable"
-                api-url="/api/v1/auth/inetaccnts"
+                :api-mode="false"
+                :data="data"
                 :fields="fields"
+                :multi-sort="true"
                 :per-page="perPage"
+                :sort-order="sortOrder"
+                no-data-template="Нет данных для отображения"
                 pagination-path="pagination"
                 @vuetable:pagination-data="onPaginationData">
             </vuetable>
-            <vuetable-pagination-info ref="paginationInfo"></vuetable-pagination-info>
+            <!--vuetable-pagination-info ref="paginationInfo"></vuetable-pagination-info-->
             <vuetable-pagination ref="pagination" @vuetable-pagination:change-page="onChangePage">
-
             </vuetable-pagination>
         </b-row>
+        </b-container>
     </div>
 </template>
 
@@ -26,6 +31,7 @@
     import _ from 'lodash'
     import moment from 'moment'
     import axios from 'axios'
+    import accounting from 'accounting'
     export default {
         name: "InetAccs",
         components: {
@@ -38,13 +44,19 @@
             return {
                 fields: FieldsDef,
                 perPage: 10,
-                data: []
+                data: [],
+                sortOrder: [
+                    {
+                        field: 'FSTATE',
+                        direction: 'asc'
+                    }
+                ]
             }
         },
         watch: {
-            data(newVal, oldVal) {
+            /*data(newVal, oldVal) {
                 this.$refs.vuetable.refresh()
-            }
+            }*/
         },
         methods: {
             onPaginationData(paginationData) {
@@ -62,12 +74,19 @@
                 return (value == null) ? '' : moment(value, 'YYYY-MM-DD').format(fmt)
             },
 
+            zakzState(value) {
+                return value === 0 ? 'Новый заказ' : 'Реализован'
+            },
+
+            formatNumber(value) {
+                return accounting.formatMoney(value,2)
+            },
+
             getAsscs() {
                 axios.get('/auth/inetaccnts').then((response) => {
-                    this.data = response.data.data;
+                    this.data = response.data;
                 }).catch((error) =>
                     this.errors = error.response.data.errors || error.message)
-                console.log(this.data)
             }
         },
         mounted() {
@@ -81,5 +100,8 @@
 </script>
 
 <style scoped>
-
+    .vuetable th.sortable:hover {
+        color: #2185d0;
+        cursor: pointer;
+    }
 </style>

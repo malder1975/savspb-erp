@@ -33,6 +33,7 @@
         "@mdi/font": "^3.6.95",
         "@vue/cli": "^3.8.2",
         "@websanova/vue-auth": "^2.21.14-beta",
+        "accounting": "^0.4.1",
         "bootstrap-vue": "^2.0.0-rc.21",
         "es6-promise": "^4.2.6",
         "laravel-vue-pagination": "^2.3.0",
