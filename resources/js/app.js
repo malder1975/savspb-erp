@@ -17,6 +17,7 @@ import routes from './router'
 import '@fortawesome/fontawesome-free/scss/fontawesome.scss'
 import '../sass/style.scss'
 import 'material-design-icons/iconfont/material-icons.css'
+import { VuejsDatatableFactory } from 'vuejs-datatable';
 //import 'materialize-css/dist/css/materialize.min.css'
 
 window.Vue = Vue;
@@ -28,7 +29,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueForm);
 Vue.router = routes;
 Vue.use(VueRouter);
-//Vue.use(DatatableFactory);
+Vue.use(VuejsDatatableFactory);
 //Vue.use(Vuex);
 
 

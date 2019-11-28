@@ -43,11 +43,13 @@
         "npm": "^6.13.0",
         "popper": "^1.0.1",
         "vue-axios": "^2.1.4",
+        "vue-bootstrap4-table": "^1.1.11",
         "vue-clickaway": "^2.2.2",
         "vue-form": "^4.10.1",
         "vue-material-design-icons": "^3.2.0",
         "vue-perfect-scrollbar": "^0.1.0",
         "vue-resource": "^1.5.1",
-        "vue-router": "^3.0.6"
+        "vue-router": "^3.0.6",
+        "vuejs-datatable": "^2.0.0-alpha.4"
     }
 }

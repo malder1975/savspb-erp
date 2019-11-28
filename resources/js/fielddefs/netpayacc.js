@@ -38,6 +38,7 @@ export default [
         title: 'Статус заказа',
         sortField: 'FSTATE',
         titleClass: "text-center",
+        dataClass: "text-center",
         callback: 'zakazState'
     }
 ]
