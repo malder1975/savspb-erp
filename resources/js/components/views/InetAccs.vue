@@ -8,6 +8,7 @@
                 :fields="fields"
                 :multi-sort="true"
                 :per-page="perPage"
+                :data-manager="dataManager"
                 :sort-order="sortOrder"
                 no-data-template="Нет данных для отображения"
                 pagination-path="pagination"
@@ -23,10 +24,10 @@
 
 <script>
     //import DatatableFactory from 'vuejs-datatable'
-    import Vuetable from 'vuetable-2/src/components/Vuetable'
+    import Vuetable from 'vuetable-2'
     import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
-    import VueTablePaginationDropDown from 'vuetable-2/src/components/VuetablePaginationDropdown'
-    import TablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo'
+    //import VueTablePaginationDropDown from 'vuetable-2/src/components/VuetablePaginationDropdown'
+   // import TablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo'
     import FieldsDef from '../../fielddefs/netpayacc.js'
     import _ from 'lodash'
     import moment from 'moment'
@@ -37,8 +38,8 @@
         components: {
             Vuetable,
             VuetablePagination,
-            VueTablePaginationDropDown,
-            TablePaginationInfo
+            //VueTablePaginationDropDown,
+            //TablePaginationInfo
         },
         data(){
             return {
@@ -48,15 +49,15 @@
                 sortOrder: [
                     {
                         field: 'FSTATE',
-                        direction: 'asc'
+                        direction: 'ASC'
                     }
                 ]
             }
         },
         watch: {
-            /*data(newVal, oldVal) {
+            data(newVal, oldVal) {
                 this.$refs.vuetable.refresh()
-            }*/
+            }
         },
         methods: {
             onPaginationData(paginationData) {
@@ -70,11 +71,40 @@
             onActionClicked(action, data) {
                 console.log("slot actions: on-click", data.name);
             },
+            dataManager(sortOrder, pagination) {
+                if(data.length < 1) return;
+                //let local = this.data;
+
+                if (sortOrder.length > 0) {
+                    console.log("OrderBy:", sortOrder[0].sortField, sortOrder[0].direction);
+                    data = _.orderBy(
+                        data,
+                        sortOrder[0].sortField,
+                        sortOrder[0].direction
+                    );
+                }
+
+                pagination = this.$refs.vuetable.makePagination(
+                    this.data.length,
+                    this.perPage
+                );
+                console.log('pagination:', pagination)
+                let from = pagination.from - 1;
+                let to = from + this.perPage;
+
+                return {
+                    pagination: pagination,
+                    data: _.slice(this.data, from, to)
+                };
+            },
+
+
+
             formatDate(value, fmt = 'DD.MM.YYYY') {
                 return (value == null) ? '' : moment(value, 'YYYY-MM-DD').format(fmt)
             },
 
-            zakzState(value) {
+            zakazState(value) {
                 return value === 0 ? 'Новый заказ' : 'Реализован'
             },
 
