@@ -79,11 +79,10 @@
                 ],
                 classes: {
                   cell: {
-                      "my-cell my-cell2" : true,
-                      "text-danger" : function(row,column,cellValue) {
-                          return column.name == "FSTATE" && row.FSTATE == 0
+                      "my-cell" : true,
+
                       }
-                  }
+
                 },
                 actions: [
                     {
@@ -109,6 +108,7 @@
                     checkbox_rows: true,
                     rows_selectable: true,
                     preservePageOnDataChange: true,
+                    card_mode: false,
                     global_search: {
                         placeholder: 'Поиск',
                         case_sensitive: false,
@@ -276,5 +276,9 @@
     .vuetable th.sortable:hover {
         color: #2185d0;
         cursor: pointer;
+    }
+
+    .my-class {
+        color: red;
     }
 </style>

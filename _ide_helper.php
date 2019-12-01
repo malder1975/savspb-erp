@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.35 on 2019-11-05 11:18:33.
+ * Generated for Laravel 5.8.35 on 2019-12-02 00:31:55.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15790,6 +15790,18 @@ namespace Tymon\JWTAuth\Facades {
  
 }
 
+namespace LaravelEnso\Helpers\app\Exceptions { 
+
+    /**
+     * 
+     *
+     */ 
+    class EnsoException {
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -18589,6 +18601,8 @@ namespace  {
     class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
 
     class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}
+
+    class EnsoException extends \LaravelEnso\Helpers\app\Exceptions\EnsoException {}
  
 }
 

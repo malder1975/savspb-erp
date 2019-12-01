@@ -11,6 +11,7 @@
         "php": "^7.1.3",
         "caouecs/laravel-lang": "~4.0",
         "fideloper/proxy": "^4.0",
+        "laravel-enso/tables": "^2.0.11",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "malder1975/laravel-firebird": "dev-laravel5.8-support",
