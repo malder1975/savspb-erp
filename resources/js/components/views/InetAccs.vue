@@ -1,9 +1,12 @@
 <template>
     <div class="animated fade-in">
         <b-container>
+            <vue-table class="box is-paddingless raises-on-hover is-rounded"
+                       path="/examples/table/init"
+                       id="example"/>
             <b-row>
                 <vue-bootstrap4-table :rows="rows" :columns="columns" :config="config" :actions="actions" @on-change-query="onChangeQuery"
-                                      :total-rows="rows.length" :show_loader="showLoader">
+                                      :total-rows="rows.length">
                     <template slot="refresh-button-text">
                         <i class="fas fa-sync-alt"></i> Обновить
                     </template>
@@ -23,6 +26,7 @@
     //import VueTablePaginationDropDown from 'vuetable-2/src/components/VuetablePaginationDropdown'
    // import TablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo'
     import VueBootstrap4Table from 'vue-bootstrap4-table'
+    import { VueTable } from '@enso-ui/tables/bulma';
     import FieldsDef from '../../fielddefs/netpayacc.js'
     import _ from 'lodash'
     import moment from 'moment'
@@ -37,6 +41,7 @@
             //VueTablePaginationDropDown,
             //TablePaginationInfo
              VueBootstrap4Table,
+            VueTable,
         },
         data(){
             return {
@@ -55,21 +60,19 @@
                     {
                         label: 'ФИО покупателя',
                         name: 'BUYER_NAME',
-                        sort: true,
-                        row_text_alignment: 'text-left',
-                        column_text_alignment: 'text-center'
+                        sort: true
                     },
                     {
                         label: 'Сумма заказа',
                         name: 'S_GOOD',
                         row_text_alignment: 'text-right',
-                        column_text_alignment: 'text-center'
+                        column_text_alignment: 'text-right'
                     },
                     {
                         label: 'Сумма оплаты',
                         name: 'S_OPL',
                         row_text_alignment: 'text-right',
-                        column_text_alignment: 'text-center'
+                        column_text_alignment: 'text-right'
                     },
                     {
                         label: 'Статус',
@@ -81,11 +84,10 @@
                 ],
                 classes: {
                   cell: {
-                      "my-cell my-cell2" : true,
-                      "text-danger" : function(row,column,cellValue) {
-                          return column.name == "FSTATE" && cellValue == 0
+                      "my-cell" : true,
+
                       }
-                  }
+
                 },
                 actions: [
                     {
@@ -111,6 +113,7 @@
                     checkbox_rows: true,
                     rows_selectable: true,
                     preservePageOnDataChange: true,
+                    card_mode: false,
                     global_search: {
                         placeholder: 'Поиск',
                         case_sensitive: false,
@@ -126,7 +129,6 @@
                     per_page: 10
                 },
                 total_rows: 0,
-                showLoader: true,
                 fields: FieldsDef,
                 page: 1,
                 per_page: 10,
@@ -193,6 +195,9 @@
             },
 
             zakazState(value) {
+
+                return value === 0 ? 'Новый заказ' : 'Реализован'
+
                 return value === 0 ? '<span class="badge badge-primary">Новый заказ</span>' : '<span class="badge badge-success">Реализован</span>'
             },
 
@@ -202,7 +207,6 @@
 
             onChangeQuery(queryParams) {
                 this.queryParams = queryParams;
-                this.showLoader = true;
                 this.getAccnts()
             },
             getAccnts() {
@@ -216,7 +220,6 @@
                 {
                     self.rows = response.data.data;
                     self.total_rows = this.rows.length;
-                    self.showLoader = false;
                 }).catch(function (error) {
                     console.log(error)
                 })
@@ -275,7 +278,12 @@
 </script>
 
 <style scoped>
-    .my-cell {
-        color: #469408;
+    .vuetable th.sortable:hover {
+        color: #2185d0;
+        cursor: pointer;
+    }
+
+    .my-class {
+        color: red;
     }
 </style>

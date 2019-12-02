@@ -18,18 +18,29 @@ import '@fortawesome/fontawesome-free/scss/fontawesome.scss'
 import '../sass/style.scss'
 import 'material-design-icons/iconfont/material-icons.css'
 import { VuejsDatatableFactory } from 'vuejs-datatable';
+import Toastr from '@enso-ui/toastr/bulma';
+import ToastrPlugin from '@enso-ui/toastr';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 //import 'materialize-css/dist/css/materialize.min.css'
 
 window.Vue = Vue;
 
 Vue.component('App', require('./components/App.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('fa', FontAwesomeIcon);
 
 Vue.use(BootstrapVue);
 Vue.use(VueForm);
 Vue.router = routes;
 Vue.use(VueRouter);
 Vue.use(VuejsDatatableFactory);
+Vue.use(ToastrPlugin, {
+    layout: Toastr,
+    options: {
+        duration: 3500,
+        position: 'right',
+    },
+});
 //Vue.use(Vuex);
 
 

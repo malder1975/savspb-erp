@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.35 on 2019-11-05 11:18:33.
+ * Generated for Laravel 5.8.35 on 2019-12-02 17:52:05.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15790,6 +15790,533 @@ namespace Tymon\JWTAuth\Facades {
  
 }
 
+namespace Intervention\Image\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @return self 
+         * @static 
+         */ 
+        public static function configure($config = array())
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param int $width
+         * @param int $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param int $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
+namespace Jenssegers\Date { 
+
+    /**
+     * 
+     *
+     */ 
+    class Date {
+         
+    }
+ 
+}
+
+namespace LaravelEnso\Enums\app\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Enums {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function register($enums)
+        {
+                        /** @var \LaravelEnso\Enums\app\Services\Enums $instance */
+                        return $instance->register($enums);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function remove($aliases)
+        {
+                        /** @var \LaravelEnso\Enums\app\Services\Enums $instance */
+                        return $instance->remove($aliases);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \LaravelEnso\Enums\app\Services\Enums $instance */
+                        return $instance->all();
+        }
+         
+    }
+ 
+}
+
+namespace LaravelEnso\Files\app\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class FileBrowser {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function register($sources)
+        {
+                        /** @var \LaravelEnso\Files\app\Services\FileBrowser $instance */
+                        return $instance->register($sources);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function folders()
+        {
+                        /** @var \LaravelEnso\Files\app\Services\FileBrowser $instance */
+                        return $instance->folders();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function models()
+        {
+                        /** @var \LaravelEnso\Files\app\Services\FileBrowser $instance */
+                        return $instance->models();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function folder($model)
+        {
+                        /** @var \LaravelEnso\Files\app\Services\FileBrowser $instance */
+                        return $instance->folder($model);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function order($folder, $order)
+        {
+                        /** @var \LaravelEnso\Files\app\Services\FileBrowser $instance */
+                        return $instance->order($folder, $order);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function remove($folders)
+        {
+                        /** @var \LaravelEnso\Files\app\Services\FileBrowser $instance */
+                        return $instance->remove($folders);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \LaravelEnso\Files\app\Services\FileBrowser $instance */
+                        return $instance->all();
+        }
+         
+    }
+ 
+}
+
+namespace LaravelEnso\Helpers\app\Exceptions { 
+
+    /**
+     * 
+     *
+     */ 
+    class EnsoException {
+         
+    }
+ 
+}
+
+namespace LaravelEnso\Searchable\app\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Search {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function register($sources)
+        {
+                        /** @var \LaravelEnso\Searchable\app\Services\Search $instance */
+                        return $instance->register($sources);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \LaravelEnso\Searchable\app\Services\Search $instance */
+                        return $instance->all();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function remove($models)
+        {
+                        /** @var \LaravelEnso\Searchable\app\Services\Search $instance */
+                        return $instance->remove($models);
+        }
+         
+    }
+ 
+}
+
+namespace Laravolt\Avatar { 
+
+    /**
+     * 
+     *
+     */ 
+    class Facade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setGenerator($generator)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->setGenerator($generator);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function create($name)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->create($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setFont($font)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->setFont($font);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function toBase64()
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->toBase64();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function save($path, $quality = 90)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->save($path, $quality);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function toSvg()
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->toSvg();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setBackground($hex)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->setBackground($hex);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setForeground($hex)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->setForeground($hex);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setDimension($width, $height = null)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->setDimension($width, $height);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setFontSize($size)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->setFontSize($size);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setBorder($size, $color)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->setBorder($size, $color);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setShape($shape)
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->setShape($shape);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getInitial()
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->getInitial();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getImageObject()
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->getImageObject();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function buildAvatar()
+        {
+                        /** @var \Laravolt\Avatar\Avatar $instance */
+                        return $instance->buildAvatar();
+        }
+         
+    }
+ 
+}
+
+namespace Spatie\LaravelImageOptimizer\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class ImageOptimizer {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getOptimizers()
+        {
+                        /** @var \Spatie\ImageOptimizer\OptimizerChain $instance */
+                        return $instance->getOptimizers();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function addOptimizer($optimizer)
+        {
+                        /** @var \Spatie\ImageOptimizer\OptimizerChain $instance */
+                        return $instance->addOptimizer($optimizer);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setOptimizers($optimizers)
+        {
+                        /** @var \Spatie\ImageOptimizer\OptimizerChain $instance */
+                        return $instance->setOptimizers($optimizers);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setTimeout($timeoutInSeconds)
+        {
+                        /** @var \Spatie\ImageOptimizer\OptimizerChain $instance */
+                        return $instance->setTimeout($timeoutInSeconds);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function useLogger($log)
+        {
+                        /** @var \Spatie\ImageOptimizer\OptimizerChain $instance */
+                        return $instance->useLogger($log);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function optimize($pathToImage, $pathToOutput = null)
+        {
+                        /** @var \Spatie\ImageOptimizer\OptimizerChain $instance */
+                        return $instance->optimize($pathToImage, $pathToOutput);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -18589,6 +19116,22 @@ namespace  {
     class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
 
     class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}
+
+    class Image extends \Intervention\Image\Facades\Image {}
+
+    class Date extends \Jenssegers\Date\Date {}
+
+    class Enums extends \LaravelEnso\Enums\app\Facades\Enums {}
+
+    class FileBrowser extends \LaravelEnso\Files\app\Facades\FileBrowser {}
+
+    class EnsoException extends \LaravelEnso\Helpers\app\Exceptions\EnsoException {}
+
+    class Search extends \LaravelEnso\Searchable\app\Facades\Search {}
+
+    class Avatar extends \Laravolt\Avatar\Facade {}
+
+    class ImageOptimizer extends \Spatie\LaravelImageOptimizer\Facades\ImageOptimizer {}
  
 }
 

@@ -1,0 +1,52 @@
+{
+    "routePrefix": "system.netPayAccs",
+    "crtNo": true,
+    "buttons": ["excel", "create", "edit", "destroy"],
+    "appends": ["isRead"],
+    "columns": [{
+        "label": "№ заказа",
+        "name": "NUM",
+        "data": "netPayAccs.NUM",
+        "meta": ["searchable", "sortable"]
+    }, {
+        "label": "Дата",
+        "name": "DAT",
+        "data": "netPayAccs.DAT",
+        "meta": ["sortable", "date"],
+        "dateFormat": "dd.mm.yyyy"
+    }, {
+        "label": "ФИО покупателя",
+        "name": "BUYER_NAME",
+        "data": "netPayAccs.BUYER_NAME",
+        "meta": ["searchable", "sortable"]
+    }, {
+        "label": "Сумма заказа",
+        "name": "S_GOOD",
+        "data": "netPayAccs.S_GOOD",
+        "align": "right",
+        "money": {
+            "symbol": "\u20BD",
+            "decimal": ".",
+            "thousand": ",",
+            "precision": 2,
+            "format": "%s%v"
+        }
+    }, {
+        "label": "Сумма оплаты",
+        "name": "S_OPL",
+        "data": "netPayAccs.S_OPL",
+        "align": "right",
+        "money": {
+            "symbol": "\u20BD",
+            "decimal": ".",
+            "thousand": ",",
+            "precision": 2,
+            "format": "%s%v"
+        }
+    }, {
+        "label": "Статус заказа",
+        "name": "FSTATE",
+        "data": "netPayAccs.FSTATE",
+        "meta": ["sortable"]
+    }]
+}
