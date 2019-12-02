@@ -3,7 +3,7 @@
         <b-container>
             <b-row>
                 <vue-bootstrap4-table :rows="rows" :columns="columns" :config="config" :actions="actions" @on-change-query="onChangeQuery"
-                                      :total-rows="rows.length">
+                                      :total-rows="rows.length" :show_loader="showLoader">
                     <template slot="refresh-button-text">
                         <i class="fas fa-sync-alt"></i> Обновить
                     </template>
@@ -55,19 +55,21 @@
                     {
                         label: 'ФИО покупателя',
                         name: 'BUYER_NAME',
-                        sort: true
+                        sort: true,
+                        row_text_alignment: 'text-left',
+                        column_text_alignment: 'text-center'
                     },
                     {
                         label: 'Сумма заказа',
                         name: 'S_GOOD',
                         row_text_alignment: 'text-right',
-                        column_text_alignment: 'text-right'
+                        column_text_alignment: 'text-center'
                     },
                     {
                         label: 'Сумма оплаты',
                         name: 'S_OPL',
                         row_text_alignment: 'text-right',
-                        column_text_alignment: 'text-right'
+                        column_text_alignment: 'text-center'
                     },
                     {
                         label: 'Статус',
@@ -81,7 +83,7 @@
                   cell: {
                       "my-cell my-cell2" : true,
                       "text-danger" : function(row,column,cellValue) {
-                          return column.name == "FSTATE" && row.FSTATE == 0
+                          return column.name == "FSTATE" && cellValue == 0
                       }
                   }
                 },
@@ -124,6 +126,7 @@
                     per_page: 10
                 },
                 total_rows: 0,
+                showLoader: true,
                 fields: FieldsDef,
                 page: 1,
                 per_page: 10,
@@ -190,9 +193,6 @@
             },
 
             zakazState(value) {
-
-                return value === 0 ? 'Новый заказ' : 'Реализован'
-
                 return value === 0 ? '<span class="badge badge-primary">Новый заказ</span>' : '<span class="badge badge-success">Реализован</span>'
             },
 
@@ -202,6 +202,7 @@
 
             onChangeQuery(queryParams) {
                 this.queryParams = queryParams;
+                this.showLoader = true;
                 this.getAccnts()
             },
             getAccnts() {
@@ -215,6 +216,7 @@
                 {
                     self.rows = response.data.data;
                     self.total_rows = this.rows.length;
+                    self.showLoader = false;
                 }).catch(function (error) {
                     console.log(error)
                 })
@@ -273,8 +275,7 @@
 </script>
 
 <style scoped>
-    .vuetable th.sortable:hover {
-        color: #2185d0;
-        cursor: pointer;
+    .my-cell {
+        color: #469408;
     }
 </style>
